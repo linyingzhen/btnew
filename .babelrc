@@ -1,0 +1,34 @@
+{
+  "presets": [
+    [
+      "next/babel",
+      {
+        "styled-jsx": {
+          "optimizeForSpeed": false
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    ["import", { "libraryName": "antd-mobile" }],
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "./common/decorator",
+          "@_": "./src/_",
+          "@api": "./common/api",
+          "@components": "./components",
+          "@const": "./common/const",
+          "@ds": "./common/ds",
+          "@src": "./src",
+          "@stores": "./common/stores",
+          "@styles": "./common/styles",
+          "@utils": "./common/utils"
+        }
+      }
+    ]
+  ]
+}

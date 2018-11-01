@@ -1,0 +1,14 @@
+#__next-error div {
+  font-size: 0.4rem !important;
+  line-height: 0.56rem !important;
+  word-break: break-all !important;
+}
+#__next-error pre {
+  font-size: 0.26rem !important;
+  line-height: 0.36rem !important;
+}
+#__next-error h1 {
+  font-size: 0.4rem !important;
+  line-height: 0.56rem !important;
+  word-break: break-all !important;
+}

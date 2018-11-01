@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "experimentalDecorators": true,
+    "paths": {
+      "@": ["./common/decorator"],
+      "@_": ["./src/_"],
+      "@api": ["./common/api"],
+      "@components": ["./components"],
+      "@const": ["./common/const"],
+      "@ds": ["./common/ds"],
+      "@src": ["./src"],
+      "@stores": ["./common/stores"],
+      "@styles": ["./common/styles"],
+      "@utils": ["./common/utils"]
+    }
+  },
+  "exclude": ["node_modules","build"],
+}

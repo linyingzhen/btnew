@@ -1,0 +1,7 @@
+build
+dist
+out
+node_modules
+!.eslintrc.js
+static
+*.7z
