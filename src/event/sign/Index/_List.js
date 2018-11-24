@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-19 13:57:41
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-20 00:24:42
+ * @Last Modified time: 2018-11-14 00:06:53
  * @Path m.benting.com.cn /src/event/sign/Index/_List.js
  */
 import React from 'react';
@@ -31,8 +31,8 @@ const _List = (props, { $ }) => {
     <div className={classNames(prefixCls, className)}>
       <div className="title t-34 l-44 t-b t-c">签到先锋</div>
       <div className="list">
-        {list.map((item, index) => (
-          <Flex key={item.tbId} className={`${prefixCls}__item`}>
+        {list.map(({ tbId, userId, faceImg, niname, createTime }, index) => (
+          <Flex key={tbId} className={`${prefixCls}__item`}>
             <div className="num t-c">
               {index < 3 ? (
                 <Icon
@@ -51,11 +51,11 @@ const _List = (props, { $ }) => {
                 <span className="t-34 l-48 t-b">{index + 1}</span>
               )}
             </div>
-            <Avatar className="ml-24" userId={item.userId} img={item.faceImg} />
+            <Avatar className="ml-24" userId={userId} img={faceImg} />
             <Flex.Item className="ml-24">
-              <p className="t-30 l-44 ls-o1">{item.niname}</p>
+              <p className="t-30 l-44 ls-o1">{niname}</p>
               <p className="t-24 l-44 t-sub ls-o1">
-                {Utils.date('H:i:s', item.createTime)}
+                {Utils.date('H:i:s', createTime)}
               </p>
             </Flex.Item>
             <span className="t-30 l-44 t-primary t-b ls-o1">

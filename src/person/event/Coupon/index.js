@@ -4,7 +4,7 @@
  * @Author: lyz0720
  * @Date: 2018-09-25 15:32:59
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 15:36:05
+ * @Last Modified time: 2018-11-13 17:38:34
  * @Path bt_mb_new /src/person/event/Coupon/index.js
  */
 import React from 'react';
@@ -114,4 +114,4 @@ Coupon.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Coupon));
+export default injectV2(store, { login: true })(observer(Coupon));

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-06 14:48:52
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 02:49:43
+ * @Last Modified time: 2018-11-14 15:49:47
  * @Path m.benting.com.cn /src/discovery/Index/_Row/_Comment.js
  */
 import React from 'react';
@@ -24,7 +24,7 @@ const _Comment = (props, { $ }) => {
     commentList = [],
     likeData = [],
     likeRecordsOpen,
-    max = 5,
+    max = 6,
     total = 0,
     className
   } = props;

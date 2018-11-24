@@ -4,7 +4,7 @@
  * @Author: lyz0720
  * @Date: 2018-09-14 14:08:39
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 15:18:06
+ * @Last Modified time: 2018-11-07 11:06:18
  * @Path bt_mb_new /src/person/prize/Detail/_Step.js
  */
 import React from 'react';
@@ -32,14 +32,14 @@ const _Step = (props, { $ }) => {
               </p>
             </Flex.Item>
           </Flex>
-          <Flex className="mt-d" align="start">
+          <Flex className="mt-md" align="start">
             <div className="dot" />
             <Flex.Item>
               <p className="t-30 l-42 t-b">2、复制奖品口令</p>
               <p className="t-24 l-34 t-sub mt-4">复制本页面奖品口令</p>
             </Flex.Item>
           </Flex>
-          <Flex className="mt-d" align="start">
+          <Flex className="mt-md" align="start">
             <div className="dot" />
             <Flex.Item>
               <p className="t-30 l-42 t-b">3、联系客服</p>
@@ -48,7 +48,7 @@ const _Step = (props, { $ }) => {
               </p>
             </Flex.Item>
           </Flex>
-          <Flex className="mt-d" align="start">
+          <Flex className="mt-md" align="start">
             <div className="dot" />
             <Flex.Item>
               <p className="t-30 l-42 t-b">4、付款</p>
@@ -65,25 +65,25 @@ const _Step = (props, { $ }) => {
             <Flex.Item>
               <p className="t-30 l-42 t-b">1、天猫购买产品</p>
               <p className="t-24 l-34 t-sub mt-4">
-                于指定购买时间在天猫《本汀旗舰店》购买
+                根据使用规则要求，于指定购买时间在天猫《本汀旗舰店》购买
               </p>
             </Flex.Item>
           </Flex>
-          <Flex className="mt-d" align="start">
+          <Flex className="mt-md" align="start">
             <div className="dot" />
             <Flex.Item>
               <p className="t-30 l-42 t-b">2、提交天猫订单号</p>
               <p className="t-24 l-34 t-sub mt-4">
-                得到订单后提交并完善相关信息
+                购买成功后，在下方提交订单相关信息
               </p>
             </Flex.Item>
           </Flex>
-          <Flex className="mt-d" align="start">
+          <Flex className="mt-md" align="start">
             <div className="dot" />
             <Flex.Item>
-              <p className="t-30 l-42 t-b">3、发放现金奖励</p>
+              <p className="t-30 l-42 t-b">3、发放答谢金</p>
               <p className="t-24 l-34 t-sub mt-4">
-                提交相关信息后请耐心等待发放
+                根据优惠券使用规则，在一定时间内发放答谢金，请耐心等待。
               </p>
             </Flex.Item>
           </Flex>

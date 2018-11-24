@@ -3,8 +3,8 @@
  * const images = '/static/images/src/person/vip/Pay';
  * @Author: czy0729
  * @Date: 2018-10-17 22:59:58
- * @Last Modified by: lyz0720
- * @Last Modified time: 2018-10-31 18:47:49
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-02 10:43:40
  * @Path m.benting.com.cn /src/person/vip/Pay/store.js
  */
 import React from 'react';
@@ -76,31 +76,32 @@ export default class store extends common {
         payType
       });
 
-      if (vip === 0) {
-        Utils.light('支付成功,请重新登录');
-        Utils.router.push('/login');
-      } else {
-        Utils.light('支付成功');
-      }
       this.page.hidePayConfirm();
       this.fetch.vipInfo();
-      // UI.showMask({
-      //   children: <Success onClick={UI.hideMask} />
-      // });
+
       UI.showMask({
         children: (
           <img
             src={`${images}/paysucess.png`}
             style={{
-              width: '80%',
-              height: 'initial'
+              width: '5.94rem',
+              height: '4.22rem'
             }}
-            onClick={UI.hideMask}
+            onClick={() => {
+              UI.hideMask();
+              Utils.onConfirm(
+                `${
+                  vip === 0 ? '开通成功' : '续费成功'
+                } ，需要重新登录才能刷新VIP信息，前往登录?`,
+                () => Utils.router.push('/login')
+              );
+            }}
             alt=""
           />
         )
       });
     },
+
     // 购买vip
     doBuyVip: async () => {
       const { gid } = this.getState('oneInfo');

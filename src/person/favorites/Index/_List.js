@@ -3,14 +3,15 @@
  * const images = '/static/images';
  * @Author: lyz0720
  * @Date: 2018-10-31 13:51:42
- * @Last Modified by: lyz0720
- * @Last Modified time: 2018-10-31 14:32:57
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-13 18:07:23
  * @Path bt_mb_new \src\person\favorites\Index\_List.js.git
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from '@';
-import { AffixTabs, ListView } from '@components';
+import { ListView } from '@components';
+import AffixTabs from '@components/AffixTabs/default';
 import Row from './_Row';
 import { orderTabs } from './ds';
 
@@ -40,7 +41,6 @@ const _List = (props, { $ }) => {
         className="tool-list-split"
         data={data}
         renderRow={item => <Row {...item} />}
-        renderEmpty
         onEndReached={onEndReached}
       />
     </AffixTabs>

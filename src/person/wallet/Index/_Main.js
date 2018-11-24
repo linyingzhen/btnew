@@ -4,7 +4,7 @@
  * @Author: cwz0525
  * @Date: 2018-07-12 11:02:12
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-14 10:04:03
+ * @Last Modified time: 2018-11-12 17:55:59
  * @Path m.benting.com.cn /src/person/wallet/Index/__Main.js
  */
 import React from 'react';
@@ -19,14 +19,23 @@ const prefixCls = 'style-133454';
 
 const _Main = (props, { $ }) => {
   const { className } = props;
-  const { btAmount = '-', sysAmount = '-' } = $.getState('walletInfo');
+  const { amount = 0, btAmount = '-', sysAmount = '-' } = $.getState(
+    'walletInfo'
+  );
   const { point = '-' } = $.getState('userInfo');
+  const hasNidoAmount = !!parseFloat(amount);
 
   return (
     <FlowWrap className={classNames(prefixCls, className)}>
       <Link href="/person/wallet/flow" block>
-        <p className="t-30 l-42 t-void t-c">余额</p>
-        <p className="t-72 l-100 t-void t-c">{btAmount}</p>
+        <p className=" t-void t-c">
+          <span className="t-32 l-42">本汀余额</span>
+          {hasNidoAmount && <span className="t-22 ml-sm">(灵动)</span>}
+        </p>
+        <p className="t-void t-c">
+          <span className="t-72 l-100">{btAmount}</span>
+          {hasNidoAmount && <span className="t-32 ml-sm">({amount})</span>}
+        </p>
       </Link>
       <Flex className="mt-40">
         <Flex.Item href="/person/wallet/coin/flow">

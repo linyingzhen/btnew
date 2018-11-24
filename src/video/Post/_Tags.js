@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-26 14:33:25
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-07-26 17:50:41
+ * @Last Modified time: 2018-11-05 09:53:50
  * @Path m.benting.com.cn /src/video/Post/_Tags.js
  */
 import React from 'react';
@@ -59,6 +59,14 @@ const _Tags = (props, { $ }) => {
         </div>
       </List.Item>
 
+      <style jsx global>{`
+        .style-281344 {
+        }
+        .${prefixCls} .am-list-content,
+        .${prefixCls} .am-list-extra {
+          font-size: ${Styles.font_form} !important;
+        }
+      `}</style>
       <style jsx>{`
         .style-281344 {
         }

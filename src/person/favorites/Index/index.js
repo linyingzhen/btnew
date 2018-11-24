@@ -3,8 +3,8 @@
  * const images = '/static/images';
  * @Author: lyz0720
  * @Date: 2018-10-31 11:32:55
- * @Last Modified by: lyz0720
- * @Last Modified time: 2018-10-31 11:33:17
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-13 18:07:04
  * @Path bt_mb_new \src\person\favorites\Index\index.js.git
  */
 import React from 'react';
@@ -19,4 +19,4 @@ const Favorites = () => (
   </Layout>
 );
 
-export default injectV2(store)(Favorites);
+export default injectV2(store, { login: true })(Favorites);

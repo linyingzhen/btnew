@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-05 17:14:51
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-07-26 18:51:56
+ * @Last Modified time: 2018-11-03 18:39:33
  * @Path m.benting.com.cn /components/Upload/index.js
  */
 import React from 'react';
@@ -85,16 +85,16 @@ export default class _Upload extends React.Component {
                 token: qiniuConfig.token
               }
           }
-          // action={
-          //   window.location.protocol === 'https:'
-          //     ? 'https://upload-z2.qbox.me'
-          //     : 'http://upload-z2.qiniu.com'
-          // }
           action={
             window.location.protocol === 'https:'
-              ? 'https://upload-z2.qiniup.com'
-              : 'http://upload-z2.qiniup.com'
+              ? 'https://upload-z2.qbox.me'
+              : 'http://upload-z2.qiniu.com'
           }
+          // action={
+          //   window.location.protocol === 'https:'
+          //     ? 'https://upload-z2.qiniup.com'
+          //     : 'http://upload-z2.qiniup.com'
+          // }
           multiple={false}
           accept={accept}
           {...other}

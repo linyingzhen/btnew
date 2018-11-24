@@ -5,7 +5,7 @@
  * @Mail: 402731062@qq.com
  * @Date: 2018-08-28 15:28:05
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-31 00:04:12
+ * @Last Modified time: 2018-11-16 14:53:31
  * @Path m.benting.com.cn /static/out/sw-181028.js
  */
 importScripts('https://g.alicdn.com/kg/workbox/3.3.0/workbox-sw.js');
@@ -30,24 +30,24 @@ if (workbox) {
   // );
 
   // 静态html:网络优先
-  const cacheList = ['/', '/nido', '/discovery', '/bbs'];
-  workbox.routing.registerRoute(
-    function(event) {
-      // 需要缓存的HTML路径列表
-      if (~cacheList.indexOf(event.url.pathname)) {
-        return true;
-      }
-      return false;
-    },
-    workbox.strategies.networkFirst({
-      cacheName: 'html-cache',
-      plugins: [
-        new workbox.expiration.Plugin({
-          maxEntries: 10
-        })
-      ]
-    })
-  );
+  // const cacheList = ['/', '/nido', '/discovery', '/bbs'];
+  // workbox.routing.registerRoute(
+  //   function(event) {
+  //     // 需要缓存的HTML路径列表
+  //     if (~cacheList.indexOf(event.url.pathname)) {
+  //       return true;
+  //     }
+  //     return false;
+  //   },
+  //   workbox.strategies.networkFirst({
+  //     cacheName: 'html-cache',
+  //     plugins: [
+  //       new workbox.expiration.Plugin({
+  //         maxEntries: 10
+  //       })
+  //     ]
+  //   })
+  // );
 
   // 静态js:缓存优先
   const regJS = /(t\/font_.*\.js$)|(\/rmsportal\/wzWaWInUcXErDyTwvySY.js)/;
@@ -59,7 +59,8 @@ if (workbox) {
       cacheName: 'js-cache',
       plugins: [
         new workbox.expiration.Plugin({
-          maxEntries: 10
+          maxEntries: 10,
+          maxAgeSeconds: 30 * 24 * 60 * 60
         })
       ]
     })
@@ -75,8 +76,8 @@ if (workbox) {
       cacheName: 'next-js-cache',
       plugins: [
         new workbox.expiration.Plugin({
-          maxEntries: 20,
-          maxAgeSeconds: 3 * 24 * 60 * 60
+          maxEntries: 50,
+          maxAgeSeconds: 30 * 24 * 60 * 60
         })
       ]
     })
@@ -84,7 +85,7 @@ if (workbox) {
 
   // 静态缓存:缓存优先
   // 例[https://www.benting.com.cn/static/images/src/_/Level/1@3x.png]
-  const regStatic = /^(https:\/\/).*\.(?:css|png|jpg|jpeg|gif|svg)/;
+  const regStatic = /^(https:\/\/).*\.(?:css|png|jpg|jpeg|gif|svg)$/;
   workbox.routing.registerRoute(
     function(event) {
       // 百度统计使用图片请求方式, 排除掉
@@ -99,7 +100,7 @@ if (workbox) {
       plugins: [
         new workbox.expiration.Plugin({
           maxEntries: 200,
-          maxAgeSeconds: 7 * 24 * 60 * 60
+          maxAgeSeconds: 30 * 24 * 60 * 60
         })
       ]
     })
@@ -118,7 +119,7 @@ if (workbox) {
       plugins: [
         new workbox.expiration.Plugin({
           maxEntries: 200,
-          maxAgeSeconds: 7 * 24 * 60 * 60
+          maxAgeSeconds: 30 * 24 * 60 * 60
         })
       ]
     })

@@ -4,17 +4,17 @@
  * @Author: czy0729
  * @Date: 2018-07-11 23:05:15
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-22 17:32:37
+ * @Last Modified time: 2018-11-10 17:29:49
  * @Path m.benting.com.cn /components/RichEditor/_BtnControl.js
  */
 import React from 'react';
 import classNames from 'classnames';
-import { Flex } from '@components';
+import { Flex, Icon } from '@components';
 
 const prefixCls = 'style-657342';
 
 const _BtnControl = props => {
-  const { label, active, color, className, ...other } = props;
+  const { label, active, color, iconActive, className, ...other } = props;
 
   return (
     <Flex
@@ -27,7 +27,13 @@ const _BtnControl = props => {
       {color ? (
         <div className="color-badge" style={{ backgroundColor: color }} />
       ) : (
-        label
+        <Icon
+          className={classNames('t-44', {
+            't-primary': iconActive,
+            't-desc': !iconActive
+          })}
+          type={label}
+        />
       )}
 
       <style jsx global>{`

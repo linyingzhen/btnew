@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-24 18:03:24
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-31 18:22:10
+ * @Last Modified time: 2018-11-22 16:59:46
  * @Path m.benting.com.cn /src/discovery/Detail/_Content.js
  */
 import React from 'react';
@@ -32,6 +32,8 @@ const _Content = (props, { $ }) => {
     fileList,
     redPacket,
     vip,
+    role,
+    dtsourceType,
     className
   } = $.getState('detail');
 
@@ -44,6 +46,7 @@ const _Content = (props, { $ }) => {
         level={grade}
         fansAuth={fanAuth}
         vip={vip}
+        role={role}
         date={publishTime && Utils.date('y-m-d H:i:s', publishTime)}
       />
       {con && <Content className="t-34 l-48 mt-40">{con}</Content>}
@@ -52,6 +55,7 @@ const _Content = (props, { $ }) => {
         type={infoType}
         files={fileList}
         red={redPacket}
+        dtsourceType={dtsourceType}
       />
 
       <style jsx>{`

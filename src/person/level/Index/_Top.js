@@ -19,13 +19,13 @@ const prefixCls = 'style-129479';
 
 const _Top = (props, { $ }) => {
   const { className } = props;
-  const { ldPoint } = $.getState('grade');
+  const { point } = $.getState('grade');
 
   return (
     <div className={classNames(prefixCls, className)}>
       <div className="card">
         <p className="t-40 l-56 t-b t-c">
-          {ldPoint ? Utils.formatNumber(ldPoint, 0) : '-'}
+          {point ? Utils.formatNumber(point, 0) : '-'}
         </p>
         <p className="t-26 l-36 t-b t-c mt-16">灵动积分</p>
       </div>

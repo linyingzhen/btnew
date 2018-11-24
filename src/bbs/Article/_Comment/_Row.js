@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-17 10:18:26
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 02:48:46
+ * @Last Modified time: 2018-11-02 17:53:51
  * @Path m.benting.com.cn /src/bbs/Article/_Comment/_Row.js
  */
 import React from 'react';
@@ -29,10 +29,12 @@ const _CommentRow = (props, { $ }) => {
     grade,
     niname,
     parCreateTime,
+    parMessage,
     parNiname,
     parUserId,
     postId,
     role,
+    rtype,
     top,
     userId,
     vip,
@@ -45,7 +47,7 @@ const _CommentRow = (props, { $ }) => {
   if (_floor === '4楼') _floor = '地板';
 
   const isTop = parseInt(top) > 0;
-  const isReward = props.rtype == 1;
+  const isReward = rtype == 1;
   const hasParComment = !!parCreateTime;
 
   return (
@@ -82,7 +84,7 @@ const _CommentRow = (props, { $ }) => {
       {isReward ? (
         <Flex className="t-34 l-48 t-title mt-24 user-select">
           <span>打赏了</span>
-          <span className="t-primary">{props.content}</span>
+          <span className="t-primary">{content}</span>
           <Img
             className="ml-8"
             src={Utils.getImgUrl(commentImg)}
@@ -101,7 +103,7 @@ const _CommentRow = (props, { $ }) => {
                     <Link
                       className="t-28 l-40 t-primary"
                       href={`/person/zone?id=${parUserId}`}
-                      as={`/person/zone/${props.parUserId}`}
+                      as={`/person/zone/${parUserId}`}
                     >
                       {parNiname}
                     </Link>
@@ -110,7 +112,7 @@ const _CommentRow = (props, { $ }) => {
                 }
                 style={{ display: 'inline-block' }}
               >
-                {props.parMessage}
+                {parMessage}
               </Content>
             </div>
           )}

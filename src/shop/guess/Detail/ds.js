@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-26 15:36:46
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-26 16:18:46
+ * @Last Modified time: 2018-11-15 11:38:37
  * @Path m.benting.com.cn /src/shop/guess/Detail/ds.js
  */
 import Utils from '@utils';
@@ -30,3 +30,24 @@ export const dataTypeDS = [
     value: '2'
   }
 ];
+export const filter = {
+  detail: {
+    dataType: 1,
+    endTime: 1,
+    guessType: 1,
+    image: 1,
+    key: 1,
+    panUrl: 1,
+    partNum: 1,
+    perPrice: 1,
+    rules: 1
+  },
+  list: {
+    createTime: 1,
+    face: 1,
+    information: 1,
+    nickName: 1,
+    userId: 1,
+    vip: 1
+  }
+};

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-25 15:52:23
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-24 11:39:51
+ * @Last Modified time: 2018-11-15 15:54:29
  * @Path m.benting.com.cn /src/shop/guess/Detail/store.js
  */
 import { observable } from 'mobx';
@@ -13,6 +13,7 @@ import Const from '@const';
 import Utils from '@utils';
 import G from '@stores/g';
 import Api from '@api';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -57,7 +58,8 @@ export default class Store extends common {
       const { id } = this.params.params;
 
       return this.fetchThenSetState('get_indiana_info', 'detail', {
-        oncebuyId: id
+        oncebuyId: id,
+        _filter: filter.detail
       });
     },
 
@@ -73,7 +75,8 @@ export default class Store extends common {
               oncebuyId: id,
               buyState: [1, 4]
             }
-          }
+          },
+          _filter: filter.record
         },
         refresh,
         'createTime'

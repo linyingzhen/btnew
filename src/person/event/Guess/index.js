@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-27 09:48:48
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-28 16:19:06
+ * @Last Modified time: 2018-11-13 17:37:25
  * @Path m.benting.com.cn /src/person/event/Guess/index.js
  */
 import React from 'react';
@@ -81,4 +81,4 @@ Guess.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Guess));
+export default injectV2(store, { login: true })(observer(Guess));

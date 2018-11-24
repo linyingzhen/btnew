@@ -4,7 +4,7 @@
  * @Author: lyz0720
  * @Date: 2018-10-23 17:35:52
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-24 18:09:18
+ * @Last Modified time: 2018-11-13 17:48:14
  * @Path bt_mb_new /src/person/goods/Index/index.js
  */
 import React from 'react';
@@ -53,4 +53,4 @@ Goods.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Goods));
+export default injectV2(store, { login: true })(observer(Goods));

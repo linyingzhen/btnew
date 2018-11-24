@@ -3,15 +3,16 @@
  * const images = '/static/images/src/bbs/floor/Detail';
  * @Author: czy0729
  * @Date: 2018-09-04 17:24:46
- * @Last Modified by:   czy0729
- * @Last Modified time: 2018-09-04 17:24:46
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-02 11:26:14
  * @Path m.benting.com.cn /src/bbs/floor/Detail/_Content.js
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { observer } from '@';
-import { DiscuzContent, RichEditor, Lazy } from '@components';
+import { DiscuzContent, Lazy } from '@components';
+import RichEditor from '@components/RichEditor';
 import Const from '@const';
 import Utils from '@utils';
 import Styles from '@styles';

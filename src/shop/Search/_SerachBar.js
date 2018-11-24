@@ -3,8 +3,8 @@
  * const images = '/static/images';
  * @Author: lyz0720
  * @Date: 2018-11-01 11:30:54
- * @Last Modified by: lyz0720
- * @Last Modified time: 2018-11-01 15:13:41
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-01 23:30:27
  * @Path bt_mb_new \src\shop\Search\_SerachBar.js.git
  */
 import React from 'react';
@@ -22,7 +22,7 @@ const _SearchBar = (props, { $ }) => {
 
   return (
     <div className={classNames(prefixCls, className)}>
-      <Flex className="searchbox">
+      <Flex className={`${prefixCls}__searchbox`}>
         <Flex.Item>
           <input
             type="search"
@@ -30,24 +30,24 @@ const _SearchBar = (props, { $ }) => {
             name="keywords"
             placeholder="请输入想要搜索的内容"
             value={keywords}
+            style={{
+              width: '100%',
+              border: 'none'
+            }}
             onChange={$.page.keywordsChange}
           />
         </Flex.Item>
-        <Icon className="t-28" type="search" onClick={$.fetch.search} />
+        <Icon className="t-32" type="search" onClick={$.fetch.search} />
 
         <style jsx global>{`
           .style-193093 {
             padding: ${Styles.wind};
             background: ${Styles.color_void} !important;
           }
-          .style-193093 .searchbox {
+          .${prefixCls}__searchbox {
             padding: ${Styles.sm} ${Styles.wind};
             background: ${Styles.color_theme};
             border: 0.02rem solid ${Styles.color_border};
-          }
-          .search {
-            border: none;
-            width: 100%;
           }
         `}</style>
       </Flex>

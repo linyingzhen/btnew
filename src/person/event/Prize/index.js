@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-18 17:39:53
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-24 16:51:28
+ * @Last Modified time: 2018-11-13 17:38:27
  * @Path m.benting.com.cn /src/person/event/Prize/index.js
  */
 import React from 'react';
@@ -217,4 +217,4 @@ Prize.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Prize));
+export default injectV2(store, { login: true })(observer(Prize));

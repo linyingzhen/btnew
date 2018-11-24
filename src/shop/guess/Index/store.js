@@ -4,13 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-09-25 12:38:08
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-25 12:38:33
+ * @Last Modified time: 2018-11-15 11:32:56
  * @Path m.benting.com.cn /src/shop/guess/Index/store.js
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';
 import Const from '@const';
 import Utils from '@utils';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -45,7 +46,8 @@ export default class Store extends common {
             search: {
               guessType: 2
             }
-          }
+          },
+          _filter: filter.list
         },
         refresh
       ),
@@ -64,7 +66,8 @@ export default class Store extends common {
             search: {
               guessType: 1
             }
-          }
+          },
+          _filter: filter.list
         },
         refresh
       )

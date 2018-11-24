@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-02 13:41:57
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-17 16:09:47
+ * @Last Modified time: 2018-11-01 21:18:22
  * @Path m.benting.com.cn /src/index/Home/_Information/index.js
  */
 import React from 'react';
@@ -38,7 +38,6 @@ const _Information = (props, { $ }) => {
 
       <style jsx>{`
         .style-204108 {
-          min-height: 11.92rem;
           padding-bottom: ${Styles.bottom};
           background: ${Styles.color_theme};
         }

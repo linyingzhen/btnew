@@ -4,13 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-10-23 00:20:36
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 18:55:57
+ * @Last Modified time: 2018-11-12 14:09:37
  * @Path bt_mb_new /src/discovery/redpacket/Cash/index.js
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectV2, form, observer } from '@';
-import { AffixTabs, PayConfirm } from '@components';
+import { PayConfirm } from '@components';
+import AffixTabs from '@components/AffixTabs/default';
 import { Layout } from '@_';
 import Form from './_Form';
 import store from './store';
@@ -26,7 +27,6 @@ const Cash = (props, { $ }) => {
   return (
     <Layout title="现金红包" className={prefixCls}>
       <AffixTabs
-        align="center"
         tabs={tabsDS}
         page={page}
         animated

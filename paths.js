@@ -3,8 +3,8 @@
  * const images = '/static/images';
  * @Author: czy0729
  * @Date: 2018-10-28 03:35:43
- * @Last Modified by:   czy0729
- * @Last Modified time: 2018-10-28 03:35:43
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-21 12:09:16
  * @Path bt_mb_new /paths.js
  */
 const paths = [
@@ -42,9 +42,22 @@ const paths = [
   ['/event/cashback/submit/:id', '/event/cashback/submit', '粉丝福利提交资料'],
   ['/event/cashback/:id', '/event/cashback', '粉丝福利'],
 
+  ['/event/car/success/:id', '/event/car/success', '送车活动报名成功'],
+  ['/event/car/success_publish/:id', '/event/car/success_publish', '送车活动渔获发布成功'],
+  ['/event/car/user_status/:id/:uid', '/event/car/user_status', '送车活动报名状况'],
+  ['/event/car/status/:id', '/event/car/status', '送车活动我的活动状况'],
+  ['/event/car/user/:id', '/event/car/user', '送车活动用户报名状况'],
+  ['/event/car/signup/:id', '/event/car/signup', '送车活动报名'],
+  ['/event/car/post/:id', '/event/car/post', '送车活动发渔获'],
+  ['/event/car/:id?', '/event/car', '送车活动'],
+
   /* ==================== person 用户中心 ==================== */
   ['/person/address/update/:id', '/person/address/update', '我的地址编辑'],
-  ['/person/event/registration/detail/:id', '/person/event/registration/detail', '活动报名填写资料'],
+  [
+    '/person/event/registration/detail/:id',
+    '/person/event/registration/detail',
+    '活动报名填写资料'
+  ],
   ['/person/event/prize/:id', '/person/event/prize', '领取奖品'],
   ['/person/feedback/detail/:id', '/person/feedback/detail', '我的反馈'],
   ['/person/help/detail/:id?', '/person/help/detail', '帮助详情'],
@@ -53,8 +66,11 @@ const paths = [
   ['/person/prize/detail/:id', '/person/prize/detail', '礼品详情'],
   ['/person/goods/detail/:id', '/person/goods/detail', '我的礼单'],
   ['/person/prize/info/:id', '/person/prize/info', '完善相关信息'],
+  ['/person/prize/success/:id', '/person/prize/success', '答谢金发放成功'],
   ['/person/vip/detail/:id', '/person/vip/detail', '#todo'],
   ['/person/publish/:id?', '/person/publish', '我的发布'],
+  ['/person/friends/search', '/person/friends/search', '搜索好友'],
+  ['/person/friends/:id?', '/person/friends', '我的好友'],
   ['/person/zone/:id?', '/person/zone', '用户空间'],
 
   /* ==================== shop 商城 ==================== */

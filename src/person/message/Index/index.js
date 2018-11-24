@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-05 20:45:38
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-06 00:05:09
+ * @Last Modified time: 2018-11-13 16:33:21
  * @Path m.benting.com.cn /src/person/message/Index/index.js
  */
 import React from 'react';
@@ -75,4 +75,4 @@ Message.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Message));
+export default injectV2(store, { login: true })(observer(Message));

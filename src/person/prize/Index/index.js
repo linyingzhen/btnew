@@ -4,13 +4,13 @@
  * @Author: lyz0720
  * @Date: 2018-09-20 11:26:22
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 10:12:48
+ * @Last Modified time: 2018-11-13 17:48:37
  * @Path bt_mb_new /src/person/prize/Index/index.js
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectV2, observer } from '@';
-import { AffixTabs } from '@components';
+import AffixTabs from '@components/AffixTabs/default';
 import { Layout } from '@_';
 import List from './_List';
 import store from './store';
@@ -25,7 +25,6 @@ const Prize = (props, { $ }) => {
     <Layout title="优惠券">
       <AffixTabs
         tabs={prizeTabs}
-        align="center"
         animated
         destroyInactiveTab={false}
         page={page}
@@ -50,4 +49,4 @@ Prize.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Prize));
+export default injectV2(store, { login: true })(observer(Prize));

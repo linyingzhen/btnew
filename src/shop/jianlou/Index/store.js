@@ -4,12 +4,13 @@
  * @Author: czy0729
  * @Date: 2018-09-23 21:48:53
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-23 21:53:56
+ * @Last Modified time: 2018-11-15 10:58:03
  * @Path m.benting.com.cn /src/shop/jianlou/Index/store.js
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';
 import Const from '@const';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -36,7 +37,8 @@ export default class Store extends common {
               dataType: 2,
               panicType: 2
             }
-          }
+          },
+          _filter: filter.list
         },
         refresh
       )

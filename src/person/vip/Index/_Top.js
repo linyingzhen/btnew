@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-17 13:58:25
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-17 17:57:15
+ * @Last Modified time: 2018-11-02 10:49:36
  * @Path m.benting.com.cn /src/person/vip/Index/__Top.js
  */
 import React from 'react';
@@ -41,15 +41,15 @@ const _Top = (props, { $ }) => {
           <div className="ml-32 mr-32">
             <p className="niname t-24 l-34">{niname}</p>
             <p className="vip-state t-34 l-48 t-title t-b mt-4">
-              {vip > 0 ? '本汀会员' : '注册会员'}
+              {vip > 0 ? 'VIP会员' : '普通会员'}
             </p>
           </div>
         </Flex>
         <div
-          className="btn-now mt-32"
+          className="btn-now tool-animate-scale mt-32"
           onClick={() => Utils.router.push('/person/vip/pay')}
         >
-          {vip > 0 ? '续费' : '立即开通'}
+          {vip > 0 ? '续费' : '开通'}
         </div>
       </div>
 

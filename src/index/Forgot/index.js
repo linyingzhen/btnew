@@ -36,7 +36,7 @@ export default class Forgot extends React.Component {
           src={`${Const.__IMG__}/logo-horizon${Const.__IMG_DPR__}.png`}
           alt=""
         />
-        <p className="t-48 l-66 t-b mt-18">找回密码</p>
+        <p className="t-48 l-66 t-b mt-16">找回密码</p>
         <Form className="mt-52" form={form}>
           <FlowInput
             type="phone"

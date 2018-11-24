@@ -4,7 +4,7 @@
  * @Author: lyz0720
  * @Date: 2018-09-14 10:38:23
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 14:09:54
+ * @Last Modified time: 2018-11-07 11:03:43
  * @Path bt_mb_new /src/person/prize/Detail/index.js
  */
 import React from 'react';
@@ -22,9 +22,9 @@ const _Attention = (props, { $ }) => {
     <Flex className={prefixCls} justify="center">
       <Icon className="t-26 t-event" type="information-circle-fill" />
       <p className="t-24 l-34 ml-xs">
-        <span className="t-void">请务必使用此旺旺ID＂</span>
+        <span className="t-void">请务必使用此旺旺ID“</span>
         <span className="t-event">{ww}</span>
-        <span className="t-void">＂进行购买</span>
+        <span className="t-void">”进行购买</span>
       </p>
 
       <style jsx global>{`

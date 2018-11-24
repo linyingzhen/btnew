@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-03 10:16:39
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-31 10:32:22
+ * @Last Modified time: 2018-11-02 18:52:04
  * @Path m.benting.com.cn /src/bbs/topic/Index/_Top.js
  */
 import React from 'react';
@@ -46,15 +46,15 @@ const _Top = (props, { $ }) => {
         {[list1, list2, list3].map((item, index) => (
           /* eslint-disable-next-line */
           <List key={index}>
-            {item.map(i => (
+            {item.map(({ topicId, title }) => (
               <List.Item
-                key={i.topicId}
+                key={topicId}
                 thumb={<TopicAvatar />}
-                href={`/bbs/topic/detail?id=${i.topicId}`}
-                as={`/bbs/topic/detail/${i.topicId}`}
+                href={`/bbs/topic/detail?id=${topicId}`}
+                as={`/bbs/topic/detail/${topicId}`}
               >
                 <Flex className={`${prefixCls}__wrap-title`}>
-                  <p className="p-title t-28 t-c2">{i.title}</p>
+                  <p className="p-title t-28 t-c2">{title}</p>
                 </Flex>
               </List.Item>
             ))}

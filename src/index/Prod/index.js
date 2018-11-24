@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-28 18:56:38
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 19:09:20
+ * @Last Modified time: 2018-11-02 11:20:49
  * @Path bt_mb_new /src/index/Prod/index.js
  */
 import React from 'react';
@@ -35,7 +35,9 @@ export default class Prod extends React.Component {
     Api.initApis();
 
     if (Const.__CLIENT__) {
-      delete window.Stores['/'];
+      if (window.Stores) {
+        delete window.Stores['/'];
+      }
     }
   }
 

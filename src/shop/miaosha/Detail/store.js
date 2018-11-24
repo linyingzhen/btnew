@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-11 12:21:33
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-21 12:10:41
+ * @Last Modified time: 2018-11-15 16:02:26
  * @Path m.benting.com.cn /src/shop/auction/Detail/store.js
  */
 import { observable } from 'mobx';
@@ -12,6 +12,7 @@ import common from '@stores/commonV2';
 import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -41,7 +42,8 @@ export default class Store extends common {
       const { id } = this.params.params;
 
       return this.fetchThenSetState('get_shop_miaosha-detail', 'detail', {
-        panicId: id
+        panicId: id,
+        _filter: filter.detail
       });
     },
 
@@ -57,7 +59,8 @@ export default class Store extends common {
             search: {
               panicId: id
             }
-          }
+          },
+          _filter: filter.record
         },
         refresh
       );
@@ -67,7 +70,6 @@ export default class Store extends common {
   do = {
     miaosha: async () => {
       const { panicId, panicType } = this.getState('detail');
-
       const { orderNo } = await Api.P('do_shop_miaosha', { panicId });
 
       this.page.hidePayConfirm();

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-25 18:33:16
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-22 18:53:58
+ * @Last Modified time: 2018-11-16 16:55:44
  * @Path m.benting.com.cn /src/index/Nido/_Discovery.js
  */
 import React from 'react';
@@ -29,22 +29,39 @@ const _Discovery = (props, { $ }) => {
         isList
       />
       <List>
-        {list.map(item => (
-          <ListRow
-            key={item.infoId}
-            userId={item.userId}
-            img={item.faceImg}
-            vip={item.vip}
-            name={item.niname}
-            level={item.grade}
-            createTime={item.publishTime}
-            title={item.con}
-            likeCount={item.likeCount}
-            commentCount={item.commentCount}
-            href={`/discovery/detail?id=${item.infoId}`}
-            as={`/discovery/detail/${item.infoId}`}
-          />
-        ))}
+        {list.map(
+          ({
+            fileList = [],
+            infoId,
+            userId,
+            faceImg,
+            vip,
+            role,
+            niname,
+            grade,
+            publishTime,
+            con,
+            likeCount,
+            commentCount
+          }) => (
+            <ListRow
+              key={infoId}
+              contentImg={fileList.map(item => item.fileId)}
+              userId={userId}
+              img={faceImg}
+              vip={vip}
+              role={role}
+              name={niname}
+              level={grade}
+              createTime={publishTime}
+              title={con}
+              likeCount={likeCount}
+              commentCount={commentCount}
+              href={`/discovery/detail?id=${infoId}`}
+              as={`/discovery/detail/${infoId}`}
+            />
+          )
+        )}
       </List>
 
       <style jsx>{`

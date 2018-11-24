@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-19 09:39:11
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 12:00:26
+ * @Last Modified time: 2018-11-02 12:03:30
  * @Path m.benting.com.cn /src/video/Index/_Top.js
  */
 import React from 'react';
@@ -22,14 +22,14 @@ const _Top = (props, { $ }) => {
 
   return (
     <List className={classNames(prefixCls, className)}>
-      {videoTop.list.map(item => (
+      {videoTop.list.map(({ tbId, tit }) => (
         <List.Item
-          key={item.tbId}
+          key={tbId}
           thumb={<span className="t-30 l-42 t-primary">置顶</span>}
-          href={`/video/detail?id=${item.tbId}`}
-          as={`/video/detail/${item.tbId}`}
+          href={`/video/detail?id=${tbId}`}
+          as={`/video/detail/${tbId}`}
         >
-          <p className="t-30 l-42 t-c1">{item.tit}</p>
+          <p className="t-30 l-42 t-c1">{tit}</p>
         </List.Item>
       ))}
 

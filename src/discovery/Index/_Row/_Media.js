@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-06 14:48:15
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-31 18:21:21
+ * @Last Modified time: 2018-11-22 17:12:16
  * @Path m.benting.com.cn /src/discovery/Index/_Row/_Media.js
  */
 import React from 'react';
@@ -18,8 +18,9 @@ import { images } from '../ds';
 
 const prefixCls = 'style-100916';
 
+export default
 @observer
-export default class Media extends React.Component {
+class Media extends React.Component {
   static contextTypes = {
     $: PropTypes.object
   };
@@ -37,7 +38,7 @@ export default class Media extends React.Component {
     return (
       <Video
         className={classNames({
-          'mt-18': !!content
+          'mt-16': !!content
         })}
         src={files.length && files[0].filePath}
         poster={files.length ? files[0].sfPath : undefined}
@@ -50,18 +51,35 @@ export default class Media extends React.Component {
   }
 
   renderImgs() {
-    const { content, files = [], infoId, params = {} } = this.props;
+    const {
+      content,
+      files = [],
+      infoId,
+      params = {},
+      dtsourceType
+    } = this.props;
+    const isFish = dtsourceType != 0;
 
     // 列表项
     if (infoId) {
+      // 渔获需要打水印
+      let data;
+      if (isFish && files.length === 1) {
+        data = files.map(item => ({
+          src: `${Utils.getAppImgUrl(item.fileId || item.filePath, 'scale')}/1`
+        }));
+      } else {
+        data = files.map(item => ({
+          src: item.fileId || item.filePath
+        }));
+      }
+
       return (
         <Imgs
           className={classNames({
-            'mt-18': !!content
+            'mt-16': !!content
           })}
-          data={files.map(item => ({
-            src: item.fileId || item.filePath
-          }))}
+          data={data}
           onImgClick={current =>
             this.setState({
               renderImgView: true,
@@ -79,10 +97,12 @@ export default class Media extends React.Component {
     return (
       <Carousel
         className={classNames({
-          'mt-18': !!content
+          'mt-16': !!content
         })}
         data={files.map(item => ({
-          src: item.fileId || item.filePath
+          src: isFish
+            ? `${Utils.getAppImgUrl(item.fileId || item.filePath, 'scale')}/1`
+            : item.fileId || item.filePath
         }))}
         height="100vw"
         autoplay={false}
@@ -251,8 +271,7 @@ export default class Media extends React.Component {
                     {ext === '元' ? item.amount : parseInt(item.amount)}
                   </span>
                   <span className="t-sub ml-4">{ext}。</span>
-                  {!!bestAmount &&
-                    bestAmount === parseFloat(item.amount) && (
+                  {!!bestAmount && bestAmount === parseFloat(item.amount) && (
                     <img
                       className="img-best"
                       src={`${images}/best.png`}
@@ -261,8 +280,7 @@ export default class Media extends React.Component {
                   )}
                 </p>
               ))}
-            {!redRecordsOpen &&
-              redPacketLogs.length > 10 && (
+            {!redRecordsOpen && redPacketLogs.length > 10 && (
               <p
                 className="t-24 l-34 mt-8"
                 onClick={() => $.page.onRedLogsOpen(infoId)}
@@ -331,9 +349,11 @@ export default class Media extends React.Component {
       infoId,
       params = {},
       type,
+      dtsourceType,
       className
     } = this.props;
     const { renderImgView, dataImgView, show, current } = this.state;
+    const isFish = dtsourceType != 0;
 
     let El;
     switch (parseInt(type)) {
@@ -381,13 +401,12 @@ export default class Media extends React.Component {
           <ImgView
             show={show}
             current={current}
-            data={dataImgView.map(item => {
-              if (item.filePath.indexOf('.gif') !== -1) {
-                return Utils.getImgUrl(item.filePath);
-              }
-
-              return Utils.getAppImgUrl(item.fileId || item.filePath, 'scale');
-            })}
+            data={dataImgView.map(
+              item =>
+                `${Utils.getAppImgUrl(item.fileId || item.filePath, 'scale')}${
+                  isFish ? '/1' : ''
+                }`
+            )}
             onClose={() =>
               this.setState({
                 renderImgView: false,

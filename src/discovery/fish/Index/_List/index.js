@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-08 15:32:28
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-08-08 18:52:05
+ * @Last Modified time: 2018-11-15 17:15:13
  * @Path m.benting.com.cn /src/discovery/fish/Index/_List/index.js
  */
 import React from 'react';
@@ -34,7 +34,6 @@ const _List = (props, { $ }) => {
             type="primary"
             size="xs"
             inline
-            ghost
             onClick={() =>
               Utils.checkLogin(() => Utils.router.push('/discovery/fish/post'))
             }

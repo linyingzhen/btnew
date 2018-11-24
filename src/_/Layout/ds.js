@@ -4,39 +4,74 @@
  * @Author: czy0729
  * @Date: 2018-07-01 17:48:18
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-22 23:52:01
+ * @Last Modified time: 2018-11-16 17:00:15
  * @Path m.benting.com.cn /src/_/Layout/ds.js
  */
+import React from 'react';
+import { Icon } from '@components';
+import Const from '@const';
+
 // 滚动到底是否显示
 export const fixedBottomMap = {
+  '/': true,
   '/nido': true,
-  '/person': true
+  '/nido/': true,
+  '/person': true,
+  '/person/': true
 };
 export const menuDS = [
   {
-    icon: 'home-fill',
-    label: '首页',
-    href: '/nido', // 跳转地址
-    includes: ['/nido'] // 包含什么path显示
+    icon: (
+      <img
+        src={`${Const.__IMG__}/icon-logo-gray${Const.__IMG_DPR__}.png`}
+        alt=""
+        style={{ width: '0.3rem', height: '0.44rem' }}
+      />
+    ),
+    iconActive: (
+      <img
+        src={`${Const.__IMG__}/icon-logo${Const.__IMG_DPR__}.png`}
+        alt=""
+        style={{ width: '0.3rem', height: '0.44rem' }}
+      />
+    ),
+    label: '本汀',
+    href: '/', // 跳转地址
+    includes: ['/'] // 包含什么path显示
   },
   {
-    icon: 'discovery-fill',
+    icon: <Icon className="t-44 t-icon" type="lingdong" />,
+    iconActive: (
+      <Icon
+        type="lingdong"
+        color
+        style={{ width: '0.44rem', height: '0.44rem' }}
+      />
+    ),
+    label: '灵动',
+    href: '/nido',
+    includes: ['/nido']
+  },
+  {
+    icon: <Icon className="t-44 t-icon" type="discovery-fill" />,
+    iconActive: <Icon className="t-44 t-primary" type="discovery-fill" />,
     label: '发现',
     href: '/discovery',
     includes: ['/discovery']
   },
   {
-    icon: 'bbs-fill',
+    icon: <Icon className="t-44 t-icon" type="bbs-fill" />,
+    iconActive: <Icon className="t-44 t-primary" type="bbs-fill" />,
     label: '社区',
     href: '/bbs',
     includes: ['/bbs', '/bbs/topic', '/video']
   },
   {
-    icon: 'me-fill',
+    icon: <Icon className="t-44 t-icon" type="me-fill" />,
+    iconActive: <Icon className="t-44 t-primary" type="me-fill" />,
     label: '我的',
     href: '/person',
-    includes: ['/person'],
-    login: true
+    includes: ['/person']
   }
 ];
 export const centerMenuDS = [

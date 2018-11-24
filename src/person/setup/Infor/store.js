@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-23 13:32:30
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 13:34:21
+ * @Last Modified time: 2018-11-14 11:48:58
  * @Path bt_mb_new /src/person/setup/Infor/store.js
  */
 import { observable } from 'mobx';
@@ -51,8 +51,22 @@ export default class Store extends common {
         delete _values.niname;
       }
 
-      if (_values.birDay === birDay) {
-        delete _values.birDay;
+      if (_values.birDay || birDay) {
+        if (_values.birDay === birDay) {
+          delete _values.birDay;
+        } else {
+          // 旧系统坑，需要判断1991-7-29与1991-07-29是一样的case
+          const [_y, _m, _d] = String(_values.birDay).split('-');
+          const [y, m, d] = String(birDay).split('-');
+
+          if (
+            parseInt(_y) === parseInt(y) ||
+            parseInt(_m) === parseInt(m) ||
+            parseInt(_d) === parseInt(d)
+          ) {
+            delete _values.birDay;
+          }
+        }
       }
 
       [

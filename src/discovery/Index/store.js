@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-04 14:40:55
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-11-01 14:21:48
+ * @Last Modified time: 2018-11-22 17:05:57
  * @Path m.benting.com.cn /src/discovery/Index/store.js
  */
 import React from 'react';
@@ -119,7 +119,7 @@ export default class Store extends common {
       one: ['checkDiscoverySpecialNew'],
       update: ['discovery']
     },
-    select: {
+    filter: {
       discovery: {
         atList: 1,
         comCountAll: 1,
@@ -133,6 +133,7 @@ export default class Store extends common {
           userId: 1
         },
         con: 1,
+        dtsourceType: 1,
         faceImg: 1,
         fanAuth: 1,
         fileList: 1,
@@ -179,7 +180,7 @@ export default class Store extends common {
         'discovery',
         {
           ...queryDiscovery,
-          _select: this.fetch.select.discovery
+          _filter: this.fetch.filter.discovery
         },
         refresh,
         'publishTime'

@@ -4,7 +4,7 @@
  * @Author: lyz0720
  * @Date: 2018-09-18 10:06:59
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 11:05:25
+ * @Last Modified time: 2018-11-12 14:36:44
  * @Path bt_mb_new /src/person/prize/Index/_Row.js
  */
 import React from 'react';
@@ -26,6 +26,8 @@ const _Row = (props, { $ }) => {
     prizeVal,
     expdatebegin,
     expdateend,
+    state,
+    authState,
     userDel
   } = props;
 
@@ -69,15 +71,37 @@ const _Row = (props, { $ }) => {
       break;
   }
 
-  const nowtimestamp = Date.parse(new Date()) / 1000;
-  const endtimestamp = expdateend;
-  const diftime = nowtimestamp - endtimestamp;
   const isdel = userDel == 0;
-
   const begin = Utils.date('y.m.d', expdatebegin);
   const end = Utils.date('y.m.d', expdateend);
   const brief =
-    diftime >= 0 ? `已过期：${begin} - ${end}` : `购买时间：${begin} - ${end}`;
+    begin === end ? `购买时间：${end}` : `购买时间：${begin} - ${end}`;
+
+  let btnTextType = 'primary';
+  let btnText = '立即使用';
+  switch (parseInt(authState)) {
+    case 1:
+      btnText = '　审核中';
+      break;
+
+    case 2:
+      if (state == 3) {
+        btnTextType = 'success';
+        btnText = '　已发放';
+      } else {
+        btnText = '审核通过';
+      }
+
+      break;
+
+    case 3:
+      btnTextType = 'danger';
+      btnText = '审核失败';
+      break;
+
+    default:
+      break;
+  }
 
   return (
     <div className={prefixCls}>
@@ -91,7 +115,7 @@ const _Row = (props, { $ }) => {
             <p className="t-30 l-42 t-b">
               {textType}({prizeName})
             </p>
-            <p className="t-24 l-34 t-sub mt-4">
+            <p className="t-24 l-34 t-sub mt-8">
               奖品来源：
               {orginText}
             </p>
@@ -101,8 +125,8 @@ const _Row = (props, { $ }) => {
             justify="center"
           >
             <p>
-              <span className="t-44 t-danger">{prizeVal}</span>
-              <span className="t-24 l-32 t-sub ml-xs">元</span>
+              <span className="t-40 t-danger">{prizeVal}</span>
+              <span className="t-24 l-32 t-sub ml-xs mr-xs">元</span>
             </p>
           </Flex>
         </Flex>
@@ -128,11 +152,11 @@ const _Row = (props, { $ }) => {
           </p>
         )}
         <Link
-          className="t-24 l-32 t-primary ml-32"
+          className={`t-24 l-32 t-${btnTextType} ml-32`}
           href={`/person/prize/detail?id=${tbId}`}
           as={`/person/prize/detail/${tbId}`}
         >
-          详情
+          {btnText}
         </Link>
       </Flex>
 

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-16 17:57:56
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-16 18:18:27
+ * @Last Modified time: 2018-11-13 17:33:51
  * @Path m.benting.com.cn /src/person/event/registration/Index/index.js
  */
 import React from 'react';
@@ -34,4 +34,4 @@ Registration.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Registration));
+export default injectV2(store, { login: true })(observer(Registration));

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-18 09:53:36
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-18 09:53:56
+ * @Last Modified time: 2018-11-15 10:48:32
  * @Path m.benting.com.cn /src/shop/auction/Index/index.js
  */
 import React from 'react';
@@ -90,6 +90,10 @@ const Auction = (props, { $ }) => {
             rgba(66, 142, 255, 1) 100%
           );
         }
+        .${prefixCls} .am-tabs-tab-bar-wrap {
+          border-radius: 0.16rem;
+          overflow: hidden;
+        }
       `}</style>
       <style jsx>{`
         .style-210894 {
@@ -108,7 +112,7 @@ const Auction = (props, { $ }) => {
           margin: 0 ${Styles.wind};
           background: ${Styles.color_theme};
           border-radius: 0.16rem;
-          box-shadow: 0 0.12rem 0.16rem 0 rgba(121, 19, 19, 0.5);
+          box-shadow: 0 0.12rem 0.16rem 0 rgba(121, 19, 19, 0.48);
           overflow: hidden;
         }
       `}</style>

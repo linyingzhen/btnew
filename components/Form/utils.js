@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-02 15:04:19
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-07 14:22:03
+ * @Last Modified time: 2018-10-30 11:51:44
  * @Path m.benting.com.cn /common/const/rules.js
  */
 import React from 'react';
@@ -27,7 +27,7 @@ class Utils {
    * @param  {Element} content
    * @return {Element}
    */
-  getLabel(content, isRequired) {
+  getLabel(content = '', isRequired) {
     return (
       <span
         className={classNames('c-form__label', {

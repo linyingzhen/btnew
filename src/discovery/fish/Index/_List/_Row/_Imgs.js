@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-08 17:30:14
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 02:49:33
+ * @Last Modified time: 2018-11-11 10:31:24
  * @Path m.benting.com.cn /src/discovery/fish/Index/_List/_Row/_Imgs.js
  */
 import React from 'react';
@@ -39,7 +39,7 @@ const _Imgs = props => {
             background-repeat: no-repeat;
           }
           img {
-            width: 100% !important;
+            width: auto !important;
             height: initial !important;
             max-width: 57.5vw;
             max-height: 100vw;

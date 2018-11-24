@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-25 16:19:52
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 23:31:05
+ * @Last Modified time: 2018-11-13 17:21:41
  * @Path bt_mb_new /src/person/level/Index/index.js
  */
 import React from 'react';
@@ -22,4 +22,4 @@ const Level = () => (
   </Layout>
 );
 
-export default injectV2(store)(Level);
+export default injectV2(store, { login: true })(Level);

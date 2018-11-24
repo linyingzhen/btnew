@@ -4,13 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-09-04 14:45:10
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-04 18:00:35
+ * @Last Modified time: 2018-11-14 18:27:02
  * @Path m.benting.com.cn /src/bbs/floor/Index/store.js
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';
 import Const from '@const';
 import G from '@stores/g';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -24,10 +25,6 @@ export default class Store extends common {
     // 帖子列表
     post: Const.__EMPTY__
   });
-
-  params = {
-    __cache: true
-  };
 
   fetch = {
     config: {
@@ -48,32 +45,14 @@ export default class Store extends common {
     time: () => this.fetchThenSetState('get_time', 'time'),
 
     // 帖子列表
-    post: refresh => {
-      const { queryPost } = this.params;
-
-      return this.fetchListThenSetState(
+    post: refresh =>
+      this.fetchListThenSetState(
         'get_floor_list',
         'post',
-        queryPost,
+        {
+          _filter: filter.post
+        },
         refresh
-      );
-    },
-    updateOnePostList: postId =>
-      this.updateOneThenSetState('get_floor_list', 'post', { postId })
-  };
-
-  do = {
-    // 点赞
-    like: async (postId, threadId) => {
-      await G.doLike(postId, threadId);
-
-      const bbsLikeAndFavorList = G.getState('bbsLikeAndFavorList');
-
-      // 更新是否点赞
-      this.setState(bbsLikeAndFavorList, 'bbsLikeAndFavorList');
-
-      // 更新一项
-      this.fetch.updateOnePostList(postId);
-    }
+      )
   };
 }

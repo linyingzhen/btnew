@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-28 15:53:15
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-28 16:13:55
+ * @Last Modified time: 2018-11-13 17:37:50
  * @Path m.benting.com.cn /src/person/event/Wabao/index.js
  */
 import React from 'react';
@@ -81,4 +81,4 @@ Wabao.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Wabao));
+export default injectV2(store, { login: true })(observer(Wabao));

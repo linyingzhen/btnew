@@ -4,14 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-08-03 10:17:34
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-31 10:10:45
+ * @Last Modified time: 2018-11-02 18:53:47
  * @Path m.benting.com.cn /src/bbs/topic/Index/store.js
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';
 import Const from '@const';
 import Utils from '@utils';
-import { tabsDS } from './ds';
+import { tabsDS, filter } from './ds';
 
 export default class Store extends common {
   config = {
@@ -108,7 +108,8 @@ export default class Store extends common {
       this.fetchThenSetState('get_topic_list', 'topicList', {
         _: {
           limit: 6
-        }
+        },
+        _filter: filter.topicList
       }),
 
     // 话题发帖列表

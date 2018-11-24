@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-28 18:32:54
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 00:48:39
+ * @Last Modified time: 2018-11-19 09:32:20
  * @Path m.benting.com.cn /src/shop/Index/_New.js
  */
 import React from 'react';
@@ -35,24 +35,24 @@ const _New = (props, { $ }) => {
         as={`/shop/category/${id}`}
       />
       <div className="wrap tool-wrap-scroll">
-        {list.map(item => (
+        {list.map(({ gid, imgs, title, minPrice, maxPrice }) => (
           <Link
-            key={item.gid}
+            key={gid}
             className={`${prefixCls}__item`}
-            href={`/shop/goods?id=${item.gid}`}
-            as={`/shop/goods/${item.gid}`}
+            href={`/shop/goods?id=${gid}`}
+            as={`/shop/goods/${gid}`}
           >
             <div className="img">
-              <Img src={item.imgs} size="2.4rem" lazyload animate />
+              <Img src={imgs} size="2.4rem" lazyload animate />
             </div>
             <div className="info">
-              <p className="t-30 l-42 t-c1">{item.title}</p>
+              <p className="t-30 l-42 t-c1">{title}</p>
               <p className="t-22 l-32 t-c1 t-b mt-4">
                 <span>¥</span>
                 <span className="ml-xs">
-                  {item.minPrice === item.maxPrice
-                    ? item.minPrice
-                    : `${item.minPrice} - ${item.maxPrice}`}
+                  {minPrice === maxPrice
+                    ? minPrice
+                    : `${minPrice} - ${maxPrice}`}
                 </span>
               </p>
             </div>

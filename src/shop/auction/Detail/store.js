@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-11 12:21:33
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-29 17:27:24
+ * @Last Modified time: 2018-11-15 09:15:40
  * @Path m.benting.com.cn /src/shop/auction/Detail/store.js
  */
 import { observable } from 'mobx';
@@ -13,6 +13,7 @@ import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
 import G from '@stores/g';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -47,7 +48,8 @@ export default class Store extends common {
     detail: async () => {
       const { id } = this.params.params;
       const res = this.fetchThenSetState('get_auction_detail', 'detail', {
-        auctionId: id
+        auctionId: id,
+        _filter: filter.detail
       });
 
       // 设置最低amount
@@ -73,7 +75,8 @@ export default class Store extends common {
             search: {
               auctionId: id
             }
-          }
+          },
+          _filter: filter.record
         },
         refresh
       );

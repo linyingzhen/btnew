@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-11 12:31:49
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-11 15:49:47
+ * @Last Modified time: 2018-11-02 18:20:41
  * @Path m.benting.com.cn /src/shop/auction/Detail/_Carousel.js
  */
 import React from 'react';
@@ -40,6 +40,7 @@ const _Carousel = (props, { $ }) => {
           show={show}
           data={data}
           current={index}
+          theme="light"
           hideOrigin
           onClose={$.page.hideImgView}
         />

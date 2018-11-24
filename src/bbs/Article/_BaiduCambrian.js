@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-18 09:16:47
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-08-30 09:51:32
+ * @Last Modified time: 2018-11-02 09:41:32
  * @Path m.benting.com.cn /src/bbs/Article/_BaiduCambrian.js
  */
 import React from 'react';
@@ -45,7 +45,7 @@ const _BaiduCambrian = (props, { $ }) => {
 
   return (
     <Head>
-      <title>{_title}</title>
+      {/* <title>{_title}</title> */}
       <link rel="canonical" href={`${Const.__WEB__}/bbs/article/${id}`} />
       <script
         type="application/ld+json"

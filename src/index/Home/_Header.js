@@ -4,17 +4,16 @@
  * @Author: czy0729
  * @Date: 2018-06-20 17:57:42
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-20 18:42:32
+ * @Last Modified time: 2018-11-01 22:32:36
  * @Path bt_mb_new /src/index/Home/_Header.js
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Badge } from 'antd-mobile';
 import { observer } from '@';
-import { Img, Header, Flex, Link, Icon } from '@components';
+import { Header, Flex, Icon } from '@components';
 import Const from '@const';
 import Utils from '@utils';
-import Styles from '@styles';
 import { images } from './ds';
 
 const _Header = (props, { $ }) => {
@@ -50,52 +49,58 @@ const _Header = (props, { $ }) => {
       }
       ft={
         <Flex>
-          <Link className="t-30 l-42 t-b" href="/nido">
-            社区活动
-          </Link>
-          <Badge
-            dot={hasNewMessage}
-            style={{
-              top: '-0.06rem',
-              right: '-0.16rem',
-              width: '0.2rem',
-              height: '0.2rem',
-              border: '0.02rem solid #fff'
+          <div
+            className="t-c"
+            onClick={() => Utils.router.push('/person/help/service')}
+          >
+            <Icon className="t-40" type="ww" />
+            <p className="t-20 l-34 t-c">客服</p>
+          </div>
+          <div
+            className="t-c ml-32"
+            onClick={() =>
+              Utils.checkLogin(() => Utils.router.push('/person/message'))
+            }
+          >
+            <Badge
+              dot={hasNewMessage}
+              style={{
+                top: '-0.06rem',
+                right: '-0.16rem',
+                width: '0.2rem',
+                height: '0.2rem',
+                border: '0.02rem solid #fff'
+              }}
+            >
+              <Icon
+                className="t-40"
+                type="message2"
+                style={{
+                  width: '0.4rem'
+                }}
+              />
+            </Badge>
+            <p className="t-20 l-34 t-c">消息</p>
+          </div>
+          <div
+            className="t-c ml-32"
+            onClick={() => {
+              if (faceImg) {
+                Utils.router.push('/person');
+              } else {
+                Utils.router.push('/login');
+              }
             }}
           >
             <Icon
-              className="t-40 ml-32"
-              type="message2"
-              style={{
-                width: '0.4rem'
-              }}
-              onClick={() =>
-                Utils.checkLogin(() => Utils.router.push('/person/message'))
-              }
-            />
-          </Badge>
-          {faceImg ? (
-            <Img
-              className="ml-32"
-              src={faceImg}
-              size="0.4rem"
-              circle
-              transparent
-              style={{
-                border: Styles.border
-              }}
-              onClick={() => Utils.router.push('/person')}
-            />
-          ) : (
-            <Icon
-              className="t-40 ml-32"
+              className="t-40"
               type="me"
               style={{
                 width: '0.4rem'
               }}
-              onClick={() => Utils.router.push('/login')}
             />
-          )}
+            <p className="t-20 l-34 t-c">我的</p>
+          </div>
         </Flex>
       }
     />

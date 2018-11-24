@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-06 14:46:11
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 02:49:49
+ * @Last Modified time: 2018-11-22 17:12:18
  * @Path m.benting.com.cn /src/discovery/Index/_Row/_Imgs.js
  */
 import React from 'react';
@@ -43,7 +43,7 @@ const _Imgs = props => {
           .style-397295 {
           }
           img {
-            width: 100% !important;
+            width: auto !important;
             height: initial !important;
             max-width: 57.5vw;
             max-height: 100vw;

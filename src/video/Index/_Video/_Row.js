@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-19 11:19:40
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 17:59:36
+ * @Last Modified time: 2018-11-02 12:08:17
  * @Path m.benting.com.cn /src/video/Index/_Video/_Row.js
  */
 import React from 'react';

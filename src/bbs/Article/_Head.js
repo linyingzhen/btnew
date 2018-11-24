@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-11 17:40:19
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 15:14:39
+ * @Last Modified time: 2018-11-16 16:43:27
  * @Path m.benting.com.cn /src/bbs/Article/_Head.js
  */
 import React from 'react';
@@ -30,6 +30,7 @@ const _Head = (props, { $ }) => {
     grade,
     fanAuth,
     vip,
+    role,
     createTime
   } = $.getState('detail');
 
@@ -55,12 +56,10 @@ const _Head = (props, { $ }) => {
             level={grade}
             fansAuth={fanAuth}
             vip={vip}
+            role={role}
             date={createTime && Utils.date('y-m-d H:i:s', createTime)}
           />
         </Flex.Item>
-        {/* <Button type="primary" ghost inline size="sm">
-          关注
-        </Button> */}
       </Flex>
 
       <style jsx>{`

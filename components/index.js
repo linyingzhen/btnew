@@ -3,8 +3,8 @@
  * const images = '/static/images/components';
  * @Author: czy0729
  * @Date:   2018-06-14 18:39:46
- * @Last Modified by:   czy0729
- * @Last Modified time: 2018-10-17 10:12:33
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-02 11:26:54
  * @Path m.benting.com.cn /components/index.js
  */
 export { default as AffixTabs } from './AffixTabs';
@@ -34,7 +34,6 @@ export { default as Page } from './Page';
 export { default as PayConfirm } from './PayConfirm';
 export { default as Result } from './Result';
 export { default as Reward } from './Reward';
-export { default as RichEditor } from './RichEditor';
 export { default as Rule } from './Rule';
 export { default as Tabs } from './Tabs';
 export { default as Textarea } from './Textarea';

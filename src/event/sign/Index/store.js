@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-18 04:09:00
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-22 10:17:22
+ * @Last Modified time: 2018-11-14 00:07:30
  * @Path m.benting.com.cn /src/event/sign/Index/store.js
  */
 import { observable } from 'mobx';
@@ -13,6 +13,7 @@ import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
 import G from '@stores/g';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -36,9 +37,8 @@ export default class Store extends common {
 
   fetch = {
     config: {
-      static: ['userInfo'],
       one: ['today'],
-      update: ['weekSign']
+      update: ['userInfo', 'weekSign']
     },
 
     userInfo: async () => {
@@ -50,10 +50,16 @@ export default class Store extends common {
     },
 
     // 本周签到记录
-    weekSign: () => this.fetchThenSetState('get_sign_week-list', 'weekSign'),
+    weekSign: () =>
+      this.fetchThenSetState('get_sign_week-list', 'weekSign', {
+        _filter: filter.weekSign
+      }),
 
     // 今天前十
-    today: () => this.fetchThenSetState('get_sign_today-top-list', 'today')
+    today: () =>
+      this.fetchThenSetState('get_sign_today-top-list', 'today', {
+        _filter: filter.today
+      })
   };
 
   do = {

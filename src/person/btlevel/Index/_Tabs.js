@@ -1,11 +1,11 @@
 /**
- * const prefixCls = 'style-128353';
- * const images = '/static/images';
+ * const prefixCls = 'style-126110';
+ * const images = '/static/images/src/person/btlevel/Index';
  * @Author: lyz0720
  * @Date: 2018-10-26 10:06:33
- * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 17:08:00
- * @Path bt_mb_new \src\person\btlevel\Index\_Tabs.js.git
+ * @Last Modified by:   czy0729
+ * @Last Modified time: 2018-11-13 17:25:34
+ * @Path bt_mb_new /src/person/btlevel/Index/_Tabs.js.git
  */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -16,7 +16,7 @@ import Grade from './_Grade';
 import Task from './_Task';
 import Score from './_Score';
 
-const prefixCls = 'style-128353';
+const prefixCls = 'style-126110';
 
 const _Tabs = (props, { $ }) => {
   const { className } = props;
@@ -66,7 +66,7 @@ const _Tabs = (props, { $ }) => {
       )}
 
       <style jsx>{`
-        .style-128353 {
+        .style-126110 {
         }
         .tabs {
           position: relative;

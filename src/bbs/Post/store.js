@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-22 23:40:22
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-07-23 11:29:35
+ * @Last Modified time: 2018-11-05 12:00:42
  * @Path m.benting.com.cn /src/bbs/Post/store.js
  */
 import { observable } from 'mobx';
@@ -49,9 +49,7 @@ export default class Store extends common {
 
       const data = await res;
 
-      this.setState({
-        qiniuFileKey: data
-      });
+      this.setState(data, 'qiniuFileKey');
 
       return res;
     }
@@ -69,12 +67,8 @@ export default class Store extends common {
         fileId: entities.join()
       });
 
-      if (window.Stores['/bbs']) {
-        window.Stores['/bbs'].setRefresh();
-      }
-
       Utils.light('发帖成功');
-      Utils.router.replace('/bbs/1');
+      Utils.router.push('/bbs');
     },
 
     // 编辑帖子
@@ -90,7 +84,7 @@ export default class Store extends common {
       });
 
       Utils.light('编辑成功');
-      Utils.router.back();
+      Utils.router.push('/bbs');
     }
   };
 }

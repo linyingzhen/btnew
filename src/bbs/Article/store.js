@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-11 16:52:03
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-31 17:59:50
+ * @Last Modified time: 2018-11-02 11:56:58
  * @Path m.benting.com.cn /src/bbs/Article/store.js
  */
 import React from 'react';
@@ -14,7 +14,7 @@ import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
 import G from '@stores/g';
-import { tabsAllDS, competitionTypeDS } from './ds';
+import { tabsAllDS, competitionTypeDS, filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -235,10 +235,9 @@ export default class Store extends common {
   fetch = {
     config: {
       static: ['userInfo', 'walletInfo', 'bbsLikeAndFavorList'],
-      one: [['detail', true]]
+      one: ['detail']
     },
 
-    // 用户信息
     userInfo: async () => {
       const res = G.fetchUserInfo();
 
@@ -271,7 +270,8 @@ export default class Store extends common {
 
       return this.fetchThenSetState('get_bbs_post-detail', 'detail', {
         threadId: id,
-        noRead: noRead === 1 ? 1 : undefined
+        noRead: noRead === 1 ? 1 : undefined,
+        _filter: filter.detail
       });
     },
 
@@ -282,7 +282,10 @@ export default class Store extends common {
       return this.fetchListThenSetState(
         'get_bbs_post-comment-list',
         'comment',
-        queryComment,
+        {
+          ...queryComment,
+          _filter: filter.comment
+        },
         refresh
       );
     },
@@ -299,7 +302,8 @@ export default class Store extends common {
             relevId: id,
             'faceImg[!]': Const.__IMG_EMPTY__
           }
-        }
+        },
+        _filter: filter.score
       });
     },
 

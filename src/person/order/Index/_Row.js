@@ -4,7 +4,7 @@
  * @Author: lyz0720
  * @Date: 2018-10-23 13:48:49
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 00:31:25
+ * @Last Modified time: 2018-11-14 15:10:14
  * @Path bt_mb_new /src/person/order/Index/__Row.js
  */
 import React from 'react';
@@ -23,16 +23,37 @@ const _Row = props => {
     item = {},
     goodsNum,
     amount,
-    grantState
+    grantState,
+    explain
   } = props;
+
+  const _grantState = Utils.getLabel(grantStateDS, grantState);
+  let isSuccess = false;
+  let type = 'primary';
+  switch (_grantState) {
+    case '审核通过':
+      isSuccess = true;
+      break;
+
+    case '审核通过已加分':
+      isSuccess = true;
+      type = 'success';
+      break;
+
+    case '审核失败':
+    case '已退货':
+      type = 'danger';
+      break;
+
+    default:
+      break;
+  }
 
   return (
     <List.Item>
       <Flex className="t-28 l-40 t-sub">
         <Flex.Item>{Utils.date(createTime)}</Flex.Item>
-        <span className="t-primary">
-          {Utils.getLabel(grantStateDS, grantState)}
-        </span>
+        <span className={`t-${type}`}>{_grantState}</span>
       </Flex>
       <Flex className={`${prefixCls}__wrap-goods mt-16`}>
         <Img
@@ -66,12 +87,15 @@ const _Row = props => {
           )}
         </Flex.Item>
       </Flex>
-      <Flex className="t-r mt-24" justify="between">
-        <Flex.Item className="t-28 l-40">
-          <span>实付金额（含邮费）：</span>
-          <span className="t-primary">{amount}</span>
-        </Flex.Item>
-      </Flex>
+      {explain && <p className="t-24 t-danger mt-24">{explain}</p>}
+      {isSuccess && (
+        <Flex className="t-r mt-24" justify="between">
+          <Flex.Item className="t-28 l-40">
+            <span>实付金额（含邮费）：</span>
+            <span className="t-primary">{amount}</span>
+          </Flex.Item>
+        </Flex>
+      )}
 
       <style jsx global>{`
         .style-372434 {

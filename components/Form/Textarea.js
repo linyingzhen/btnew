@@ -4,13 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-07-26 17:13:20
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-19 15:17:29
+ * @Last Modified time: 2018-11-15 16:47:06
  * @Path m.benting.com.cn /components/Form/Textarea.js
  */
 import React from 'react';
 import classNames from 'classnames';
 import { TextareaItem } from 'antd-mobile';
 import Styles from '@styles';
+import utils from './utils';
 
 const prefixCls = 'c-form-textarea';
 
@@ -40,12 +41,13 @@ const Textarea = props => {
       <TextareaItem
         {...formProps}
         className={classNames(prefixCls, className)}
-        title={title || label}
+        title={utils.getLabelDecorator(option)(title || label)}
         name={name}
         placeholder={placeholder}
         rows={4}
         clear
         autoHeight
+        error={!!form.getFieldError(name)}
         {...other}
       />
 

@@ -5,7 +5,7 @@
  * @Author: czy0729
  * @Date: 2018-06-20 11:16:10
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 20:29:33
+ * @Last Modified time: 2018-11-20 10:52:08
  * @Path m.benting.com.cn \common\utils\index.js
  */
 import React from 'react';
@@ -36,6 +36,69 @@ function goToPay() {
 }
 
 /* ==================== addOn 最近添加 ==================== */
+/**
+ * 灌水检测
+ * @version 181031 1.0
+ + @param  {String}  *str
+ * @return {Boolean}
+ */
+let _checkCommentFailCount = 0;
+function checkComment(str = '') {
+  const dist = [
+    '一样',
+    '不错',
+    '加油',
+    '厉害',
+    '可以',
+    '呵呵',
+    '哈哈',
+    '好的',
+    '对啊',
+    '很好',
+    '抢到',
+    '是啊',
+    '是的',
+    '来了',
+    '满分',
+    '漂亮',
+    '点赞',
+    '看看',
+    '继续',
+    '蛋',
+    '试试',
+    '路过',
+    '还行'
+  ];
+
+  let index = -1;
+  if (str.length < 5) {
+    index = dist.findIndex(item => str.indexOf(item) !== -1);
+  }
+
+  if (index !== -1) {
+    if (_checkCommentFailCount < 2) {
+      light('大师，请认真评论');
+    } else if (_checkCommentFailCount < 4) {
+      light('认真评论可帮助社区成长哦');
+    } else if (_checkCommentFailCount < 6) {
+      light('再调皮管理要出动了');
+    } else {
+      // #todo 调起禁言接口
+      light('╮(╯﹏╰)╭');
+    }
+
+    if (_checkCommentFailCount < 9) {
+      _checkCommentFailCount += 1;
+    } else {
+      _checkCommentFailCount = 0;
+    }
+
+    return false;
+  }
+
+  return true;
+}
+
 /**
  * [常用]项目图片切换七牛静态CDN地址
  * @version 180524 1.0
@@ -251,20 +314,29 @@ function isUC() {
 }
 
 /**
- * [常用]系统log
+ * [常用]测试log
  * @version 171024 0.1
+ * @version 181101 1.0 测试环境才显示
+ * @param {String} type  消息类型
+ * @param {String} key   消息键
+ * @param {Any}    value 消息值
  */
-function log(a, b, c) {
-  console.log(
-    '[DEV]',
-    date('H:i:s', new Date().valueOf() / 1000),
-    '|',
-    a,
-    '|',
-    fill(b),
-    '|',
-    c
-  );
+function log(type, key, value, ...other) {
+  if (Const.__DEV__) {
+    console.log(
+      '[DEV]',
+      '|',
+      date('H:i:s', new Date().valueOf() / 1000),
+      '|',
+      fill(type, 6),
+      '|',
+      fill(key, 24),
+      '|',
+      fill(value, 24),
+      '|',
+      other
+    );
+  }
 }
 
 /**
@@ -302,11 +374,17 @@ function getRandomArrayElements(arr, count) {
 }
 
 /**
- * [常用]返回当前timestamp
+ * [常用]返回timestamp
  * @version 170814 1.0
- * @return {Int} 时间戳
+ * @version 181107 1.1
+ * @param  {String} date  指定时间，例2018/11/11 00:00:00
+ * @return {Int}    时间戳
  */
-function getTimestamp() {
+function getTimestamp(date) {
+  if (date) {
+    return Math.floor(new Date(date).valueOf() / 1000);
+  }
+
   return Math.floor(new Date().valueOf() / 1000);
 }
 
@@ -531,8 +609,13 @@ function getPathname(currentPathname) {
  * @version 170519 1.0
  * @version 170712 1.1 引入回调地址机制
  * @version 180102 1.2 不传nextFn，返回boolean
+ * @version 181113 1.3 非客户端直接返回false
  */
 function checkLogin(nextFn) {
+  if (!Const.__CLIENT__) {
+    return false;
+  }
+
   const tk = G.getState('tk');
 
   if (!nextFn) {
@@ -1344,17 +1427,18 @@ function checkDeviceType() {
  * @param {Mix}    data
  */
 function lsSet(key, data) {
-  if (typeof localStorage == 'undefined') return false;
+  if (typeof localStorage === 'undefined') {
+    return false;
+  }
 
   try {
-    const value = typeof data == 'string' ? data : JSON.stringify(data);
+    const value = typeof data === 'string' ? data : JSON.stringify(data);
 
     localStorage.setItem(key, value);
-
-    console.log('localStorage set success: ', key);
+    Utils.log('LS', key, value.substring(0, 100));
     return true;
   } catch (err) {
-    console.log('localStorage set fail: ', key, '\n', err);
+    console.warn('localStorage set fail: ', key, '\n', err);
     return false;
   }
 }
@@ -1368,7 +1452,9 @@ function lsSet(key, data) {
 function lsGet(key, defaultDS = {}) {
   let data;
 
-  if (typeof localStorage == 'undefined') return defaultDS;
+  if (typeof localStorage === 'undefined') {
+    return defaultDS;
+  }
 
   try {
     data = JSON.parse(localStorage.getItem(key)) || defaultDS;
@@ -1620,11 +1706,11 @@ function emojify(content, format) {
         );
       }
 
+      const content = format ? format(item) : item;
+
       return (
         <span key={index}>
-          {(format ? format(item) : item)
-            .replace(/,/g, '，')
-            .replace(/:/g, '：')}
+          {typeof content === 'string' ? content.replace(/,/g, '，') : content}
         </span>
       );
     });
@@ -1786,7 +1872,7 @@ function wxHideMenuItems() {
  * @return {Bool}   true为进，false为退
  */
 function getPageTransition() {
-  if (router.historyState === 'PUSH' || router.historyState === 'REPLACE') {
+  if (router._historyState === 'PUSH' || router._historyState === 'REPLACE') {
     return true;
   }
 
@@ -1817,10 +1903,10 @@ const router = {
   ...Router,
 
   // 181024 由Link和Router来共同维护一个方向变量
-  historyState: 'PUSH',
-  setPush: () => (router.historyState = 'PUSH'),
-  setReplace: () => (router.historyState = 'REPLACE'),
-  setPop: () => (router.historyState = 'POP'),
+  _historyState: 'PUSH',
+  setPush: () => (router._historyState = 'PUSH'),
+  setReplace: () => (router._historyState = 'REPLACE'),
+  setPop: () => (router._historyState = 'POP'),
 
   // 前进
   push: (...arg) => {
@@ -1835,22 +1921,28 @@ const router = {
   },
 
   // 退后
+  _hasBackToHome: false,
   back: (...arg) => {
-    // const lastPath = window.location.href;
+    if (!router._hasBackToHome) {
+      const lastPath = window.location.href;
 
-    Router.back(...arg);
+      Router.back(...arg);
 
-    // #todo
-    // hack 正式环境，外链直接进来，退后点击回到首页
-    // if (!Const.__DEV__) {
-    //   setTimeout(() => {
-    //     const currentPath = window.location.href;
+      // #todo
+      // hack 正式环境，外链直接进来，退后点击回到首页
+      if (!Const.__DEV__) {
+        setTimeout(() => {
+          const currentPath = window.location.href;
 
-    //     if (lastPath === currentPath) {
-    //       Router.push('/');
-    //     }
-    //   }, 1200);
-    // }
+          if (lastPath === currentPath) {
+            Router.replace('/');
+            router._hasBackToHome = true;
+          }
+        }, 200);
+      }
+    } else {
+      Router.back(...arg);
+    }
   }
 };
 
@@ -1861,14 +1953,14 @@ const Utils = {
   /* ==================== base ==================== */
   bankCheck,
   cdn,
+  checkComment,
   checkDeviceType,
   checkLogin,
   checkWW,
   date,
-  formatDate,
-  toTimestamp,
   deepCopy,
   fill,
+  formatDate,
   formatNumber,
   genSearch,
   getAppImgUrl,
@@ -1898,6 +1990,7 @@ const Utils = {
   sleep,
   strInsert,
   stringSplitToArray,
+  toTimestamp,
   tree,
   trim,
   validate,

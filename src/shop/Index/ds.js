@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-28 18:10:22
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-30 16:32:06
+ * @Last Modified time: 2018-11-19 09:33:07
  * @Path m.benting.com.cn /src/shop/Index/ds.js
  */
 import Utils from '@utils';
@@ -44,3 +44,16 @@ export const categoryDS = [
     value: '51'
   }
 ];
+export const filter = {
+  carousel: {
+    imgId: 1,
+    url: 1
+  },
+  new: {
+    gid: 1,
+    imgs: 1,
+    maxPrice: 1,
+    minPrice: 1,
+    title: 1
+  }
+};

@@ -5,7 +5,7 @@
  * @Author: czy0729
  * @Date: 2018-10-18 01:49:53
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 20:15:14
+ * @Last Modified time: 2018-11-14 00:11:31
  * @Path m.benting.com.cn /src/event/sign/History/_Calendar.js
  */
 import React from 'react';
@@ -59,9 +59,9 @@ export default class _Calendar extends React.Component {
 
     const signRecordMap = {};
     if (list.length) {
-      list.forEach(item => {
+      list.forEach(({ dateYm, dayNumber }) => {
         signRecordMap[
-          `${String(item.dateYm).replace('-', '/')}/${item.dayNumber}`
+          `${String(dateYm).replace('-', '/')}/${dayNumber}`
         ] = true;
       });
     }

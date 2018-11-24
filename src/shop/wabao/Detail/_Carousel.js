@@ -3,8 +3,8 @@
  * const images = '/static/images/src/shop/wabao/Detail';
  * @Author: czy0729
  * @Date: 2018-09-27 17:24:02
- * @Last Modified by:   czy0729
- * @Last Modified time: 2018-09-27 17:24:02
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-02 18:22:46
  * @Path m.benting.com.cn /src/shop/wabao/Detail/_Carousel.js
  */
 import React from 'react';
@@ -42,6 +42,7 @@ const _Carousel = (props, { $ }) => {
           show={show}
           data={data}
           current={index}
+          theme="light"
           hideOrigin
           onClose={$.page.hideImgView}
         />

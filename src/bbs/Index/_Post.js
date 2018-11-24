@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-10 16:34:25
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 16:52:01
+ * @Last Modified time: 2018-11-16 16:47:05
  * @Path m.benting.com.cn /src/bbs/Index/_Post.js
  */
 import React from 'react';
@@ -34,7 +34,6 @@ const _Post = (props, { $ }) => {
             type="primary"
             size="xs"
             inline
-            ghost
             onClick={() =>
               Utils.checkLogin(() => Utils.router.push('/bbs/post'))
             }
@@ -46,11 +45,13 @@ const _Post = (props, { $ }) => {
       >
         <ListView
           data={post}
+          refresh
           renderRow={item => (
             <ListRow
               userId={item.userId}
               img={item.faceImg}
               vip={item.vip}
+              role={item.role}
               name={item.niname}
               level={item.grade}
               createTime={item.createTime}
@@ -59,6 +60,7 @@ const _Post = (props, { $ }) => {
               likeCount={item.likeAdd}
               commentCount={item.replyNum}
               spec={item.isDigest === 1}
+              contentImg={item.contentImg}
               href={`/bbs/article?id=${item.threadId}`}
               as={`/bbs/article/${item.threadId}`}
             />

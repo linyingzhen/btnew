@@ -5,7 +5,7 @@
  * @Author: czy0729
  * @Date: 2018-07-11 23:20:57
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-07-23 11:06:25
+ * @Last Modified time: 2018-11-05 17:46:13
  * @Path m.benting.com.cn /components/RichEditor/_Control.js
  */
 import React from 'react';
@@ -128,22 +128,18 @@ export default class _Control extends React.Component {
         key={item.style}
         label={item.label}
         active={editorState.getCurrentInlineStyle().has(item.style)}
-        onMouseDown={
-          !Const.__IOS__
-            ? e => {
-              e.preventDefault();
-              this.toggleInlineStyle(item.style);
-            }
-            : undefined
-        }
-        onTouchEnd={
-          Const.__IOS__
-            ? e => {
-              e.preventDefault();
-              this.toggleInlineStyle(item.style);
-            }
-            : undefined
-        }
+        onMouseDown={e => {
+          if (!Const.__IOS__) {
+            e.preventDefault();
+            this.toggleInlineStyle(item.style);
+          }
+        }}
+        onTouchEnd={e => {
+          if (Const.__IOS__) {
+            e.preventDefault();
+            this.toggleInlineStyle(item.style);
+          }
+        }}
       />
     ));
   }
@@ -162,22 +158,18 @@ export default class _Control extends React.Component {
         key={item.style}
         label={item.label}
         active={item.style === blockType}
-        onMouseDown={
-          !Const.__IOS__
-            ? e => {
-              e.preventDefault();
-              this.toggleBlockType(item.style);
-            }
-            : undefined
-        }
-        onTouchEnd={
-          Const.__IOS__
-            ? e => {
-              e.preventDefault();
-              this.toggleBlockType(item.style);
-            }
-            : undefined
-        }
+        onMouseDown={e => {
+          if (!Const.__IOS__) {
+            e.preventDefault();
+            this.toggleBlockType(item.style);
+          }
+        }}
+        onTouchEnd={e => {
+          if (Const.__IOS__) {
+            e.preventDefault();
+            this.toggleBlockType(item.style);
+          }
+        }}
       />
     ));
   }
@@ -206,7 +198,7 @@ export default class _Control extends React.Component {
           Utils.hideToast();
         }}
       >
-        <BtnControl label={<img src={`${images}/pic.png`} alt="" />} />
+        <BtnControl label="pic2" />
 
         <style jsx global>{`
           .style-829803 {
@@ -275,7 +267,7 @@ export default class _Control extends React.Component {
         }}
       >
         <BtnControl
-          label={<img src={`${images}/video.png`} alt="" />}
+          label="video2"
           onClick={onQiniuUploadClick}
         />
 
@@ -300,22 +292,18 @@ export default class _Control extends React.Component {
         key={item.style}
         color={item.label}
         active={editorState.getCurrentInlineStyle().has(item.style)}
-        onMouseDown={
-          !Const.__IOS__
-            ? e => {
-              e.preventDefault();
-              this.toggleColor(item.style);
-            }
-            : undefined
-        }
-        onTouchEnd={
-          Const.__IOS__
-            ? e => {
-              e.preventDefault();
-              this.toggleColor(item.style);
-            }
-            : undefined
-        }
+        onMouseDown={e => {
+          if (!Const.__IOS__) {
+            e.preventDefault();
+            this.toggleColor(item.style);
+          }
+        }}
+        onTouchEnd={e => {
+          if (Const.__IOS__) {
+            e.preventDefault();
+            this.toggleColor(item.style);
+          }
+        }}
       />
     ));
   }
@@ -325,7 +313,7 @@ export default class _Control extends React.Component {
 
     return (
       <BtnControl
-        label={<img src={`${images}/packup.png`} alt="" />}
+        label="up"
         onClick={onToggleAdvance}
       />
     );
@@ -336,7 +324,7 @@ export default class _Control extends React.Component {
 
     return (
       <BtnControl
-        label={<img src={`${images}/unfold.png`} alt="" />}
+        label="down"
         onClick={onToggleAdvance}
       />
     );
@@ -374,7 +362,7 @@ export default class _Control extends React.Component {
               right: 0;
               z-index: ${Styles.z_rich_editor_control};
               padding: ${Styles.sm} ${Styles.wind};
-              background: ${Styles.color_bg};
+              background: #e9e9e9;
               border-top: ${Styles.border};
               border-bottom: ${Styles.border};
             }
@@ -428,9 +416,7 @@ export default class _Control extends React.Component {
             left: 0;
             right: 0;
             padding: ${Styles.sm} ${Styles.wind};
-            background-color: ${Styles.color_bg};
-            // border-top: ${Styles.border};
-            // border-bottom: ${Styles.border};
+            background-color: #e9e9e9;
           }
           .${prefixCls}__control__split {
             width: 0;

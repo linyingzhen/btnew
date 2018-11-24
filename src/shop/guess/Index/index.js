@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-25 12:09:24
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-25 14:49:45
+ * @Last Modified time: 2018-11-15 11:33:01
  * @Path m.benting.com.cn /src/shop/guess/Index/index.js
  */
 import React from 'react';
@@ -88,6 +88,10 @@ const Guess = (props, { $ }) => {
             rgba(34, 236, 164, 1) 0%,
             rgba(0, 219, 166, 1) 100%
           );
+        }
+        .${prefixCls} .am-tabs-tab-bar-wrap {
+          border-radius: 0.16rem;
+          overflow: hidden;
         }
       `}</style>
       <style jsx>{`

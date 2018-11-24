@@ -4,13 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-07-31 18:36:39
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 15:13:32
+ * @Last Modified time: 2018-11-13 18:05:13
  * @Path m.benting.com.cn /src/person/publish/Index/_List.js
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from '@';
-import { AffixTabs, ListView } from '@components';
+import { ListView } from '@components';
+import AffixTabs from '@components/AffixTabs/default';
 import Row from './_Row';
 import { tabsDS } from './ds';
 
@@ -34,6 +35,10 @@ const _List = (props, { $ }) => {
       data = $.getState('discovery');
       onEndReached = $.fetch.discovery;
       break;
+  }
+
+  if (!data.list || !data.list.length) {
+    return null;
   }
 
   return (

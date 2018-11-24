@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-20 15:10:39
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-20 16:20:43
+ * @Last Modified time: 2018-11-14 18:40:03
  * @Path m.benting.com.cn /src/shop/miaosha/Index/index.js
  */
 import React from 'react';

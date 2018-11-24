@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-22 11:04:33
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 03:28:49
+ * @Last Modified time: 2018-11-16 14:50:12
  * @Path m.benting.com.cn /server.js
  */
 const express = require('express');
@@ -25,18 +25,18 @@ app
     const server = express();
 
     /* ==================== static ==================== */
-    // #todo 补充注释, 关键代码
+    // 使/static/out映射为项目根目录下的目录，存放例如robot.txt, icon, sw.js之类的文件
     server.use(
       express.static(`${__dirname}/static/out`, {
-        maxage: dev ? '0' : '1d'
+        maxage: dev ? '0' : '30d'
       })
     );
 
-    // #todo 补充注释, 关键代码
+    // 开发环境不能暴露out，会另Next.js默认使用out里面的静态导出页面，导致不识别开发页面的代码
     if (!dev) {
       server.use(
         express.static(`${__dirname}/out`, {
-          maxage: dev ? '0' : '1d'
+          maxage: '30d'
         })
       );
     }

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-25 14:34:43
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 15:13:32
+ * @Last Modified time: 2018-11-07 14:48:16
  * @Path bt_mb_new /src/person/prize/Info/_Form.js
  */
 import React from 'react';
@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { observer } from '@';
 import { Form, Link } from '@components';
+import { Tips } from '@_';
 import Const from '@const';
 import Utils from '@utils';
 
@@ -19,6 +20,7 @@ const prefixCls = 'style-121409';
 
 const _Form = (props, { $ }) => {
   const { form, onSubmit, className } = props;
+  const { ww, _loaded: loadedUserInfo } = $.getState('userInfo');
   const {
     bankNo,
     orderNo,
@@ -27,21 +29,26 @@ const _Form = (props, { $ }) => {
     state,
     authState,
     authRemark,
-    _loaded
+    expdatebegin,
+    expdateend,
+    _loaded: loadedDetail
   } = $.getState('detail');
   const bank = $.getState('bank');
 
-  if (!bank._loaded || !_loaded) {
+  if (!loadedUserInfo || !loadedDetail || !bank._loaded) {
     return null;
   }
 
+  const begin = Utils.date('y.m.d H:i:s', expdatebegin);
+  const end = Utils.date('y.m.d H:i:s', expdateend);
+  const isBindWW = !!ww;
   const isBindBank = !!bank.bankcardId;
 
   let allowSubmit = true;
-  let btnText = '提交';
+  let btnType = 'primary';
+  let btnText = '确认提交';
   switch (parseInt(authState)) {
     case 0:
-    case 3:
       break;
 
     case 1:
@@ -51,7 +58,12 @@ const _Form = (props, { $ }) => {
 
     case 2:
       allowSubmit = false;
-      btnText = state == 3 ? '奖励金发放成功' : '审核通过，请等待奖金发放';
+      btnText = state == 3 ? '答谢金发放成功' : '审核通过，请等待奖金发放';
+      break;
+
+    case 3:
+      btnType = 'danger';
+      btnText = '审核失败，重新提交';
       break;
 
     default:
@@ -68,6 +80,21 @@ const _Form = (props, { $ }) => {
           initialValue={orderNo}
           option={Const.rules.required}
           disabled={!allowSubmit}
+        />
+        <Form.Input
+          name="ww"
+          label="旺旺号"
+          initialValue={ww}
+          option={Const.rules.required}
+          placeholder="必须为购买此单的旺旺号"
+          disabled
+          extra={
+            !isBindWW && (
+              <Link className="t-primary" href={Const.__ROUTER__.ww}>
+                去绑定
+              </Link>
+            )
+          }
         />
         <Form.Input
           name="bankName"
@@ -104,11 +131,22 @@ const _Form = (props, { $ }) => {
           {authRemark}
         </p>
       )}
+      <Tips className="mt-d">
+        <p className="t-28 l-44">
+          1、购买订单日期必须为：
+          {begin} - {end}
+        </p>
+        <p className="t-28 l-44">2、已绑定的旺旺ID不可自己修改</p>
+        <p className="t-28 l-44">3、一个旺旺ID只能绑定一个账号</p>
+        <p className="t-28 l-44">4、订单的旺旺ID必需与订单号对应</p>
+      </Tips>
       <Form.Button
+        type={btnType}
         disabled={!allowSubmit}
         onClick={() =>
           onSubmit(form, values =>
-            Utils.onConfirm('确认无误并提交?', () => $.do.submit(values)))
+            Utils.onConfirm('确认无误并提交?', () => $.do.submit(values))
+          )
         }
       >
         {btnText}

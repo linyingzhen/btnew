@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-20 17:34:41
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 13:37:37
+ * @Last Modified time: 2018-11-16 15:30:19
  * @Path m.benting.com.cn \components\Header\index.js
  */
 import React from 'react';
@@ -22,10 +22,17 @@ export default class Header extends React.Component {
   state = {
     freeze: false,
     open: true,
-    fixed: false
+    fixed: false,
+    transition: false
   };
 
   componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        transition: true
+      });
+    }, 200);
+
     if (Const.__CLIENT__) {
       const scroll = (fn = Function.prototype) => {
         let beforeScrollTop =
@@ -60,7 +67,7 @@ export default class Header extends React.Component {
           beforeScrollTop = afterScrollTop;
 
           return true;
-        }, 50);
+        }, 80);
 
         // window.addEventListener('scroll', this.onScroll, false);
         window.addEventListener('scroll', this.onScroll, { passive: true });
@@ -130,7 +137,7 @@ export default class Header extends React.Component {
       className,
       ...other
     } = this.props;
-    const { freeze, open, fixed } = this.state;
+    const { freeze, open, fixed, transition } = this.state;
 
     if (!show) {
       return null;
@@ -145,13 +152,14 @@ export default class Header extends React.Component {
         [`${prefixCls}__wrap_open`]: freeze
           ? document.body.scrollTop === 0
           : open,
-        [`${prefixCls}__wrap_fixed`]: fixed
+        [`${prefixCls}__wrap_fixed`]: fixed,
+        [`${prefixCls}__wrap_transition`]: transition
       });
     }
 
     if (children) {
       return (
-        <div
+        <header
           className={classNames(prefixCls, className)}
           style={style}
           {...other}
@@ -175,24 +183,32 @@ export default class Header extends React.Component {
               right: 0;
               background: ${Styles.color_theme};
               transform: translate3d(0, -104%, 0);
-              transition: transform 0.16s ease-in-out;
             }
             .${prefixCls}__wrap_freeze {
               transition: initial !important;
             }
+            .${prefixCls}__wrap_transition {
+              transition: transform 0.16s ease-in-out;
+            }
             .${prefixCls}__wrap_open {
-              transform: translateZ(0);
+              transform: translate3d(0, 0, 0);
+              transition: transform 0.08s ease-in-out;
             }
             .${prefixCls}__wrap_fixed {
-              box-shadow: 0 0.02rem 0.08rem rgba(0, 0, 0, 0.16);
+              box-shadow: 0 0.02rem 0.04rem rgba(0, 0, 0, 0.16);
             }
           `}</style>
-        </div>
+        </header>
       );
     }
 
     return (
-      <div className={classNames(prefixCls, className)} style={style}>
+      <header
+        className={classNames(prefixCls, className, {
+          [`${prefixCls}_android-wx`]: !Const.__IOS__ && Const.__WX__
+        })}
+        style={style}
+      >
         {hideBack ? (
           <Flex className={cls} style={style}>
             <Flex className={`${prefixCls}__hd t-40 l-56 t-b`}>
@@ -209,7 +225,7 @@ export default class Header extends React.Component {
             <Flex className={`${prefixCls}__hd`}>
               {hd || (
                 <Icon
-                  className="t-34 t-b"
+                  className="t-34"
                   type="left"
                   style={{
                     color: style.color || Styles.color_title
@@ -246,16 +262,19 @@ export default class Header extends React.Component {
             padding: 0.24rem ${Styles.wind};
             background: ${Styles.color_theme};
             transform: translate3d(0, -104%, 0);
-            transition: all 0.16s ease-in-out;
           }
           .${prefixCls}__wrap_freeze {
             transition: initial !important;
           }
+          .${prefixCls}__wrap_transition {
+            transition: transform 0.16s ease-in-out;
+          }
           .${prefixCls}__wrap_open {
-            transform: translateZ(0);
+            transform: translate3d(0, 0, 0);
+            transition: transform 0.08s ease-in-out;
           }
           .${prefixCls}__wrap_fixed {
-            box-shadow: 0 0.02rem 0.08rem rgba(0, 0, 0, 0.16);
+            box-shadow: 0 0.02rem 0.04rem rgba(0, 0, 0, 0.16);
           }
           .${prefixCls}__hd {
             min-width: 1.16rem;
@@ -267,8 +286,11 @@ export default class Header extends React.Component {
           .${prefixCls}__ft {
             min-width: 1.16rem;
           }
+          .${prefixCls}_android-wx .${prefixCls}__hd i {
+            margin-left: -0.09rem;
+          }
         `}</style>
-      </div>
+      </header>
     );
   }
 }

@@ -4,13 +4,17 @@
  * @Author: czy0729
  * @Date: 2018-10-07 16:38:24
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-16 09:48:23
+ * @Last Modified time: 2018-11-21 13:48:19
  * @Path m.benting.com.cn /src/account/Fans/Index/ds.js
  */
 export const typeNameDS = [
   {
     label: '天猫：本汀旗舰店',
     value: '天猫：本汀旗舰店'
+  },
+  {
+    label: '天猫：本汀大门旗舰店',
+    value: '天猫：本汀大门旗舰店'
   },
   {
     label: '天猫：本汀麦酥专卖店',

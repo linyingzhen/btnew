@@ -4,10 +4,11 @@
  * @Author: czy0729
  * @Date: 2018-07-11 23:03:12
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-08-17 14:52:02
+ * @Last Modified time: 2018-11-02 11:30:35
  * @Path m.benting.com.cn /components/RichEditor/decorator/link.js
  */
 import React from 'react';
+import Const from '@const';
 import Styles from '@styles';
 
 const prefixCls = 'style-146076';
@@ -16,13 +17,17 @@ const Link = props => {
   const { offsetKey, entityKey, contentState } = props;
   const { link, tag } = contentState.getEntity(entityKey).getData();
 
+  const _link = String(link)
+    .replace(Const.__WEB_BT__, Const.__WEB__)
+    .replace(Const.__WEB_NIDO__, Const.__WEB__);
+
   return (
     <a
       className={prefixCls}
       data-offset-key={offsetKey}
-      href={link}
+      href={_link}
       rel="noopener noreferrer"
-      target="_blank"
+      // target="_blank"
     >
       {tag}
 

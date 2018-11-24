@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-17 10:17:05
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-07-17 10:17:34
+ * @Last Modified time: 2018-11-02 11:48:38
  * @Path m.benting.com.cn /src/bbs/Article/_Comment/index.js
  */
 import React from 'react';
@@ -21,7 +21,6 @@ const _Comment = (props, { $ }) => {
   const { className } = props;
   const { page } = $.getState('_affixTabs');
   const { userId } = $.getState('userInfo');
-  // const floorUserId = $.getState('detail').userId; // 楼主Id
   const comment = $.getState('comment');
 
   return (
@@ -33,10 +32,7 @@ const _Comment = (props, { $ }) => {
       >
         <ListView
           data={comment}
-          renderRow={item => (
-            // isHost={floorUserId == item.parUserId}
-            <Row {...item} />
-          )}
+          renderRow={item => <Row {...item} />}
           renderEmpty={<Empty>来抢沙发吧...</Empty>}
           onEndReached={$.fetch.comment}
         />

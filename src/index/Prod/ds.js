@@ -3,8 +3,8 @@
  * const images = '/static/images/src/index/Prod';
  * @Author: czy0729
  * @Date: 2018-10-28 18:56:34
- * @Last Modified by:   czy0729
- * @Last Modified time: 2018-10-28 18:56:34
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-23 09:15:46
  * @Path bt_mb_new /src/index/Prod/index.js
  */
 export const WEB = 'http://benting.tw-bt.com';
@@ -19,37 +19,32 @@ export const rootDS = [
     icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
     text: '本汀首页',
     href: '/'
-  },
-  {
-    icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-    text: '灵动首页',
-    href: '/nido'
-  },
-  {
-    icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-    text: '发现',
-    href: '/discovery'
-  },
-  {
-    icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-    text: '社区',
-    href: '/bbs'
-  },
-  {
-    icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-    text: '个人中心',
-    href: '/person'
   }
 ];
 export const eventDS = [
   {
     icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-    text: '竞拍',
-    href: '/shop/auction'
+    text: '见面有礼',
+    href: '/person/welfare/meet/'
   },
   {
     icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
-    text: '秒杀',
-    href: '/shop/miaosha'
+    text: '生日尊享',
+    href: '/person/welfare/birthday/'
+  },
+  {
+    icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
+    text: '升级尊享',
+    href: '/person/welfare/upgrade/'
+  },
+  {
+    icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
+    text: '超爽积分',
+    href: '/person/welfare/point/'
+  },
+  {
+    icon: 'https://gw.alipayobjects.com/zos/rmsportal/nywPmnTAvTmLusPxHPSu.png',
+    text: '其他特权',
+    href: '/person/welfare/other/'
   }
 ];

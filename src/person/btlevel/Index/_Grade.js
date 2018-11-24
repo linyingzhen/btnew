@@ -1,11 +1,11 @@
 /**
- * const prefixCls = 'style-179816';
- * const images = '/static/images';
+ * const prefixCls = 'style-142296';
+ * const images = '/static/images/src/person/btlevel/Index';
  * @Author: lyz0720
  * @Date: 2018-10-26 10:48:19
- * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 17:10:05
- * @Path bt_mb_new \src\person\level\Index\_Grade.js.git
+ * @Last Modified by:   czy0729
+ * @Last Modified time: 2018-11-13 17:24:04
+ * @Path bt_mb_new /src/person/btlevel/Index/_Grade.js.git
  */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -17,7 +17,7 @@ import Utils from '@utils';
 import Styles from '@styles';
 import { images, gradeData, getBTLevel } from './ds';
 
-const prefixCls = 'styles-179816';
+const prefixCls = 'styles-142296';
 
 const _Grade = (props, { $ }) => {
   const { btexp = 0, btlevel = 0, className, _loaded } = $.getState('userInfo');
@@ -78,7 +78,7 @@ const _Grade = (props, { $ }) => {
       )}
 
       <style jsx>{`
-        .styles-179816 {
+        .styles-142296 {
           padding: 0 0.64rem 1rem;
           min-height: 3.58rem;
         }
@@ -87,7 +87,7 @@ const _Grade = (props, { $ }) => {
         }
       `}</style>
       <style jsx global>{`
-        .styles-179816 {
+        .styles-142296 {
           background: ${Styles.color_void};
         }
         .${prefixCls} .am-flexbox {

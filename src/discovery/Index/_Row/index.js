@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-06 14:45:07
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-11-01 14:30:56
+ * @Last Modified time: 2018-11-22 17:06:21
  * @Path m.benting.com.cn /src/discovery/Index/_Row/index.js
  */
 import React from 'react';
@@ -27,6 +27,7 @@ const _Row = (props, { $ }) => {
     comCountAll,
     commentList,
     con,
+    dtsourceType,
     faceImg,
     fanAuth,
     fileList,
@@ -96,6 +97,7 @@ const _Row = (props, { $ }) => {
               height: '50vw'
             }
           }}
+          dtsourceType={dtsourceType}
         />
         {infoAddress && (
           <Address

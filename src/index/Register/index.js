@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-03 17:09:14
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-08-30 11:33:10
+ * @Last Modified time: 2018-11-14 15:16:43
  * @Path m.benting.com.cn /src/index/Register/index.js
  */
 import React from 'react';
@@ -30,13 +30,13 @@ export default class Register extends React.Component {
     const { form, onSubmit } = this.props;
 
     return (
-      <Layout className={prefixCls} title="注册" theme="fullTheme">
+      <Layout className={prefixCls} title="本汀注册" theme="fullTheme">
         <img
           className="img-logo"
           src={`${Const.__IMG__}/logo-horizon${Const.__IMG_DPR__}.png`}
           alt=""
         />
-        <p className="t-48 l-66 t-b mt-18">欢迎注册本汀账号</p>
+        <p className="t-48 l-66 t-b mt-16">欢迎注册本汀账号</p>
         <Form className="mt-52" form={form}>
           <FlowInput
             type="phone"

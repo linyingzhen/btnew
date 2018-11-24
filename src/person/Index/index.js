@@ -4,7 +4,7 @@
  * @Author: cwz0525
  * @Date: 2018-07-16 12:05:35
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-31 12:00:27
+ * @Last Modified time: 2018-11-13 15:04:11
  * @Path m.benting.com.cn /src/person/Index/index.js
  */
 import React from 'react';
@@ -24,4 +24,4 @@ const Person = () => (
   </Layout>
 );
 
-export default injectV2(store)(Person);
+export default injectV2(store, { login: true })(Person);

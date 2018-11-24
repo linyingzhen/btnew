@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-02 10:00:55
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 02:50:10
+ * @Last Modified time: 2018-11-14 15:16:57
  * @Path m.benting.com.cn /src/index/Login/index.js
  */
 import React from 'react';
@@ -42,13 +42,13 @@ export default class Login extends React.Component {
     const { form, onSubmit } = this.props;
 
     return (
-      <Layout className={prefixCls} title="登录" theme="fullTheme">
+      <Layout className={prefixCls} title="登录本汀" theme="fullTheme">
         <img
           className="img-logo"
           src={`${Const.__IMG__}/logo-horizon${Const.__IMG_DPR__}.png`}
           alt=""
         />
-        <p className="t-48 l-66 t-b mt-18">欢迎登录本汀官网</p>
+        <p className="t-48 l-66 t-b mt-16">欢迎登录本汀官网</p>
         <Form className="mt-64" form={form}>
           <FlowInput
             name="account"

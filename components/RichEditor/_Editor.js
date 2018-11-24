@@ -4,16 +4,17 @@
  * @Author: czy0729
  * @Date: 2018-07-11 23:30:59
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 20:18:50
+ * @Last Modified time: 2018-11-10 17:11:29
  * @Path m.benting.com.cn /components/RichEditor/_Editor.js
  */
 import React from 'react';
 import classNames from 'classnames';
-import { Editor } from 'draft-js';
+import { EditorState, Editor, SelectionState, RichUtils } from 'draft-js';
 import Utils from '@utils';
 import Styles from '@styles';
 import ImgView from '../ImgView';
 import Media from './_Media';
+import MediaEditable from './_MediaEditable';
 import { colorStyleMap } from './config';
 
 const prefixCls = 'style-147998';
@@ -34,26 +35,70 @@ export default class _Editor extends React.Component {
     });
   };
 
-  renderMediaBlock(block) {
+  deleteMedia = block => {
+    const { editorState, onChange } = this.props;
+
+    const selection = editorState.getSelection();
+    const content = editorState.getCurrentContent();
+    const keyAfter =
+      content.getKeyAfter(block.key) || content.getKeyBefore(block.key);
+    const blockMap = content.getBlockMap().delete(block.key);
+    const withoutAtomicBlock = content.merge({
+      blockMap,
+      selectionAfter: selection
+    });
+    const newState = EditorState.push(
+      editorState,
+      withoutAtomicBlock,
+      'remove-range'
+    );
+    const newSelection = new SelectionState({
+      anchorKey: keyAfter,
+      anchorOffset: 0,
+      focusKey: keyAfter,
+      focusOffset: block.getLength()
+    });
+    const newEditorState = EditorState.forceSelection(newState, newSelection);
+
+    if (newEditorState) {
+      onChange(newEditorState);
+    }
+  };
+
+  addLine = () => {
+    const { editorState, onChange } = this.props;
+
+    const newEditorState = RichUtils.insertSoftNewline(
+      EditorState.moveSelectionToEnd(editorState)
+    );
+    onChange(newEditorState);
+  };
+
+  ref;
+
+  renderMediaBlock(block, that) {
     if (block.getType() === 'atomic') {
+      const { readOnly, imgView } = that.props;
+
+      let component;
+      if (readOnly) {
+        if (imgView) {
+          component = props => <Media {...props} onClick={that.showImgView} />;
+        } else {
+          component = Media;
+        }
+      } else {
+        component = props => (
+          <MediaEditable {...props} onDelete={that.deleteMedia} />
+        );
+      }
+
       return {
-        component: Media,
+        component,
         editable: false
       };
     }
-    return null;
-  }
 
-  renderHOCMediaBlock(block, that) {
-    // ImgView HOC
-    const ViewMedia = props => <Media {...props} onClick={that.showImgView} />;
-
-    if (block.getType() === 'atomic') {
-      return {
-        component: ViewMedia,
-        editable: false
-      };
-    }
     return null;
   }
 
@@ -90,18 +135,20 @@ export default class _Editor extends React.Component {
         })}
       >
         <Editor
+          ref={ref => (this.ref = ref)}
           placeholder="输入内容"
           editorState={editorState}
           readOnly={readOnly}
-          blockRendererFn={
-            imgView
-              ? block => this.renderHOCMediaBlock(block, this)
-              : this.renderMediaBlock
-          }
           customStyleMap={colorStyleMap}
           spellCheck={false}
+          blockRendererFn={block => this.renderMediaBlock(block, this)}
           {...other}
         />
+        {/* {!readOnly && (
+          <div className="t-r mt-sm">
+            <BtnTool type="plus" onClick={this.addLine} />
+          </div>
+        )} */}
         {imgView && (
           <ImgView
             show={show}
@@ -120,14 +167,16 @@ export default class _Editor extends React.Component {
         <style jsx global>{`
           .style-147998 {
             position: relative;
-            min-height: 100vw;
-            padding: ${Styles.space} ${Styles.wind} 1.2rem;
-            font-size: ${Styles.t_32};
+            min-height: 64vh;
+            padding: 0.24rem ${Styles.wind} ${Styles.bottom};
+            margin-bottom: 0.92rem;
+            font-size: ${Styles.t_34};
+            line-height: 0.48rem;
             word-wrap: break-word;
             background: ${Styles.color_theme};
           }
           .${prefixCls} figure {
-            margin: ${Styles.sm} 0 !important;
+            margin: 0.24rem 0 !important;
           }
           .${prefixCls}_hide-placeholder .public-DraftEditorPlaceholder-root {
             display: none;
@@ -135,14 +184,13 @@ export default class _Editor extends React.Component {
           .${prefixCls}_read-only {
             padding: 0;
             min-height: 0;
-            border: 0;
-            line-height: 1.5;
           }
+
+          /* orgin draft.js style reset */
           .${prefixCls} .public-DraftStyleDefault-ol,
           .${prefixCls} .public-DraftStyleDefault-ul {
             margin: 0;
           }
-          // ol
           .${prefixCls}
             .public-DraftStyleDefault-ol
             .public-DraftStyleDefault-orderedListItem {

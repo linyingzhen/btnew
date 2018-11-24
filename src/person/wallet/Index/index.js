@@ -4,7 +4,7 @@
  * @Author: cwz0525
  * @Date: 2018-07-11 11:08:34
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-13 09:20:01
+ * @Last Modified time: 2018-11-13 18:06:03
  * @Path m.benting.com.cn /src/person/wallet/Index/index.js
  */
 import React from 'react';
@@ -33,4 +33,4 @@ const Wallet = () => (
   </Layout>
 );
 
-export default injectV2(store)(Wallet);
+export default injectV2(store, { login: true })(Wallet);

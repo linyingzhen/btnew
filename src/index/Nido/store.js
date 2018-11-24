@@ -4,18 +4,18 @@
  * @Author: czy0729
  * @Date: 2018-06-24 18:00:02
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-30 11:42:53
+ * @Last Modified time: 2018-11-15 11:51:56
  * @Path m.benting.com.cn /src/index/Nido/store.js
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';
 import Const from '@const';
 import G from '@stores/g';
-import { mockTopic } from './ds';
+import { mockTopic, filter } from './ds';
 
 export default class Store extends common {
   config = {
-    cache: ['carousel', 'event', 'fish', 'discovery', 'bbs']
+    cache: ['carousel', 'event', 'fish', 'prize', 'discovery', 'bbs']
   };
 
   @observable
@@ -42,6 +42,9 @@ export default class Store extends common {
     // 渔获有礼
     fish: Const.__EMPTY__,
 
+    // 有奖活动
+    prize: Const.__EMPTY__,
+
     // 发现精选
     discovery: Const.__EMPTY__,
 
@@ -52,7 +55,7 @@ export default class Store extends common {
   fetch = {
     config: {
       static: ['userInfo'],
-      one: ['carousel', 'event', 'fish', 'discovery', 'bbs']
+      one: ['carousel', 'event', 'fish', 'prize', 'discovery', 'bbs']
     },
 
     userInfo: async () => {
@@ -66,7 +69,8 @@ export default class Store extends common {
     // 首页轮播图
     carousel: () =>
       this.fetchThenSetState('get_carousel_list', 'carousel', {
-        imgType: 1
+        imgType: 1,
+        _filter: filter.carousel
       }),
 
     // 活动信息
@@ -79,12 +83,25 @@ export default class Store extends common {
     fish: () =>
       this.fetchThenSetState('get_discovery_list', 'fish', {
         _: {
-          limit: 3,
+          limit: 4,
           search: {
             'rate[>]': 0,
             isReclist: 1
           }
-        }
+        },
+        _filter: filter.fish
+      }),
+
+    // 有奖活动
+    prize: () =>
+      this.fetchThenSetState('get_bbs_list', 'prize', {
+        _: {
+          limit: 5,
+          search: {
+            forumId: 77
+          }
+        },
+        _filter: filter.bbs
       }),
 
     // 发现精选
@@ -95,7 +112,8 @@ export default class Store extends common {
           search: {
             isRec: 1 // 精选
           }
-        }
+        },
+        _filter: filter.discovery
       }),
 
     // 牛贴赏析
@@ -107,7 +125,8 @@ export default class Store extends common {
             isDigest: 1, // 精华,
             'replyNum[>]': 50
           }
-        }
+        },
+        _filter: filter.bbs
       })
   };
 }

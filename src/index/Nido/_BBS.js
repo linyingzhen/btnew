@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-28 18:40:15
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-22 18:54:06
+ * @Last Modified time: 2018-11-16 16:55:33
  * @Path m.benting.com.cn /src/index/Nido/_BBS.js
  */
 import React from 'react';
@@ -24,22 +24,39 @@ const _BBS = (props, { $ }) => {
     <div className={classNames(prefixCls, className)}>
       <Header title="牛贴赏析" href="/bbs?id=2" as="/bbs/2" isList />
       <List>
-        {list.map(item => (
-          <ListRow
-            key={item.threadId}
-            userId={item.userId}
-            img={item.faceImg}
-            vip={item.vip}
-            name={item.niname}
-            level={item.grade}
-            createTime={item.createTime}
-            title={item.title}
-            likeCount={item.likeAdd}
-            commentCount={item.replyNum}
-            href={`/bbs/article?id=${item.threadId}`}
-            as={`/bbs/article/${item.threadId}`}
-          />
-        ))}
+        {list.map(
+          ({
+            contentImg,
+            createTime,
+            faceImg,
+            grade,
+            likeAdd,
+            niname,
+            replyNum,
+            threadId,
+            title,
+            userId,
+            vip,
+            role
+          }) => (
+            <ListRow
+              key={threadId}
+              contentImg={contentImg}
+              userId={userId}
+              img={faceImg}
+              vip={vip}
+              role={role}
+              name={niname}
+              level={grade}
+              createTime={createTime}
+              title={title}
+              likeCount={likeAdd}
+              commentCount={replyNum}
+              href={`/bbs/article?id=${threadId}`}
+              as={`/bbs/article/${threadId}`}
+            />
+          )
+        )}
       </List>
 
       <style jsx>{`

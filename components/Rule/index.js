@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-09 16:16:12
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-22 17:32:46
+ * @Last Modified time: 2018-11-10 11:58:51
  * @Path m.benting.com.cn /components/Rule/index.js
  */
 import React from 'react';
@@ -58,7 +58,7 @@ export default class Rule extends React.Component {
       <Animate type="bottom">
         {show && (
           <div className={prefixCls}>
-            <p className="t-48 l-66 t-c t-b ls-1 mt-80">{title}</p>
+            <div className="t-48 l-66 t-c t-b ls-1 mt-80">{title}</div>
             <div className="wrap-rule mt-64">
               {content.map((item, index) => {
                 let _item = item;
@@ -81,9 +81,9 @@ export default class Rule extends React.Component {
                 if (!showNum) {
                   return (
                     /* eslint-disable-next-line */
-                    <p key={index} className="t-34 l-48">
+                    <div key={index} className="t-34 l-48 mt-16">
                       {_item}
-                    </p>
+                    </div>
                   );
                 }
 
@@ -91,7 +91,7 @@ export default class Rule extends React.Component {
                   <Flex
                     /* eslint-disable-next-line */
                     key={index}
-                    className="t-34 l-48"
+                    className="t-34 l-48 mt-16"
                     align="start"
                   >
                     <span className="num">{index + 1}.</span>
@@ -126,7 +126,7 @@ export default class Rule extends React.Component {
               }
               .wrap-rule {
                 position: absolute;
-                top: 1.28rem;
+                top: 1.12rem;
                 right: 0.8rem;
                 bottom: 2.4rem;
                 left: 0.8rem;

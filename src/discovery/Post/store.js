@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-23 13:57:29
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 17:19:02
+ * @Last Modified time: 2018-11-05 11:59:48
  * @Path m.benting.com.cn /src/discovery/Post/store.js
  */
 import { observable } from 'mobx';
@@ -41,9 +41,7 @@ export default class Store extends common {
 
       const data = await res;
 
-      this.setState({
-        qiniuFileKey: data
-      });
+      this.setState(data, 'qiniuFileKey');
 
       return res;
     }
@@ -92,7 +90,7 @@ export default class Store extends common {
       // 发布成功，还原页面store
       this.page.reset();
       Utils.light(`发布成功，积分+${point}`);
-      Utils.router.replace('/discovery');
+      Utils.router.push('/discovery');
     }
   };
 

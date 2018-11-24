@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-22 17:31:39
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-21 22:35:12
+ * @Last Modified time: 2018-11-01 23:34:16
  * @Path m.benting.com.cn /src/index/Nido/_Carousel.js
  */
 import React from 'react';
@@ -21,9 +21,9 @@ const _Carousel = (props, { $ }) => {
   return (
     <div className={prefixCls}>
       <Carousel
-        data={list.map(item => ({
-          src: Utils.getAppImgUrl(item.imgPath, 'scale'),
-          href: item.url
+        data={list.map(({ imgId, url }) => ({
+          src: Utils.getAppImgUrl(imgId, 'scale'),
+          href: url
         }))}
         height="42.6vw"
         ssr

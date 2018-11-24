@@ -4,13 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-09-03 12:28:14
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 17:30:04
+ * @Last Modified time: 2018-11-12 17:43:15
  * @Path m.benting.com.cn /src/service/Index/index.js
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectV2, observer, form } from '@';
-import { Tabs, Form } from '@components';
+import { Form } from '@components';
+import AffixTabs from '@components/AffixTabs/default';
 import { Layout } from '@_';
 import Const from '@const';
 import G from '@stores/g';
@@ -41,7 +42,7 @@ export default class Service extends React.Component {
     const { $ } = this.context;
     const { form } = this.props;
 
-    let isLogin = true;
+    let isLogin;
     if (Const.__CLIENT__) {
       isLogin = !!G.getState('tk');
     }
@@ -107,6 +108,7 @@ export default class Service extends React.Component {
     return (
       <React.Fragment>
         <Form
+          id="service"
           label
           form={form}
           renderHeader={() => (
@@ -147,11 +149,6 @@ export default class Service extends React.Component {
               option={Const.rules.required}
             />
           )}
-          {/* <Form.Input
-            label="防伪码"
-            name="authCode"
-            placeholder="选填，可加快审核速度"
-          /> */}
         </Form>
         <Form.Button
           type="main"
@@ -175,17 +172,13 @@ export default class Service extends React.Component {
 
     return (
       <Layout className={prefixCls} title="售后中心">
-        <Tabs
+        <AffixTabs
           tabs={tabsDS}
           page={page}
-          align="center"
           onTabClick={$.page.onTabClick}
-        >
-          <div>
-            {this.renderRegister()}
-            {this.renderForm()}
-          </div>
-        </Tabs>
+        />
+        {this.renderRegister()}
+        {this.renderForm()}
       </Layout>
     );
   }

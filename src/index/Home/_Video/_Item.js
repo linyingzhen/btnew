@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-02 12:41:16
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-07 09:09:26
+ * @Last Modified time: 2018-11-12 16:22:56
  * @Path m.benting.com.cn /src/index/Home/_Video/_Item.js
  */
 import React from 'react';
@@ -15,23 +15,23 @@ import Utils from '@utils';
 
 const prefixCls = 'style-195215';
 
-const _Item = props => (
+const _Item = ({ tbId, fileinfo = {}, tit, userName, createTime }) => (
   <Link
     className={prefixCls}
-    href={`/video/detail?id=${props.tbId}`}
-    as={`/video/detail/${props.tbId}`}
+    href={`/video/detail?id=${tbId}`}
+    as={`/video/detail/${tbId}`}
   >
     <Video
       className={`${prefixCls}__thumb`}
-      poster={Utils.getAppImgUrl(props.fileinfo.surface, 'scale')}
-      playSecond={props.fileinfo.play_time}
+      poster={Utils.getAppImgUrl(fileinfo.surface, 'scale')}
+      playSecond={fileinfo.play_time}
       height={0}
       isPoster
     />
     <div className="info">
-      <p className="p-title p-28 l-40 t-c2">{props.tit}</p>
-      <p className="t-22 l-32 t-sub t-c1 mt-6">
-        {props.userName} · {Utils.lastDate(props.createTime)}
+      <p className="p-title p-28 l-40 t-c2">{tit}</p>
+      <p className="t-22 l-32 t-sub t-c1 mt-8">
+        {userName} · {Utils.lastDate(createTime)}
       </p>
     </div>
 
@@ -39,7 +39,7 @@ const _Item = props => (
       .style-195215 {
         display: inline-block;
         width: 44%;
-        margin-left: 0.16rem;
+        margin-left: 0.24rem;
         border-radius: 0.06rem;
         box-shadow: 0 0.04rem 0.08rem 0 rgba(0, 0, 0, 0.15);
       }
@@ -66,7 +66,7 @@ const _Item = props => (
     `}</style>
     <style jsx>{`
       .style-195215 {
-        min-height: 8.8rem;
+        min-height: 10.16rem;
       }
       .info {
         padding: 0.12rem 0.24rem;

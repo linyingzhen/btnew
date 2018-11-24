@@ -4,7 +4,7 @@
  * @Author: cwz0525
  * @Date: 2018-07-16 12:18:46
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 15:20:21
+ * @Last Modified time: 2018-11-11 09:55:32
  * @Path m.benting.com.cn /src/person/Index/_Top.js
  */
 import React from 'react';
@@ -53,11 +53,10 @@ const _Top = (props, { $ }) => {
       <div className="wrap-info">
         <Flex>
           <Flex.Item className="t-34 l-48 t-b mr-sm">{niname}</Flex.Item>
-          <Icon
-            className="t-32 t-sub"
-            type="right"
-            onClick={() => Utils.router.push('/person/level')}
-          />
+          <div onClick={() => Utils.router.push('/person/level')}>
+            <span className="t-30">积分等级</span>
+            <Icon className="t-32 t-sub ml-xs" type="right" />
+          </div>
         </Flex>
         <div className="wrap-tag l-28 mt-16">
           {vip == 1 && (
@@ -102,7 +101,7 @@ const _Top = (props, { $ }) => {
             <span className="t-40 l-56 t-b">{postCount}</span>
             <span className="t-24 l-34 t-sub ml-xs">帖子</span>
           </Flex.Item>
-          <Flex.Item>
+          <Flex.Item href="/person/friends?id=1" as="/person/friends/1">
             <span className="t-40 l-56 t-b">{fanCount}</span>
             <span className="t-24 l-34 t-sub ml-xs">粉丝</span>
           </Flex.Item>

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-20 17:47:38
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-30 11:16:38
+ * @Last Modified time: 2018-11-14 13:45:10
  * @Path m.benting.com.cn /src/index/Home/store.js
  */
 import { observable } from 'mobx';
@@ -13,6 +13,7 @@ import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
 import G from '@stores/g';
+import { filter } from './ds';
 
 export default class Store extends common {
   config = {
@@ -95,7 +96,8 @@ export default class Store extends common {
     // 首页轮播图
     carousel: () =>
       this.fetchThenSetState('get_carousel_list', 'carousel', {
-        imgType: 41
+        imgType: 41,
+        _filter: filter.carousel
       }),
 
     // 新品
@@ -107,21 +109,24 @@ export default class Store extends common {
             goodsType: 48,
             disable: 0
           }
-        }
+        },
+        _filter: filter.newGoods
       }),
 
     // 视频推荐
     videos: () =>
       this.fetchThenSetState('get_video_list-list', 'videos', {
         _: {
-          limit: 8,
+          limit: 5,
           order: {
+            sortNo: 'desc',
             createTime: 'desc'
           },
           search: {
-            from: 0
+            recomNo: [1, 50]
           }
-        }
+        },
+        _filter: filter.videos
       }),
 
     // 资讯
@@ -131,8 +136,9 @@ export default class Store extends common {
         'information',
         {
           _: {
-            limit: Const.__LIMIT__
-          }
+            limit: 8
+          },
+          _filter: filter.information
         },
         refresh
       )

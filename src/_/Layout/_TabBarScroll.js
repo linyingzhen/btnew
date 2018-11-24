@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-09 18:25:54
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-30 13:33:14
+ * @Last Modified time: 2018-11-12 16:51:36
  * @Path m.benting.com.cn /src/_/Layout/_TabBarScroll.js
  */
 import React from 'react';
@@ -12,15 +12,14 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import debounce from 'lodash.debounce';
 import { observer } from '@';
-import { Flex, Icon, Link } from '@components';
+import { Flex, Link } from '@components';
 import Const from '@const';
 import Styles from '@styles';
-import BtnCenter from './_BtnCenter';
 import { fixedBottomMap, menuDS } from './ds';
 
 const prefixCls = 'style-144253';
 const allPaths = [];
-menuDS.forEach(item => item.includes.forEach(i => allPaths.push(i)));
+menuDS.forEach(item => item.includes.forEach(i => allPaths.push(i, `${i}/`)));
 
 @observer
 export default class _TabBar extends React.Component {
@@ -30,15 +29,24 @@ export default class _TabBar extends React.Component {
 
   state = {
     freeze: false,
-    open: true
+    open: true,
+    transition: false
   };
 
   componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        transition: true
+      });
+    }, 200);
+
     const scroll = (fn = Function.prototype) => {
-      let beforeScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      let beforeScrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
 
       this.onScroll = debounce(() => {
-        const afterScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const afterScrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop;
         const delta = afterScrollTop - beforeScrollTop;
 
         if (delta === 0) {
@@ -81,7 +89,7 @@ export default class _TabBar extends React.Component {
         beforeScrollTop = afterScrollTop;
 
         return true;
-      }, 50);
+      }, 80);
 
       window.addEventListener('scroll', this.onScroll, { passive: true });
     };
@@ -122,7 +130,7 @@ export default class _TabBar extends React.Component {
 
   render() {
     const { pathname } = this.context;
-    const { freeze, open } = this.state;
+    const { freeze, open, transition } = this.state;
     const hidden = !allPaths.includes(pathname);
 
     if (hidden) {
@@ -138,15 +146,18 @@ export default class _TabBar extends React.Component {
         [`${prefixCls}__wrap_freeze`]: freeze,
         [`${prefixCls}__wrap_open`]: freeze
           ? document.body.scrollTop === 0
-          : open
+          : open,
+        [`${prefixCls}__wrap_transition`]: transition
       });
     }
 
     return (
       <div className={classNames(prefixCls, cls)}>
         <Flex justify="around">
-          {menuDS.map(item => {
-            const isCurrent = item.includes.includes(pathname);
+          {menuDS.map((item, index) => {
+            const isCurrent =
+              item.includes.includes(pathname) ||
+              item.includes.includes(`${pathname}/`);
 
             return (
               <Link
@@ -156,17 +167,14 @@ export default class _TabBar extends React.Component {
                 login={item.login}
                 prefetch
               >
-                <Icon
-                  className={classNames('t-48', {
-                    't-icon': !isCurrent,
-                    't-primary': isCurrent
-                  })}
-                  type={item.icon}
-                />
+                <div className="t-c">
+                  {isCurrent ? item.iconActive : item.icon}
+                </div>
                 <p
-                  className={classNames('t-20 l-28 t-c', {
+                  className={classNames('t-20 l-32 t-c', {
                     't-sub': !isCurrent,
-                    't-primary': isCurrent
+                    't-title': index <= 1 && isCurrent,
+                    't-primary': index > 1 && isCurrent
                   })}
                 >
                   {item.label}
@@ -175,7 +183,6 @@ export default class _TabBar extends React.Component {
             );
           })}
         </Flex>
-        <BtnCenter className={`${prefixCls}__btn-center`} />
 
         <style jsx global>{`
           .style-144253 {
@@ -183,32 +190,20 @@ export default class _TabBar extends React.Component {
             z-index: ${Styles.z_tabbar};
             bottom: 0;
             width: 100%;
-            padding: 0.06rem 0 0.04rem;
-            background: ${Styles.color_tab_bar};
+            padding: 0.12rem ${Styles.wind};
+            background: ${Styles.color_theme};
             border-top: ${Styles.border};
-            transform: translate3d(0, 144%, 0);
-          }
-          .${prefixCls}__item:nth-of-type(3) {
-            margin-left: 20%;
-          }
-          .${prefixCls}__btn-center {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translate3d(-50%, 0, 0);
-          }
-          .${prefixCls}__wrap {
-            transition: transform 0.08s ease-in-out;
+            transform: translate3d(0, 100%, 0);
           }
           .${prefixCls}__wrap_freeze {
             transition: initial !important;
           }
-          .${prefixCls}__wrap_open {
-            box-shadow: 0 0.02rem 0.04rem rgba(0, 0, 0, 0.16);
-            transform: translate3d(0, 0, 0) !important;
+          .${prefixCls}__wrap_transition {
+            transition: transform 0.16s ease-in-out;
           }
-          .${prefixCls}__item:nth-of-type(3) {
-            margin-left: 20%;
+          .${prefixCls}__wrap_open {
+            transform: translate3d(0, 0, 0) !important;
+            transition: transform 0.08s ease-in-out;
           }
         `}</style>
       </div>

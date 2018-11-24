@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-08 15:33:25
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-08-21 14:52:02
+ * @Last Modified time: 2018-11-06 17:11:58
  * @Path m.benting.com.cn /src/discovery/fish/Index/store.js
  */
 import { observable } from 'mobx';
@@ -47,8 +47,6 @@ export default class Store extends common {
   });
 
   params = {
-    __cache: true,
-
     query: {}
   };
 

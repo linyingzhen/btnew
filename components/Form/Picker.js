@@ -4,13 +4,15 @@
  * @Author: czy0729
  * @Date: 2018-08-11 16:11:28
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 12:47:43
+ * @Last Modified time: 2018-11-15 17:11:28
  * @Path m.benting.com.cn /components/Form/Picker.js
  */
 import React from 'react';
 import classNames from 'classnames';
-import { Picker as AMPicker, List } from 'antd-mobile';
+import { Picker as AMPicker } from 'antd-mobile';
+import Const from '@const';
 import Styles from '@styles';
+import List from '../List';
 import utils from './utils';
 
 const prefixCls = 'c-form-picker';
@@ -36,7 +38,8 @@ const Picker = props => {
   return (
     <div
       className={classNames(prefixCls, className, {
-        [`${prefixCls}_disabled`]: disabled
+        [`${prefixCls}_disabled`]: disabled,
+        [`${prefixCls}_error`]: !!form.getFieldError(name)
       })}
     >
       <AMPicker
@@ -45,7 +48,7 @@ const Picker = props => {
           ...option
         })}
         cols={1}
-        title={label || title}
+        title={title || label}
         disabled={disabled}
         extra={_extra}
         {...other}
@@ -71,6 +74,21 @@ const Picker = props => {
         }
         .${prefixCls}_disabled .am-input-label {
           color: ${Styles.color_disabled};
+        }
+        /* 仿错误提示 */
+        .${prefixCls}_error .am-list-extra {
+          position: relative;
+        }
+        .${prefixCls}_error .am-list-extra:before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0;
+          width: 0.42rem;
+          height: 0.42rem;
+          ${Styles._bg};
+          background-image: url(${Const.__IMG__}/icon/information@${Const.__DPR__}x.png);
+          transform: translateY(-50%);
         }
         .${prefixCls}__list-item .am-list-content {
           flex: initial !important;

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-20 16:57:49
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 20:24:31
+ * @Last Modified time: 2018-11-12 09:57:42
  * @Path m.benting.com.cn \components\Global\index.js
  */
 import React from 'react';
@@ -119,7 +119,6 @@ export default () => (
       }
       .am-list-footer {
         padding: ${Styles.sm} 0.32rem;
-        // background: ${Styles.color_bg};
       }
 
       /* <Toast> : 样式 偏上一点 */
@@ -238,6 +237,12 @@ export default () => (
         border-left: ${Styles.border};
       }
 
+      /* <Tabs> */
+      .am-tabs-default-bar-tab {
+        height: 1rem;
+        line-height: 1rem;
+      }
+
       /* ==================== utils v2 ==================== */
       /* margin-top */
       .mt-4 {
@@ -325,6 +330,9 @@ export default () => (
       }
 
       /* margin-left */
+      .ml-0 {
+        margin-left: 0 !important;
+      }
       .ml-4 {
         margin-left: 0.04rem !important;
       }
@@ -355,15 +363,16 @@ export default () => (
       .ml-48 {
         margin-left: 0.48rem !important;
       }
-      .ml-54 {
-        margin-left: 0.54rem !important;
+      .ml-56 {
+        margin-left: 0.56rem !important;
       }
 
       /* margin-bottom */
       .mb-d {
         margin-bottom: ${Styles.distance};
       }
-      .mb-md {
+      .mb-md,
+      .mb-32 {
         margin-bottom: ${Styles.md};
       }
 
@@ -374,6 +383,9 @@ export default () => (
       .mr-sm,
       .mr-16 {
         margin-right: 0.16rem !important;
+      }
+      .mr-24 {
+        margin-right: 0.24rem !important;
       }
       .mr-32 {
         margin-right: 0.32rem !important;
@@ -528,6 +540,9 @@ export default () => (
       .t-title {
         color: ${Styles.color_title} !important;
       }
+      .t-desc {
+        color: ${Styles.color_desc} !important;
+      }
       .t-sub {
         color: ${Styles.color_sub} !important;
       }
@@ -586,9 +601,6 @@ export default () => (
       }
 
       /* letter-spacing */
-      // .ls-o1 {
-      //   letter-spacing: -0.01rem;
-      // }
       .ls-1 {
         letter-spacing: 0.01rem;
       }
@@ -609,6 +621,9 @@ export default () => (
       }
       .border {
         border: ${Styles.border};
+      }
+      .bg {
+        ${Styles._bg};
       }
       .del {
         text-decoration: line-through;
@@ -665,7 +680,6 @@ export default () => (
       .tool-emoji {
         width: 0.4rem !important;
         height: 0.4rem !important;
-        vertical-align: top !important;
       }
 
       /* 170620 老虎洋葱样式 */

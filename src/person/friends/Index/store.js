@@ -4,13 +4,15 @@
  * @Author: czy0729
  * @Date: 2018-10-23 15:31:57
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 15:38:21
+ * @Last Modified time: 2018-11-14 16:36:42
  * @Path bt_mb_new /src/person/friends/Index/store.js
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';
+import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -33,12 +35,35 @@ export default class Store extends common {
       this.fetchListThenSetState(
         'get_user_followers',
         'follows',
-        {},
+        {
+          _filter: filter.list
+        },
         refresh
       ),
 
     fans: refresh =>
-      this.fetchListThenSetState('get_user_fans', 'fans', {}, refresh)
+      this.fetchListThenSetState(
+        'get_user_fans',
+        'fans',
+        {
+          _filter: filter.list
+        },
+        refresh
+      )
+  };
+
+  do = {
+    toggle: async (concernId, isFollow) => {
+      await Api.P('do_add_follow', {
+        concernId
+      });
+
+      if (isFollow) {
+        this.fetch.fans(true);
+      } else {
+        this.fetch.follows(true);
+      }
+    }
   };
 
   page = {
@@ -53,4 +78,10 @@ export default class Store extends common {
       Utils.scrollTo(0);
     }
   };
+
+  storeInit() {
+    const { id = 0 } = this.params.params;
+
+    this.setState({ page: id }, '_affixTabs');
+  }
 }

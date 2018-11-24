@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-27 14:15:44
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-24 15:30:03
+ * @Last Modified time: 2018-11-13 17:36:01
  * @Path m.benting.com.cn /src/person/event/Floor/index.js
  */
 import React from 'react';
@@ -70,4 +70,4 @@ Floor.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Floor));
+export default injectV2(store, { login: true })(observer(Floor));

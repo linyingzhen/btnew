@@ -3,8 +3,8 @@
  * const images = '/static/images/src/event/cashback/Index';
  * @Author: czy0729
  * @Date: 2018-10-15 16:32:41
- * @Last Modified by:   czy0729
- * @Last Modified time: 2018-10-15 16:32:41
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-11 08:52:57
  * @Path m.benting.com.cn /src/event/cashback/Index/_Btn.js
  */
 import React from 'react';
@@ -110,11 +110,13 @@ const _Btn = (props, { $ }) => {
     );
   }
 
-  return (
-    <div className={cls}>
-      <Button disabled>活动已结束</Button>
-    </div>
-  );
+  // return (
+  //   <div className={cls}>
+  //     <Button disabled>活动已结束</Button>
+  //   </div>
+  // );
+
+  return null;
 };
 
 _Btn.contextTypes = {

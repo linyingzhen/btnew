@@ -5,7 +5,7 @@
  * @Author: czy0729
  * @Date: 2018-07-04 18:45:01
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 11:56:22
+ * @Last Modified time: 2018-11-22 17:03:13
  * @Path m.benting.com.cn /components/ImgView/index.js
  */
 import React from 'react';
@@ -88,7 +88,7 @@ export default class ImgView extends React.Component {
   };
 
   render() {
-    const { show, theme = 'dark', hideOrigin, className } = this.props;
+    const { show, theme = 'dark', hideOrigin = true, className } = this.props;
     const { close, current, data, originKeys } = this.state;
 
     if (!show) {

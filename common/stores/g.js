@@ -4,14 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-06-20 11:15:45
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 17:18:17
+ * @Last Modified time: 2018-11-14 11:30:24
  * @Path m.benting.com.cn \common\stores\g.js
  */
 import { observable } from 'mobx';
 import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
-import common, { paramsKey } from './common';
+import common, { paramsKey } from './commonV2';
 
 const namespace = `${Const.__LS_PREFIX__}G`;
 const tree = (ds, parId = 1) => {
@@ -38,7 +38,14 @@ const tree = (ds, parId = 1) => {
 class Store extends common {
   config = {
     namespace,
-    cache: ['tk', 'indexNotice', 'discoverySpecial', 'bbsBlock', 'bbsTopic']
+    cache: [
+      'tk',
+      'tmall181111',
+      'indexNotice',
+      'discoverySpecial',
+      'bbsBlock',
+      'bbsTopic'
+    ]
   };
   wxConfig = {}; // 缓存不同页面的微信配置
 
@@ -51,6 +58,10 @@ class Store extends common {
     loadedAMapJS: false, // 高德地图依赖是否加载完成
     reply: { list: [] }, // 记录历史回复
     gifts: Const.__EMPTY__, // 打赏礼物
+    tmall181111: {
+      // 天猫2018双11优惠券弹窗
+      isRead: false
+    },
 
     // 消息提示数，用于我的标记红点
     messageCount: {
@@ -128,10 +139,19 @@ class Store extends common {
   /**
    * 更新Tk
    * @version 180208 1.0
+   * @version 181114 1.1 更新Tk后会把url上面的tk去掉
    */
   updateTk = tk => {
     this.setState(tk, 'tk');
     this.setCache();
+
+    if (Const.__CLIENT__) {
+      const { pathname, asPath, query } = Const.__PATH_CURRENT__;
+
+      Utils.router.replace(`${pathname}?${Utils.getQueryStr(query)}`, asPath, {
+        shallow: true
+      });
+    }
   };
 
   /**
@@ -147,8 +167,10 @@ class Store extends common {
       }
       list.unshift(newReply);
       this.setState(list, 'reply');
+
       return true;
     }
+
     return false;
   };
 
@@ -224,6 +246,21 @@ class Store extends common {
   };
 
   /* ==================== Action ==================== */
+  /**
+   * 20181111天猫弹窗已读
+   * @version 181106 1.0
+   */
+  doSetReadTmall = () => {
+    this.setState(
+      {
+        isRead: true
+      },
+      'tmall181111'
+    );
+
+    this.setCache();
+  };
+
   /**
    * 清除消息
    * @version 181005 1.0
@@ -651,7 +688,9 @@ class Store extends common {
   resetMessageCount = () => {
     const { isRead } = this.getState('messageCount');
 
-    if (isRead) return;
+    if (isRead) {
+      return;
+    }
 
     this.setState(
       {
@@ -666,11 +705,11 @@ const G = new Store();
 
 // 开发环境客户端
 /* if (!Const.__SERVER__ && Const.__DEV__) {
-    setTimeout(() => {
-        autorun(() => {
-            console.info(`autorun[G]`, G.toJS());
-        });
-    }, 0);
+  setTimeout(() => {
+    autorun(() => {
+      console.info(`autorun[G]`, G.toJS());
+    });
+  }, 0);
 } */
 
 // 客户端

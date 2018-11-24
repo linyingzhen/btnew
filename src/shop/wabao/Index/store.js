@@ -4,12 +4,13 @@
  * @Author: czy0729
  * @Date: 2018-09-27 16:36:22
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-27 16:50:05
+ * @Last Modified time: 2018-11-15 12:01:34
  * @Path m.benting.com.cn /src/shop/wabao/Index/store.js
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';
 import Const from '@const';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -35,7 +36,8 @@ export default class Store extends common {
             search: {
               oncebuyType: 2
             }
-          }
+          },
+          _filter: filter.list
         },
         refresh
       )

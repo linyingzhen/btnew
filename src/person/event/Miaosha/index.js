@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-18 09:55:06
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-21 11:51:52
+ * @Last Modified time: 2018-11-13 17:35:08
  * @Path m.benting.com.cn /src/person/event/Auction/index.js
  */
 import React from 'react';
@@ -77,4 +77,4 @@ Auction.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Auction));
+export default injectV2(store, { login: true })(observer(Auction));

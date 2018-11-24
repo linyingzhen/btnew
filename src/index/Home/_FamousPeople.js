@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-21 16:14:29
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-21 20:43:36
+ * @Last Modified time: 2018-11-11 00:45:16
  * @Path bt_mb_new /src/index/Home/_FamousPeople.js
  */
 import React from 'react';
@@ -27,7 +27,7 @@ const _FamousPeople = ({ className }) => (
       <p className="t-24 l-34 t-sub">荣光 · 因您更耀眼！</p>
     </div>
     <img
-      className="img-famous ml-54"
+      className="img-famous ml-56"
       src={`${images}/famous${Const.__IMG_DPR__}.png`}
       alt=""
     />

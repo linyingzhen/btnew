@@ -1,11 +1,11 @@
 /**
- * const prefixCls = 'style-171147';
- * const images = '/static/images';
+ * const prefixCls = 'style-168904';
+ * const images = '/static/images/src/person/btlevel/Index';
  * @Author: lyz0720
  * @Date: 2018-10-26 10:25:49
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-31 18:13:47
- * @Path bt_mb_new \src\person\btlevel\Index\_Task.js.git
+ * @Last Modified time: 2018-11-13 17:26:15
+ * @Path bt_mb_new /src/person/btlevel/Index/_Task.js.git
  */
 import React from 'react';
 import classNames from 'classnames';
@@ -17,7 +17,7 @@ import { privilegeDS } from './ds';
 const { Item } = List;
 const { Brief } = Item;
 
-const prefixCls = 'style-171147';
+const prefixCls = 'style-168904';
 
 const _Task = ({ className }) => (
   <div className={classNames(prefixCls, className)}>
@@ -44,25 +44,26 @@ const _Task = ({ className }) => (
         </Item>
       ))}
     </List>
+
     <style jsx global>{`
-      .style-171147 .am-list-extra {
+      .style-168904 .am-list-extra {
         flex-basis: 12% !important;
       }
       .am-list-item .am-list-line .am-list-content {
         display: flex;
         align-items: center;
       }
-      .style-171147 .flex-label {
+      .style-168904 .flex-label {
         margin-right: 0.12rem;
       }
-      .style-171147 .am-list-brief {
+      .style-168904 .am-list-brief {
         font-size: 0.24rem !important;
         color: ${Styles.color_sub} !important;
         margin-top: 0 !important;
       }
     `}</style>
     <style jsx>{`
-      .style-171147 {
+      .style-168904 {
         background: #fff;
         margin-bottom: ${Styles.wind};
       }

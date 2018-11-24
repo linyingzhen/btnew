@@ -7,4 +7,4 @@
  * @Last Modified time: 2018-10-25 10:10:14
  * @Path bt_mb_new /src/person/prize/Index/ds.js
  */
-export const prizeTabs = [{ title: '优惠卷' }, { title: '回收站' }];
+export const prizeTabs = [{ title: '优惠券' }, { title: '回收站' }];

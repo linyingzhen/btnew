@@ -4,12 +4,13 @@
  * @Author: czy0729
  * @Date: 2018-06-22 13:34:06
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 19:01:17
+ * @Last Modified time: 2018-11-16 15:29:27
  * @Path m.benting.com.cn /src/index/Home/_Footer.js
  */
 import React from 'react';
 import classNames from 'classnames';
 import { Flex, Icon } from '@components';
+import Const from '@const';
 import Utils from '@utils';
 import Styles from '@styles';
 import { footerDS } from './ds';
@@ -20,7 +21,7 @@ const _Footer = props => {
   const { className } = props;
 
   return (
-    <div className={classNames(prefixCls, className)}>
+    <footer className={classNames(prefixCls, className)}>
       <Flex className={`${prefixCls}__btns`} justify="around">
         {footerDS.map(item => (
           <Flex.Item
@@ -45,27 +46,29 @@ const _Footer = props => {
       <p className="t-24 l-34 t-sub t-c mt-14">
         粤ICP备 15020540号-1 广州本汀渔具有限公司
       </p>
-      <span
-        className="p-prod t-void"
-        onClick={() => Utils.router.push('/prod')}
-      >
-        prod
-      </span>
+      {Const.__WEB__ !== 'https://www.benting.com.cn' && (
+        <span
+          className="p-prod"
+          onClick={() => Utils.router.push('/prod')}
+        >
+          prod
+        </span>
+      )}
 
       <style jsx>{`
         .style-105182 {
           position: relative;
           min-height: 2.4rem;
-          padding: 0.48rem ${Styles.wind} ${Styles.bottom};
+          padding: 0.48rem ${Styles.wind} 1.4rem;
           background: ${Styles.color_theme};
         }
         .p-prod {
           position: absolute;
-          right: 0;
-          bottom: 0;
+          left: 0.16rem;
+          bottom: 1.44rem;
         }
       `}</style>
-    </div>
+    </footer>
   );
 };
 

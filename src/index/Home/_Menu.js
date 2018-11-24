@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-21 09:45:00
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-29 00:09:55
+ * @Last Modified time: 2018-11-06 14:31:52
  * @Path m.benting.com.cn \src\index\Home\_Menu.js
  */
 import React from 'react';
@@ -48,31 +48,20 @@ const _Menu = props => {
 
       <style jsx global>{`
         .style-687483 {
-          padding: 0.4rem 0.64rem;
+          padding: 0.4rem 0.48rem;
           background: ${Styles.color_theme};
         }
         .${prefixCls}__badge {
           position: absolute;
           top: -0.08rem;
-          right: -0.08rem;
+          left: 50%;
+          margin-left: 0.32rem;
+          transform: translateX(-50%);
         }
         .${prefixCls}__item {
           position: relative;
           text-align: center;
         }
-      `}</style>
-      <style jsx>{`
-        .style-687483 {
-        }
-        // .img-hot {
-        //   position: absolute;
-        //   top: 0;
-        //   right: 0;
-        //   width: 0.68rem;
-        //   height: 0.38rem;
-        //   margin-top: -0.16rem;
-        //   margin-right: -0.16rem;
-        // }
       `}</style>
     </Flex>
   );

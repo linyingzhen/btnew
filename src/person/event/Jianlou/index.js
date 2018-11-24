@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-25 10:36:34
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-27 12:18:12
+ * @Last Modified time: 2018-11-13 17:36:30
  * @Path m.benting.com.cn /src/person/event/Jianlou/index.js
  */
 import React from 'react';
@@ -77,4 +77,4 @@ Jianlou.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Jianlou));
+export default injectV2(store, { login: true })(observer(Jianlou));

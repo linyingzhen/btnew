@@ -4,7 +4,7 @@
  * @Author: lyz0720
  * @Date: 2018-09-25 15:10:04
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 15:34:47
+ * @Last Modified time: 2018-11-21 15:28:33
  * @Path m.benting.com.cn \src\person\event\Coupon\store.js
  */
 
@@ -31,10 +31,10 @@ export default class Store extends common {
     // 用户信息
     userInfo: G.toJS('userInfo'),
 
-    // 优惠卷
+    // 优惠券
     lotteryList: Const.__EMPTY__,
 
-    // vip优惠卷
+    // vip优惠券
     viplotteryList: Const.__EMPTY__
   });
 
@@ -53,7 +53,7 @@ export default class Store extends common {
       return res;
     },
 
-    // 优惠卷
+    // 优惠券
     fetchLotteryList: async () => {
       const res = Api.PP('get_lottery_list', {
         lotteryType: 2,
@@ -73,7 +73,7 @@ export default class Store extends common {
       return res;
     },
 
-    // vip优惠卷
+    // vip优惠券
     fetchvipLotteryList: async () => {
       const res = Api.PP(
         'get_lottery_list',
@@ -87,6 +87,7 @@ export default class Store extends common {
 
       const data = await res;
       if (data.code !== 0) {
+        Utils.light(data.err);
         return false;
       }
 

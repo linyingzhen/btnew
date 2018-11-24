@@ -1,11 +1,11 @@
 /**
- * const prefixCls = 'style-105455';
- * const images = '/static/images/src/shop/auction/Detail';
+ * const prefixCls = 'style-181146';
+ * const images = '/static/images/src/shop/miaosha/Detail';
  * @Author: czy0729
- * @Date: 2018-09-11 12:31:49
- * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-21 12:23:09
- * @Path m.benting.com.cn /src/shop/auction/Detail/_Carousel.js
+ * @Date: 2018-11-02 18:22:31
+ * @Last Modified by:   czy0729
+ * @Last Modified time: 2018-11-02 18:22:31
+ * @Path bt_mb_new /src/shop/miaosha/Detail/_Carousel.js.git
  */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -40,6 +40,7 @@ const _Carousel = (props, { $ }) => {
           show={show}
           data={data}
           current={index}
+          theme="light"
           hideOrigin
           onClose={$.page.hideImgView}
         />

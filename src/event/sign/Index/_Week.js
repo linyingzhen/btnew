@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-18 23:56:27
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 17:27:31
+ * @Last Modified time: 2018-11-14 00:00:23
  * @Path m.benting.com.cn /src/event/sign/Index/_Week.js
  */
 import React from 'react';
@@ -19,7 +19,7 @@ import { numberMap } from '@ds';
 const prefixCls = 'style-125645';
 function getWeekDay(i) {
   const now = new Date();
-  const firstDay = new Date(now - (now.getDay() || 7 - 1) * 86400000);
+  const firstDay = new Date(now - ((now.getDay() || 7) - 1) * 86400000);
 
   firstDay.setDate(firstDay.getDate() + i);
 
@@ -45,7 +45,7 @@ const _Week = (props, { $ }) => {
   }
 
   const signMap = {};
-  list.forEach(item => (signMap[item.dayNumber] = true));
+  list.forEach(({ dayNumber }) => (signMap[dayNumber] = true));
 
   return (
     <div className={classNames(prefixCls, className)}>

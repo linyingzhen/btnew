@@ -4,14 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-07-11 16:52:03
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-31 10:06:49
+ * @Last Modified time: 2018-11-14 13:43:14
  * @Path m.benting.com.cn /src/bbs/Article/store.js
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';
 import Const from '@const';
 import Utils from '@utils';
-import { tabsDS } from './ds';
+import { tabsDS, filter } from './ds';
 
 export default class Store extends common {
   config = {
@@ -103,9 +103,10 @@ export default class Store extends common {
         _: {
           limit: 3,
           search: {
-            recomNo: [1, 50]
+            recomNo: [2, 50]
           }
-        }
+        },
+        _filter: filter.videoTop
       }),
 
     // 视频
@@ -115,7 +116,10 @@ export default class Store extends common {
       return this.fetchListThenSetState(
         'get_video_list-list',
         'video',
-        queryVideo,
+        {
+          ...queryVideo,
+          _filter: filter.video
+        },
         refresh
       );
     }

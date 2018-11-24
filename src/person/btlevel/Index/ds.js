@@ -1,16 +1,15 @@
 /**
- * const prefixCls = 'style-739508';
- * const images = '/static/images';
+ * const prefixCls = 'style-121379';
+ * const images = '/static/images/src/person/btlevel/Index';
  * @Author: lyz0720
  * @Date: 2018-10-26 09:53:43
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 17:05:08
- * @Path bt_mb_new \src\person\btlevel\Index\ds.js.git
+ * @Last Modified time: 2018-11-13 17:27:24
+ * @Path bt_mb_new /src/person/btlevel/Index/ds.js.git
  */
 import Utils from '@utils';
 
 export const images = Utils.cdn('/static/images/src/person/btlevel/Index');
-
 export const gradeData = [
   {
     id: 0,
@@ -79,40 +78,34 @@ export const gradeData = [
     point: 99999
   }
 ];
-
 export const privilegeDS = [
   {
     label: '见面有礼',
     brief: '每个新用户仅一次领取机会',
-    // href: '/person/welfare/meet',
     type: 'gift-fill',
     bgcolor: 'b-yellow'
   },
   {
     label: '生日尊享',
     brief: '会员生日有好礼',
-    // href: '/person/welfare/birthday',
     type: 'cake-fill',
     bgcolor: 'b-coral'
   },
   {
     label: '升级尊享',
     brief: '会员升级有好礼',
-    // href: '/person/welfare/rank_up',
     type: 'crown-fill',
     bgcolor: 'b-plum'
   },
   {
     label: '超爽积分',
     brief: '兑换抽奖享不停',
-    // href: '/person/welfare/point',
     type: 'score-fill',
     bgcolor: 'b-blue'
   },
   {
     label: '其他特权',
     brief: '尊享特权 精彩不停',
-    // href: '/person/btlevel',
     type: 'tequan-fill',
     bgcolor: 'b-cyan'
   }
@@ -146,7 +139,8 @@ export const getBTLevel = level => {
 
     case 9:
       return '至尊会员';
-
+    case 10:
+      return '至尊会员';
     default:
       return '初始会员';
   }

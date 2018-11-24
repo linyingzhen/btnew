@@ -4,35 +4,33 @@
  * @Author: czy0729
  * @Date: 2018-07-11 18:45:33
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-16 18:34:07
+ * @Last Modified time: 2018-11-05 17:40:29
  * @Path m.benting.com.cn /components/RichEditor/config.js
  */
-import React from 'react';
 import Styles from '@styles';
-import { images } from './ds';
 
 export const inlineTypes = [
   {
-    label: <img src={`${images}/B.png`} alt="" />,
+    label: 'bold',
     style: 'BOLD'
   },
   {
-    label: <img src={`${images}/I.png`} alt="" />,
+    label: 'italic',
     style: 'ITALIC'
   }
 ];
 
 export const blockTypes = [
   {
-    label: <img src={`${images}/H.png`} alt="" />,
+    label: 'h',
     style: 'header-two'
   },
   {
-    label: <img src={`${images}/ul.png`} alt="" />,
+    label: 'ul',
     style: 'unordered-list-item'
   },
   {
-    label: <img src={`${images}/ol.png`} alt="" />,
+    label: 'ol',
     style: 'ordered-list-item'
   }
 ];

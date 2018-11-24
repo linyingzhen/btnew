@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-26 12:28:28
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-07-26 17:41:02
+ * @Last Modified time: 2018-11-05 09:33:17
  * @Path m.benting.com.cn /src/video/Post/_Form.js
  */
 import React from 'react';
@@ -19,17 +19,9 @@ const _Form = props => {
   const { form, className } = props;
 
   return (
-    <Form className={classNames(prefixCls, className)} form={form}>
-      <Form.Input
-        name="tit"
-        option={Const.rules.required}
-        placeholder="请输入标题"
-      />
-      <Form.Textarea
-        name="introCon"
-        placeholder="请输入描述（选填）"
-        rows={4}
-      />
+    <Form className={classNames(prefixCls, className)} form={form} label>
+      <Form.Input label="标题" name="tit" option={Const.rules.required} />
+      <Form.Textarea label="描述" name="introCon" rows={4} />
     </Form>
   );
 };

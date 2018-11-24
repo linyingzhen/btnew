@@ -4,7 +4,7 @@
  * @Author: cwz0525
  * @Date: 2018-07-09 14:31:20
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-17 17:38:24
+ * @Last Modified time: 2018-11-02 10:52:50
  * @Path m.benting.com.cn /src/index/VIP/ds.js
  */
 import Utils from '@utils';
@@ -29,7 +29,7 @@ export const menuDS = [
   {
     thumb: 'sign',
     title: '签到',
-    desc: '每日签到积分变为8-12分，周全勤变为100积分'
+    desc: '每日签到积分8-12分，周全勤100分'
   }
 ];
 export const listDS = [
@@ -39,14 +39,14 @@ export const listDS = [
     desc: '福利活动确认收货后返款到账由八天变为三天内'
   },
   {
-    thumb: 'cake',
-    title: '生日福利',
-    desc: '生日发放一张50元的鱼竿通用现金劵'
-  },
-  {
     thumb: 'vip-first',
     title: '福利优先',
     desc: 'VIP用户可在粉丝福利中提前报名（提前1个小时）'
+  },
+  {
+    thumb: 'cake',
+    title: '生日福利',
+    desc: '生日发放一张50元鱼竿通用现金劵'
   },
   {
     thumb: 'free-day',
@@ -56,7 +56,7 @@ export const listDS = [
   {
     thumb: 'vip-room',
     title: 'VIP贵宾厅',
-    desc: 'VIP用户专属的活动福利'
+    desc: 'VIP用户专属活动福利'
   },
   {
     thumb: 'score',

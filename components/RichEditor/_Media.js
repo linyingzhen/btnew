@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-11 23:34:54
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 00:30:07
+ * @Last Modified time: 2018-11-06 23:56:43
  * @Path m.benting.com.cn /components/RichEditor/_Media.js
  */
 import React from 'react';
@@ -59,7 +59,7 @@ const Placeholder = () => (
       }
       .${prefixCls}__placeholder {
         height: 6.4rem;
-        background: ${Styles.color_bg};
+        background: #e9e9e9;
       }
     `}</style>
   </>
@@ -83,7 +83,6 @@ const Image = props => {
         .${prefixCls}__image {
           display: block;
           width: 100%;
-          margin: ${Styles.distance} auto;
           vertical-align: top;
         }
       `}</style>
@@ -110,9 +109,7 @@ const V = props => {
         .${prefixCls}__video {
           display: block;
           width: 100%;
-          margin: ${Styles.distance} auto;
           vertical-align: top;
-          border: 0.01rem solid #eee;
         }
       `}</style>
     </>

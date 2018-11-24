@@ -4,14 +4,13 @@
  * @Author: czy0729
  * @Date: 2018-07-11 23:16:55
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-07-23 11:17:24
+ * @Last Modified time: 2018-11-06 12:56:48
  * @Path m.benting.com.cn /components/RichEditor/_BtnView.js
  */
 import React from 'react';
 import classNames from 'classnames';
 import { Modal } from 'antd-mobile';
 import Styles from '@styles';
-import Button from '../Button';
 import Editor from './_Editor';
 
 const prefixCls = 'style-160458';
@@ -35,22 +34,18 @@ export default class _BtnView extends React.Component {
 
     return (
       <React.Fragment>
-        <Button
-          className={classNames(prefixCls, className)}
-          size="sm"
-          inline
+        <span
+          className={classNames(prefixCls, className, 't-34 l-48 t-primary')}
           onClick={this.toggleModal}
         >
           预览
-        </Button>
+        </span>
         <Modal maskClosable={false} visible={visible}>
           <div className={`${prefixCls}__modal`}>
             <span className="am-modal-close-x" onClick={this.toggleModal} />
-            <p className="t-34 l-48">
-              {title || '输入贴子标题'}
-            </p>
+            <p className="t-40 l-56 t-b">{title || '输入贴子标题'}</p>
             <Editor
-              className="t-30 l-42 mt-24"
+              className="t-34 l-48 mt-24"
               editorState={editorState}
               readOnly
             />

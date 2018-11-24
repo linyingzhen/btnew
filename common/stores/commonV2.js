@@ -5,7 +5,7 @@
  * @Author: czy0729
  * @Date: 2018-07-15 16:32:52
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-07 11:05:21
+ * @Last Modified time: 2018-11-15 15:36:01
  * @Path m.benting.com.cn /common/stores/common@v2.js
  */
 import {
@@ -20,7 +20,7 @@ import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
 
-configure({ enforceActions: true });
+configure({ enforceActions: 'observed' });
 
 export const defaultKey = 'state';
 export const paramsKey = 'params';
@@ -55,9 +55,44 @@ class store {
       filterState[item] = defaultState[item];
     });
 
-    return cache && namespace
-      ? { ...defaultState, ...Utils.lsGet(namespace), ...filterState }
-      : { ...defaultState, ...filterState };
+    // G, UI
+    if (cache && namespace) {
+      return {
+        ...defaultState,
+        ...Utils.lsGet(namespace),
+        ...filterState
+      };
+    }
+
+    // 页面store cache
+    if (cache && !namespace) {
+      if (!Const.__CLIENT__) {
+        return {
+          ...defaultState,
+          ...filterState
+        };
+      }
+
+      const localState = Utils.lsGet(
+        `${Const.__LS_PREFIX__}${this.params.asPath}`
+      );
+
+      const state = {};
+      cache.forEach(item => {
+        state[item] = localState[item] || defaultState[item];
+      });
+
+      return {
+        ...defaultState,
+        ...state,
+        ...filterState
+      };
+    }
+
+    return {
+      ...defaultState,
+      ...filterState
+    };
   }
 
   /**
@@ -486,6 +521,18 @@ class store {
    */
   toJS(key) {
     return toJS(this.state[key] || this.state);
+  }
+
+  /**
+   *
+   * @version 181029 1.0
+   */
+  lsGet(key) {
+    if (Const.__SERVER__ || !key || !this.cache || !this.cache.path) {
+      return null;
+    }
+
+    return null;
   }
 }
 

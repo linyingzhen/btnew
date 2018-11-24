@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-14 10:00:36
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-14 10:04:35
+ * @Last Modified time: 2018-11-02 10:35:42
  * @Path m.benting.com.cn /src/person/wallet/_/FlowWrap/index.js
  */
 import React from 'react';
@@ -32,6 +32,7 @@ const FlowWrap = ({ className, children }) => (
       }
       .img-wave {
         width: 100%;
+        min-height: 1.08rem;
         margin-bottom: -0.01rem;
         opacity: 0.4;
       }

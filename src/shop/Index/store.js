@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-28 17:53:40
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-30 16:42:08
+ * @Last Modified time: 2018-11-19 09:34:29
  * @Path m.benting.com.cn /src/shop/Index/store.js
  */
 import React from 'react';
@@ -15,12 +15,17 @@ import Utils from '@utils';
 import G from '@stores/g';
 import UI from '@stores/ui';
 import Menu from '@src/shop/_/Menu';
-import { categoryDS } from './ds';
+import { filter, categoryDS } from './ds';
 
 export default class Store extends common {
+  config = {
+    cache: ['carousel', 'new', 'yugan']
+  };
+
   @observable
   state = this.initState({
     shopCategory: G.getState('shopCategory'),
+    carousel: Const.__EMPTY__,
     new: Const.__EMPTY__,
     yugan: Const.__EMPTY__,
     yuxian: Const.__EMPTY__,
@@ -33,7 +38,7 @@ export default class Store extends common {
 
   fetch = {
     config: {
-      one: ['shopCategory', 'new', 'yugan']
+      one: ['shopCategory', 'carousel', 'new', 'yugan']
     },
 
     // 商城分类
@@ -45,6 +50,12 @@ export default class Store extends common {
       return res;
     },
 
+    carousel: () =>
+      this.fetchThenSetState('get_carousel_list', 'carousel', {
+        imgType: 42,
+        _filter: filter.carousel
+      }),
+
     // 新品
     new: () =>
       this.fetchThenSetState('get_goods-list', 'new', {
@@ -54,7 +65,8 @@ export default class Store extends common {
             goodsType: Utils.getValue(categoryDS, '新品'),
             disable: 0
           }
-        }
+        },
+        _filter: filter.new
       }),
 
     // 鱼竿

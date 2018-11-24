@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-20 11:16:42
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-22 18:41:02
+ * @Last Modified time: 2018-11-10 15:56:39
  * @Path m.benting.com.cn \src\_\Layout\index.js
  */
 import React from 'react';
@@ -28,7 +28,15 @@ export default class Layout extends React.Component {
   };
 
   renderHeader() {
-    const { title, titleThumb, hide, hideBack, headerStyle, bd, ft } = this.props;
+    const {
+      title,
+      titleThumb,
+      hide,
+      hideBack,
+      headerStyle,
+      bd,
+      ft
+    } = this.props;
 
     if (hide) {
       return null;

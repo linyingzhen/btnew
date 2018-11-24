@@ -4,12 +4,13 @@
  * @Author: czy0729
  * @Date: 2018-10-16 10:07:21
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 12:49:21
+ * @Last Modified time: 2018-11-15 17:27:00
  * @Path m.benting.com.cn /components/Form/DatePicker.js
  */
 import React from 'react';
 import classNames from 'classnames';
 import { DatePicker as AMDatePicker } from 'antd-mobile';
+import Const from '@const';
 import Styles from '@styles';
 import List from '../List';
 import utils from './utils';
@@ -22,6 +23,7 @@ const DatePicker = props => {
     option,
     name,
     label,
+    title,
     initialValue,
     mode = 'date',
     format,
@@ -29,6 +31,7 @@ const DatePicker = props => {
     maxDate,
     align,
     extra,
+    placeholder,
     className,
     ...other
   } = props;
@@ -36,14 +39,17 @@ const DatePicker = props => {
   const _initialValue = initialValue
     ? new Date(initialValue.replace(/\\-/g, '/'))
     : undefined;
+  const isAlignLeft = align === 'left';
+  const value = form.getFieldValue(name);
 
   return (
     <AMDatePicker
       mode={mode}
       format={format}
-      title={label}
+      title={title || label}
       minDate={minDate === null ? undefined : minDate || new Date('1900/1/1')}
       maxDate={maxDate === null ? undefined : maxDate || new Date(Date.now())}
+      extra={isAlignLeft ? extra || placeholder : undefined}
       {...form.getFieldProps(name, {
         initialValue: _initialValue,
         ...option
@@ -56,16 +62,33 @@ const DatePicker = props => {
           className,
           utils.getFormItemCls(name),
           {
-            [`${prefixCls}_align-left`]: align === 'left'
+            [`${prefixCls}_has-value`]: !!value,
+            [`${prefixCls}_error`]: !!form.getFieldError(name),
+            [`${prefixCls}_align-left`]: isAlignLeft
           }
         )}
         arrow="horizontal"
       >
         {label && utils.getLabelDecorator(option)(label)}
-        {extra && <div className="extra">{extra}</div>}
+        {!isAlignLeft && extra && <div className="extra">{extra}</div>}
 
         <style jsx global>{`
           .c-form-date-picker {
+          }
+          /* 仿错误提示 */
+          .${prefixCls}_error .am-list-extra {
+            position: relative;
+          }
+          .${prefixCls}_error .am-list-extra:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 0.42rem;
+            height: 0.42rem;
+            ${Styles._bg};
+            background-image: url(${Const.__IMG__}/icon/information@${Const.__DPR__}x.png);
+            transform: translateY(-50%);
           }
           .${prefixCls} .extra {
             position: absolute;
@@ -80,6 +103,9 @@ const DatePicker = props => {
           }
           .${prefixCls} .am-list-extra {
             font-size: ${Styles.font_form} !important;
+            color: ${Styles.color_sub} !important;
+          }
+          .${prefixCls}_has-value .am-list-extra {
             color: ${Styles.color_desc} !important;
           }
           .${prefixCls}_align-left .am-list-content {

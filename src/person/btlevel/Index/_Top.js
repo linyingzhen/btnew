@@ -1,11 +1,11 @@
 /**
- * const prefixCls = 'style-860613';
- * const images = '/static/images';
+ * const prefixCls = 'style-169117';
+ * const images = '/static/images/src/person/btlevel/Index';
  * @Author: lyz0720
  * @Date: 2018-10-26 09:46:43
- * @Last Modified by: lyz0720
- * @Last Modified time: 2018-10-26 10:05:29
- * @Path bt_mb_new \src\person\btlevel\Index\_Top.js.git
+ * @Last Modified by:   czy0729
+ * @Last Modified time: 2018-11-13 17:26:31
+ * @Path bt_mb_new /src/person/btlevel/Index/_Top.js.git
  */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -15,7 +15,7 @@ import Utils from '@utils';
 import Styles from '@styles';
 import { images } from './ds';
 
-const prefixCls = 'style-860613';
+const prefixCls = 'style-169117';
 
 const _Top = (props, { $ }) => {
   const { className } = props;
@@ -29,8 +29,9 @@ const _Top = (props, { $ }) => {
         </p>
         <p className="t-26 l-36 t-b t-c mt-16">本汀积分</p>
       </div>
+
       <style jsx>{`
-        .style-860613 {
+        .style-169117 {
           position: relative;
           padding: ${Styles.sm} 0;
           background: ${Styles.color_main};

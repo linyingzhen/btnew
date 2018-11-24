@@ -4,13 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-09-10 18:12:03
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-05 16:28:54
+ * @Last Modified time: 2018-11-14 18:41:55
  * @Path m.benting.com.cn /src/shop/auction/Index/store.js
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';
 import Const from '@const';
 import Utils from '@utils';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -45,7 +46,8 @@ export default class Store extends common {
             search: {
               auctionType: 1
             }
-          }
+          },
+          _filter: filter.list
         },
         refresh
       ),
@@ -64,7 +66,8 @@ export default class Store extends common {
             search: {
               auctionType: 2
             }
-          }
+          },
+          _filter: filter.list
         },
         refresh
       ),

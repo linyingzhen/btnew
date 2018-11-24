@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-11 14:15:36
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-12 15:58:13
+ * @Last Modified time: 2018-11-15 09:28:13
  * @Path m.benting.com.cn /src/shop/auction/Detail/ds.js
  */
 import Utils from '@utils';
@@ -17,3 +17,26 @@ export const ruleDS = [
   '为了体现竞拍的公平性，使所有用户都用充分的时间拍下自己心仪的商品。若用户在结束时间倒计时最后1分钟内参与竞拍，竞拍结束时间将顺延一分钟让其他竞拍者有时间决定是否出价',
   '本活动最终解释权归本汀所有'
 ];
+export const filter = {
+  detail: {
+    addPrice: 1,
+    appType: 1,
+    auctionType: 1,
+    beginTime: 1,
+    currentPrice: 1,
+    endTime: 1,
+    goodsImg: 1,
+    nowTime: 1,
+    ownUser: 1,
+    showState: 1,
+    title: 1
+  },
+  record: {
+    auctionPriceTotal: 1,
+    auctionTime: 1,
+    faceImg: 1,
+    niname: 1,
+    type: 1,
+    userId: 1
+  }
+};

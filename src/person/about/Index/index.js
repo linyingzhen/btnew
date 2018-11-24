@@ -1,84 +1,80 @@
 /**
- * const prefixCls = 'style-199793';
- * const images = '/static/images';
- * @Author: cwz0525
- * @Date: 2018-08-22 14:34:51
+ * const prefixCls = 'style-195493';
+ * const images = '/static/images/src/person/about/Index';
+ * @Author: czy0729
+ * @Date: 2018-11-02 10:19:02
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-08 16:11:49
- * @Path newProject \src\person\about\Index\store.js
+ * @Last Modified time: 2018-11-02 10:24:22
+ * @Path bt_mb_new /src/person/about/Index/index.js.git
  */
 import React from 'react';
-import { observer } from '@';
 import { Layout } from '@_';
-import { Img, List, Flex, Icon } from '@components';
-import UI, { aboutDetail, images } from './ds';
+import { List, Flex, Icon } from '@components';
 import Styles from '@styles';
+import UI from '@stores/ui';
 
-// @injectV2(store)
-@observer
-export default class About extends React.Component {
-  render() {
-    return (
-      <Layout title="关于我们">
-        <div className="top">
-          <div className="t-c">
-            <Img src={`${images}/nido.jpg`} size="2.92rem" />
-          </div>
-          <p className="desc t-30 l-44 text-desc">{aboutDetail}</p>
-        </div>
-        <List className="mt-sm">
-          <List.Item>
-            <span className="t-sub">公众号名称:</span>
-            <span className="ml-24">灵动运动</span>
-          </List.Item>
-          <List.Item
-            arrow="horizontal"
-            onClick={() => {
-              UI.showMask({
-                children: (
-                  <Flex direction="column">
-                    <Img key="0" src={`${images}/code.jpg`} size="4rem" />
-                    <p key="1" className="info mt-md">
-                      微信里长按识别二维码
-                    </p>
-                    <Icon
-                      key="2"
-                      className="mt-128 t-32"
-                      type="cross"
-                      onClick={UI.hideMask}
-                    />
-                  </Flex>
-                )
-              });
-            }}
-          >
-            <Flex justify="between">
-              <span className="t-34 l-48">公众号二维码</span>{' '}
-              <Icon type="qrcode" className="t-22" />
-            </Flex>
-          </List.Item>
-        </List>
-        <style jsx>{`
-          .style-199793 {
-          }
-          .top {
-            padding: ${Styles.wind};
-            padding-top: 0;
-            background-color: ${Styles.color_void};
-          }
-          .desc {
-            text-indent: 2em;
-          }
-          .info {
-            margin-bottom: 1.5rem;
-          }
-        `}</style>
-        <style jsx global>{`
-          .am-modal-mask {
-            background-color: rgba(255, 255, 255, 0.97);
-          }
-        `}</style>
-      </Layout>
-    );
-  }
-}
+const About = () => (
+  <Layout title="关于我们">
+    <div className="top">
+      <div className="t-c">
+        <Icon
+          type="lingdong"
+          color
+          style={{
+            width: '1.6rem',
+            height: '1.6rem'
+          }}
+        />
+      </div>
+      <p className="t-32 mt-48">
+        {'　　'}
+        灵动是备受中国钓鱼人群体喜爱的运动聚集社区，灵动旨在打造一个让广大钓鱼爱好者畅所欲言、交流互动、休闲放松、切磋钓技的交友玩乐的活动平台，让我们一起快乐垂钓，纵情山水，享受自然，强健体魄，放飞心情！
+      </p>
+    </div>
+    <List className="mt-d">
+      <List.Item extra="灵动小区">公众号名称</List.Item>
+      <List.Item
+        arrow="horizontal"
+        onClick={() => {
+          UI.showMask({
+            children: (
+              <div>
+                <img
+                  key="0"
+                  className="img-qr"
+                  src="/static/images/src/person/Help/Nido/qr.jpg"
+                  alt=""
+                />
+                <p key="1" className="t-36 t-void t-c mt-lg">
+                  长按识别二维码
+                </p>
+              </div>
+            ),
+            onClick: UI.hideMask
+          });
+        }}
+      >
+        <Flex justify="between">
+          <span className="t-34 l-48">公众号二维码</span>
+          <Icon className="t-32 t-sub" type="qrcode" />
+        </Flex>
+      </List.Item>
+    </List>
+
+    <style jsx>{`
+      .style-195493 {
+      }
+      .top {
+        padding: ${Styles.space} ${Styles.wind} ${Styles.bottom};
+        background-color: ${Styles.color_theme};
+      }
+      .img-qr {
+        width: 4rem;
+        height: 4rem;
+        box-shadow: 0.04rem 0.04rem 0.16rem rgba(0, 0, 0, 0.16);
+      }
+    `}</style>
+  </Layout>
+);
+
+export default About;

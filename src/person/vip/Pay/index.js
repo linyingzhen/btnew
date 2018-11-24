@@ -3,8 +3,8 @@
  * const images = '/static/images/src/person/vip/Pay';
  * @Author: czy0729
  * @Date: 2018-10-17 17:46:37
- * @Last Modified by: lyz0720
- * @Last Modified time: 2018-10-31 18:24:50
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-02 10:47:23
  * @Path m.benting.com.cn /src/person/vip/Pay/index.js
  */
 import React from 'react';
@@ -19,7 +19,7 @@ import store from './store';
 
 const Pay = (props, { $ }) => {
   const { faceImg, niname = '-', vip, userId } = $.getState('userInfo');
-  const { endTime } = $.getState('vipInfo');
+  const { endTime, _loaded } = $.getState('vipInfo');
 
   // 购买的vip时间
   const buyType = 365 * 24 * 60 * 60 * 1000;
@@ -66,11 +66,13 @@ const Pay = (props, { $ }) => {
           <span className="t-40 l-56 t-b">￥</span>
           <span style={{ fontSize: '0.96rem' }}>240.00</span>
         </p>
-        <p className="t-32 l-48 t-sub t-c mt-16">{`${_startTime} - ${_endTime}`}</p>
+        <p className="t-32 l-48 t-sub t-c mt-16">
+          {_loaded ? `${_startTime} - ${_endTime}` : ''}
+        </p>
       </div>
       <div className="p-w mt-md">
-        <Button type="main" onClick={() => $.do.doBuyVip()}>
-          确认支付
+        <Button type="main" onClick={$.do.doBuyVip}>
+          {vip === 0 ? '开通' : '续费'}
         </Button>
       </div>
       <PayConfirm />

@@ -4,10 +4,11 @@
  * @Author: czy0729
  * @Date: 2018-06-20 16:13:46
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 15:07:52
+ * @Last Modified time: 2018-11-16 09:26:10
  * @Path m.benting.com.cn \common\const\index.js
  */
 import {
+  __RELEASE__,
   __PROJECT__,
   __WEB__,
   __WEB_BT__,
@@ -36,10 +37,11 @@ const __images__ = cdnUsed
 
 const Const = {
   /* ==================== iconfont ==================== */
-  __ICONFONT__: 'https://at.alicdn.com/t/font_728495_owtw3r5zjwi.css',
-  __ICONFONT_COLOR__: 'https://at.alicdn.com/t/font_739329_pm6l4bjy3j.js',
+  __ICONFONT__: 'https://at.alicdn.com/t/font_728495_pyjkn55lkkm.css',
+  __ICONFONT_COLOR__: 'https://at.alicdn.com/t/font_739329_1xdlns6pf4h.js',
 
   /* ==================== base ==================== */
+  __RELEASE__, // 是否正式环境
   __PROJECT__, // 项目唯一标识
   __WEB__: __server__ ? __WEB__ : window.location.origin, // 本站域名
   __WEB_BT__, // 本汀域名

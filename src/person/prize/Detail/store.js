@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-08 14:46:54
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 11:15:35
+ * @Last Modified time: 2018-11-07 11:35:36
  * @Path bt_mb_new /src/person/prize/Detail/store.js
  */
 import { observable } from 'mobx';
@@ -20,7 +20,7 @@ export default class Store extends common {
 
   fetch = {
     config: {
-      update: ['detail']
+      every: ['detail']
     },
 
     detail: () => {

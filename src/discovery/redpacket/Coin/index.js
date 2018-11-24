@@ -4,13 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-10-22 23:55:47
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 18:28:08
+ * @Last Modified time: 2018-11-12 14:09:38
  * @Path bt_mb_new /src/discovery/redpacket/Coin/index.js
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectV2, form, observer } from '@';
-import { AffixTabs, PayConfirm } from '@components';
+import { PayConfirm } from '@components';
+import AffixTabs from '@components/AffixTabs/default';
 import { Layout } from '@_';
 import Form from './_Form';
 import store from './store';
@@ -26,7 +27,6 @@ const Coin = (props, { $ }) => {
   return (
     <Layout title="金币红包" className={prefixCls}>
       <AffixTabs
-        align="center"
         tabs={tabsDS}
         page={page}
         animated

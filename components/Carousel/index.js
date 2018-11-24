@@ -4,13 +4,13 @@
  * @Author: czy0729
  * @Date: 2018-06-24 18:14:09
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 14:45:55
+ * @Last Modified time: 2018-11-12 10:17:14
  * @Path m.benting.com.cn /components/Carousel/index.js
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Carousel } from 'antd-mobile';
+import { Carousel as AMCarousel } from 'antd-mobile';
 import Const from '@const';
 import Utils from '@utils';
 import Styles from '@styles';
@@ -23,10 +23,15 @@ const urlLocation = (e, href) => {
 
   e.stopPropagation();
 
-  if (String(href).indexOf(Const.__WEB__) !== -1) {
+  // 181029 旧域名全部换成本站域名
+  const _href = String(href)
+    .replace(Const.__WEB_BT__, Const.__WEB__)
+    .replace(Const.__WEB_NIDO__, Const.__WEB__);
+
+  if (_href.indexOf(Const.__WEB__) !== -1) {
     // 暂时只能对本域名而且结尾为数字的地址，做处理，并且都为?id=
     // #todo /id/postId 这类路由会误解释，需要处理
-    const path = href.replace(Const.__WEB__, '');
+    const path = _href.replace(Const.__WEB__, '');
     const reg = /\/\d+$/;
     const match = path.match(reg);
 
@@ -39,147 +44,155 @@ const urlLocation = (e, href) => {
       Utils.router.push(path);
     }
   } else {
-    window.location = href;
+    Utils.onConfirm('即将跳出本站，确定?', () => (window.location = href));
   }
 };
 
-const _Carousel = props => {
-  const {
-    data,
-    height,
-    style,
-    ssr = false,
-    onImgClick = Function.prototype,
-    className,
-    ...other
-  } = props;
+class Carousel extends React.Component {
+  static propTypes = {
+    data: PropTypes.array, // 轮播数据 Array<{ src: String }>
+    height: PropTypes.string, // 轮播高度
+    ssr: PropTypes.bool, // 是否把轮播背景设置为第一个图
+    onImgClick: PropTypes.func // 图片点击回调
+  };
 
-  if (data.length === 0) {
-    return (
-      <div className={classNames(prefixCls, className)} style={{ height }} />
-    );
+  static defaultProps = {
+    data: [],
+    height: '46vw',
+    ssr: false,
+    onImgClick: Function.prototype
+  };
+
+  state = {
+    didMount: false
+  };
+
+  componentDidMount() {
+    // 暂时解决SSR hydrate问题
+    this.setState({
+      didMount: true
+    });
   }
 
-  if (data.length === 1) {
+  render() {
+    const {
+      data,
+      height,
+      ssr,
+      onImgClick,
+      style,
+      className,
+      ...other
+    } = this.props;
+    const { didMount } = this.state;
+    const cls = classNames(prefixCls, className);
+
+    if (!didMount || data.length === 0) {
+      return <div className={cls} style={{ height }} />;
+    }
+
+    if (data.length === 1) {
+      const { src, href } = data[0] || {};
+
+      return (
+        <div className={cls} onClick={() => onImgClick(0)}>
+          <div
+            className="bg"
+            style={{
+              height,
+              backgroundImage: `url(${Utils.getAppImgUrl(src, 'scale', true)})`,
+              ...style
+            }}
+            onClick={e => urlLocation(e, href)}
+          />
+        </div>
+      );
+    }
+
+    let ssrStyle;
+    if (ssr) {
+      ssrStyle = {
+        backgroundImage: `url(${Utils.getAppImgUrl(
+          (data[0] || {}).src,
+          'scale',
+          true
+        )})`
+      };
+    }
+
     return (
-      <div
-        className={classNames(prefixCls, className)}
-        onClick={() => onImgClick(0)}
-      >
-        <div
-          className="item"
+      <div className={cls} style={ssrStyle}>
+        <AMCarousel
+          infinite
+          autoplay
+          autoplayInterval={8000}
           style={{
-            height,
-            backgroundImage: `url(${Utils.getAppImgUrl(
-              data[0].src,
-              'scale',
-              true
-            )})`,
+            minHeight: height,
             ...style
           }}
-          onClick={e => urlLocation(e, data[0].href)}
-        />
+          {...other}
+        >
+          {data.map(({ src, href }, index) => (
+            <div
+              key={src}
+              className="bg"
+              style={{
+                height,
+                backgroundImage: `url(${Utils.getAppImgUrl(
+                  src,
+                  'scale',
+                  true
+                )})`,
+                ...style
+              }}
+              onClick={e => {
+                onImgClick(index);
+                urlLocation(e, href);
+              }}
+            />
+          ))}
+        </AMCarousel>
 
-        <style jsx>{`
+        <style jsx global>{`
           .c-carousel {
-          }
-          .item {
             ${Styles._bg};
+          }
+          .${prefixCls} .slider-slide {
+            ${Styles._bg};
+            background-size: contain;
+          }
+          .${prefixCls} .am-carousel-wrap {
+            margin-bottom: 0.08rem;
+          }
+          .${prefixCls} .am-carousel-wrap-dot > span {
+            width: 0.16rem;
+            height: 0.16rem;
+            margin: 0 0.04rem;
+            background: rgba(255, 255, 255, 0.32);
+            border-radius: 50%;
+            box-shadow: ${Styles.boxShadow};
+          }
+          .${prefixCls} .am-carousel-wrap-dot-active > span {
+            background: rgba(255, 255, 255, 0.8);
+          }
+          .${prefixCls} .slider-decorator-0 {
+            width: 90%;
           }
         `}</style>
       </div>
     );
   }
+}
 
-  return (
-    <div
-      className={classNames(prefixCls, className)}
-      style={
-        ssr
-          ? {
-            backgroundImage: `url(${Utils.getAppImgUrl(
-              data[0].src,
-              'scale',
-              true
-            )})`
-          }
-          : undefined
-      }
-    >
-      <Carousel
-        infinite
-        autoplay
-        autoplayInterval={8000}
-        style={{
-          minHeight: height
-        }}
-        {...other}
-      >
-        {data.map((item, index) => (
-          <div
-            key={item.src}
-            className="item"
-            style={{
-              height,
-              backgroundImage: `url(${Utils.getAppImgUrl(
-                item.src,
-                'scale',
-                true
-              )})`,
-              ...style
-            }}
-            onClick={e => {
-              onImgClick(index);
-              urlLocation(e, item.href);
-            }}
-          />
-        ))}
-      </Carousel>
+const prefixClsOrigin = `${prefixCls}__orgin`;
 
-      <style jsx global>{`
-        .c-carousel {
-          ${Styles._bg};
-        }
-        .${prefixCls} .slider-slide {
-          ${Styles._bg};
-          background-size: contain;
-        }
-        .${prefixCls} .am-carousel-wrap {
-          margin-bottom: 0.08rem;
-        }
-        .${prefixCls} .am-carousel-wrap-dot > span {
-          width: 0.16rem;
-          height: 0.16rem;
-          margin: 0 0.04rem;
-          background: rgba(255, 255, 255, 0.32);
-          border-radius: 50%;
-          box-shadow: ${Styles.boxShadow};
-        }
-        .${prefixCls} .am-carousel-wrap-dot-active > span {
-          background: rgba(255, 255, 255, 0.8);
-        }
-        .${prefixCls} .slider-decorator-0 {
-          width: 90%;
-        }
-      `}</style>
-      <style jsx>{`
-        .c-carousel {
-        }
-        .item {
-          ${Styles._bg};
-        }
-      `}</style>
-    </div>
-  );
-};
-
-const _CarouselOrigin = props => {
+const Origin = props => {
   const { height, className, children, ...other } = props;
 
   return (
     <>
-      <Carousel
-        className={classNames(`${prefixCls}__origin`, className)}
+      <AMCarousel
+        className={classNames(prefixClsOrigin, className)}
         infinite
         autoplay
         autoplayInterval={8000}
@@ -189,25 +202,23 @@ const _CarouselOrigin = props => {
         {...other}
       >
         {children}
-      </Carousel>
+      </AMCarousel>
 
       <style jsx global>{`
-        .c-carousel {
-        }
-        .${prefixCls}__origin {
+        .c-carousel__origin {
           padding-bottom: ${Styles.bottom};
         }
-        .${prefixCls}__origin .am-carousel-wrap-dot > span {
+        .${prefixClsOrigin} .am-carousel-wrap-dot > span {
           width: 0.16rem;
           height: 0.16rem;
           margin: 0 0.08rem;
           background: rgba(0, 0, 0, 0.4);
           border-radius: 50%;
         }
-        .${prefixCls}__origin .am-carousel-wrap-dot-active > span {
+        .${prefixClsOrigin} .am-carousel-wrap-dot-active > span {
           background: rgba(0, 0, 0, 0.8);
         }
-        .${prefixCls}__origin .slider-decorator-0 {
+        .${prefixClsOrigin} .slider-decorator-0 {
           width: 90%;
         }
       `}</style>
@@ -215,12 +226,6 @@ const _CarouselOrigin = props => {
   );
 };
 
-_Carousel.propTypes = {
-  height: PropTypes.string
-};
-_Carousel.defaultProps = {
-  height: '46vw'
-};
-_Carousel.Origin = _CarouselOrigin;
+Carousel.Origin = Origin;
 
-export default _Carousel;
+export default Carousel;

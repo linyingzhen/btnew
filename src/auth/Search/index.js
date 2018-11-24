@@ -4,17 +4,20 @@
  * @Author: czy0729
  * @Date: 2018-08-13 14:31:31
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-03 10:25:06
+ * @Last Modified time: 2018-11-05 10:22:20
  * @Path m.benting.com.cn /src/auth/Search/index.js
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectV2, form, observer } from '@';
-import { Form, Icon } from '@components';
+import { Form } from '@components';
 import { Layout } from '@_';
 import Const from '@const';
 import Utils from '@utils';
+import Styles from '@styles';
 import store from './store';
+
+const prefixCls = 'style-205479';
 
 @injectV2(store)
 @form
@@ -39,12 +42,14 @@ export default class Search extends React.Component {
     const { form, onSubmit } = this.props;
 
     return (
-      <Layout title="输入防伪码">
-        <Form form={form}>
+      <Layout title="防伪中心" bd={null}>
+        <div className="wrap">
+          <p className="t-48 l-66 t-b">防伪中心</p>
+        </div>
+        <Form className={`${prefixCls}__form`} form={form} label>
           <Form.Input
-            label={<Icon className="t-34" type="barcode" />}
+            label="防伪码"
             name="codeNo"
-            placeholder="请输入防伪码"
             updatePlaceholder={false}
             option={Const.rules.required}
           />
@@ -55,6 +60,23 @@ export default class Search extends React.Component {
         >
           查询
         </Form.Button>
+
+        <style jsx global>{`
+          .style-679252 {
+          }
+          .${prefixCls}__form {
+            margin-top: 0;
+            background: ${Styles.color_theme};
+          }
+        `}</style>
+        <style jsx>{`
+          .style-205479 {
+          }
+          .wrap {
+            padding: ${Styles.space} ${Styles.wind};
+            background: ${Styles.color_theme};
+          }
+        `}</style>
       </Layout>
     );
   }

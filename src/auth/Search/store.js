@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-13 14:31:41
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-17 17:40:30
+ * @Last Modified time: 2018-11-05 10:09:20
  * @Path m.benting.com.cn /src/auth/Search/store.js
  */
 import { observable } from 'mobx';
@@ -52,13 +52,18 @@ export default class Store extends common {
       }
 
       // 若有数据，证明是真的防伪码
-      await Api.P('get_code_query', {
+      const data = await Api.PP('get_code_query', {
         _: {
           search: {
             codeNo
           }
         }
       });
+
+      if (data.code !== 0 || data.data.list.length === 0) {
+        Utils.light(data.err || '防伪码无效');
+        return;
+      }
 
       // 二维码扫描的情况，替换地址
       Utils.router[Utils.getQuery('type') === 'scan' ? 'replace' : 'push'](

@@ -3,8 +3,8 @@
  * const images = '/static/images';
  * @Author: lyz0720
  * @Date: 2018-11-01 11:20:26
- * @Last Modified by: lyz0720
- * @Last Modified time: 2018-11-01 11:29:53
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-01 23:26:18
  * @Path bt_mb_new \src\shop\Search\index.js.git
  */
 import React from 'react';

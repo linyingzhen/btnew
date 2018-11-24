@@ -5,7 +5,7 @@
  * @Author: czy0729
  * @Date: 2018-06-23 13:14:58
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 19:55:05
+ * @Last Modified time: 2018-11-01 23:55:32
  * @Path m.benting.com.cn /components/CountDown/index.js
  */
 import React from 'react';
@@ -39,7 +39,7 @@ export default class CountDown extends React.Component {
   };
 
   state = {
-    now: this.props.now
+    now: parseInt(this.props.now)
   };
 
   componentDidMount() {
@@ -51,7 +51,7 @@ export default class CountDown extends React.Component {
         now: now + 1
       });
 
-      if (now + 1 > beginTime) {
+      if (now + 1 > parseInt(beginTime)) {
         clearInterval(this.interval);
         onEnd();
       }
@@ -132,17 +132,23 @@ export default class CountDown extends React.Component {
       }
 
       let short;
-      if (parseInt(h)) {
-        short = `${parseInt(h)}时`;
+      const _h = parseInt(h);
+      if (_h) {
+        if (_h > 24) {
+          const d = parseInt(_h / 24);
+          short = `${d}天${_h - d * 24}时`;
+        } else {
+          short = `${_h}时${parseInt(m)}分`;
+        }
       } else {
         short = `${parseInt(m)}分${parseInt(s)}秒`;
       }
 
       return (
-        <p className={classNames(prefixCls, className)}>
+        <div className={classNames(prefixCls, className)}>
           {left}
           {short}
-        </p>
+        </div>
       );
     }
 

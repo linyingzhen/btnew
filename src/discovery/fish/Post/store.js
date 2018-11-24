@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-11 15:55:42
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-08-12 14:31:37
+ * @Last Modified time: 2018-11-15 17:23:32
  * @Path m.benting.com.cn /src/discovery/fish/Post/store.js
  */
 import { observable } from 'mobx';
@@ -39,10 +39,6 @@ export default class Store extends common {
     goods: goodsDS
   });
 
-  // params = {
-  //   hasFetchGoodsSubData: false
-  // };
-
   fetch = {
     config: {
       one: ['specialGoods']
@@ -54,9 +50,7 @@ export default class Store extends common {
 
       const data = await res;
 
-      this.setState({
-        qiniuFileKey: data
-      });
+      this.setState(data, 'qiniuFileKey');
 
       return res;
     },
@@ -64,33 +58,6 @@ export default class Store extends common {
     // 特殊商品
     specialGoods: () =>
       this.fetchThenSetState('get_shop_special-goods', 'specialGoods')
-
-    // 找到分类里面的所有子商品
-    // goodsSubData: async (id = 36) => {
-    //   const data = await Api.P('get_shop_only-goods-list', {
-    //     _: {
-    //       limit: 0,
-    //       search: {
-    //         goodsType: id
-    //       }
-    //     }
-    //   });
-
-    //   let goods = this.getState('goods');
-    //   goods = JSON.parse(JSON.stringify(goods));
-
-    //   const index = goods.findIndex(item => item.value == id);
-
-    //   if (index !== -1) {
-    //     goods[index].children = data.goodsList.map(item => ({
-    //       label: item.title,
-    //       value: item.gid,
-    //       parId: id
-    //     }));
-    //   }
-
-    //   this.setState(goods, 'goods');
-    // }
   };
 
   do = {
@@ -168,7 +135,7 @@ export default class Store extends common {
       // 发布成功，还原页面store
       this.page.reset();
       Utils.light(`发布成功，积分+${point}`);
-      Utils.router.replace(
+      Utils.router.push(
         `/discovery/fish?id=${dtsourceCategory}&gid=${dtsourceId}`,
         `/discovery/fish/${dtsourceCategory}/${dtsourceId}`
       );

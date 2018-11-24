@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-04 14:44:58
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-04 17:36:23
+ * @Last Modified time: 2018-11-14 18:34:51
  * @Path m.benting.com.cn /src/bbs/floor/Index/store.js
  */
 import React from 'react';
@@ -41,21 +41,28 @@ const _Post = (props, { $ }) => {
     <>
       <ListView
         data={post}
-        renderRow={item => (
+        renderRow={({
+          contentImg,
+          createTime,
+          endTime,
+          likeAdd,
+          replyNum,
+          threadId,
+          title,
+          userId
+        }) => (
           <ListRow
             className={`${prefixCls}__item`}
-            userId={item.userId}
-            createTime={item.createTime}
-            title={item.title}
-            titleExtra={time < item.endTime ? Processing : End}
-            contentImg={item.contentImg}
-            likeCount={item.likeAdd}
-            commentCount={item.replyNum}
-            href={`/bbs/floor/detail?id=${item.threadId}`}
-            as={`/bbs/floor/detail/${item.threadId}`}
+            userId={userId}
+            createTime={createTime}
+            title={title}
+            titleExtra={time < endTime ? Processing : End}
+            contentImg={contentImg}
+            likeCount={likeAdd}
+            commentCount={replyNum}
+            href={`/bbs/floor/detail?id=${threadId}`}
+            as={`/bbs/floor/detail/${threadId}`}
             login
-            lazyload
-            animate
           />
         )}
         onEndReached={$.fetch.post}

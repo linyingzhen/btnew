@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-15 16:34:26
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 18:08:13
+ * @Last Modified time: 2018-11-13 14:24:44
  * @Path m.benting.com.cn /src/event/cashback/Submit/index.js
  */
 import React from 'react';
@@ -108,8 +108,7 @@ const Submit = (props, { $ }) => {
             name="branchName"
             label="支行名称"
             initialValue={branchName}
-            option={Const.rules.required}
-            disabled
+            disabled={!!branchName}
           />
         )}
         <Form.Input

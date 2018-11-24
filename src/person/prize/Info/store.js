@@ -4,17 +4,20 @@
  * @Author: czy0729
  * @Date: 2018-10-25 14:33:25
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 15:13:15
+ * @Last Modified time: 2018-11-07 11:16:07
  * @Path bt_mb_new /src/person/prize/Info/store.js
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';
 import Api from '@api';
 import Utils from '@utils';
+import G from '@stores/g';
 
 export default class Store extends common {
   @observable
   state = this.initState({
+    userInfo: G.getState('userInfo'),
+
     bank: {},
 
     detail: {}
@@ -22,7 +25,16 @@ export default class Store extends common {
 
   fetch = {
     config: {
+      static: ['userInfo'],
       every: ['bank', 'detail']
+    },
+
+    userInfo: async () => {
+      const res = G.fetchUserInfo();
+
+      this.setState(await res, 'userInfo');
+
+      return res;
     },
 
     bank: () => this.fetchThenSetState('get_user_bank_info', 'bank'),

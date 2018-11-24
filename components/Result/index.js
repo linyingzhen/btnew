@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-12 18:26:26
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-07 12:18:06
+ * @Last Modified time: 2018-11-09 09:43:28
  * @Path m.benting.com.cn /components/Result/index.js
  */
 import React from 'react';
@@ -34,13 +34,13 @@ export default class Result extends React.Component {
 
         <style jsx>{`
           .c-result {
-            min-height: 6rem;
+            min-height: 5.6rem;
             padding-bottom: ${Styles.bottom};
             overflow: hidden;
           }
           .wrap-img {
-            min-height: 4.14rem;
-            padding: ${Styles.lg} 0;
+            min-height: 3.2rem;
+            padding: ${Styles.space} 0;
           }
           .img-thumb {
             display: block;

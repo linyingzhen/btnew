@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-07 14:41:37
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-07 14:47:20
+ * @Last Modified time: 2018-11-19 10:06:37
  * @Path m.benting.com.cn /src/account/Bank/index.js
  */
 import React from 'react';
@@ -44,7 +44,7 @@ const Bank = (props, { $ }) => {
           <Form.Input
             label="支行名称"
             name="branchName"
-            placeholder="请输入"
+            option={Const.rules.required}
           />
         )}
         <Form.Input

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-02 14:42:56
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 19:53:11
+ * @Last Modified time: 2018-11-01 23:55:57
  * @Path m.benting.com.cn /src/index/Nido/_Event/_Top.js
  */
 import React from 'react';
@@ -28,9 +28,11 @@ const _Top = (props, { $ }) => {
             <span className="t-34 l-48 t-danger">极速秒杀</span>
             <span className="t-24 l-34 t-sub ml-8">倒计时：</span>
           </p>
-          <CountDown className="mt-10" beginTime={panic.beginTime}>
-            <span className="t-24 mt-10">进行中</span>
-          </CountDown>
+          <div>
+            <CountDown className="mt-10" beginTime={panic.beginTime}>
+              <span className="t-24 mt-10">进行中</span>
+            </CountDown>
+          </div>
           <Img
             className={`${prefixCls}__img-lg`}
             src={Utils.getAppImgUrl(panic.imgId)}
@@ -43,7 +45,7 @@ const _Top = (props, { $ }) => {
         <Link className={`${prefixCls}__square`} href="/bbs/floor">
           <div className="content">
             <p className="t-30 l-42">欢乐踩楼</p>
-            <Badge className="mt-6" text="进行中" style={Styles._badge} />
+            <Badge className="mt-8" text="进行中" style={Styles._badge} />
             <Img
               className={`${prefixCls}__img-sm`}
               src={Utils.getAppImgUrl(floor.imgId, 'scale')}
@@ -56,7 +58,7 @@ const _Top = (props, { $ }) => {
           <div className="content">
             <p className="t-30 l-42">金币竞拍</p>
             {goldAuction.state === 2 && (
-              <Badge className="mt-6" text="进行中" style={Styles._badge} />
+              <Badge className="mt-8" text="进行中" style={Styles._badge} />
             )}
             <Img
               className={`${prefixCls}__img-sm`}

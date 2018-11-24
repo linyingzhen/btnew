@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-03 14:45:21
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-03 18:28:29
+ * @Last Modified time: 2018-11-07 14:52:42
  * @Path m.benting.com.cn /src/service/Index/store.js
  */
 import { observable } from 'mobx';
@@ -48,10 +48,13 @@ export default class Store extends common {
 
     // 提交消费订单
     submit: async values => {
+      const { page } = this.getState('_tabs');
       const { shopName, orderNo, cardImg } = values;
 
+      const isRealShop = page === 1;
+
       await Api.P('do_consumer_add', {
-        shopName,
+        shopName: isRealShop ? '实体店' : shopName,
         orderNo,
         cardImg
       });

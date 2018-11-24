@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-10 09:49:43
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-30 11:41:48
+ * @Last Modified time: 2018-11-16 16:47:16
  * @Path m.benting.com.cn /src/bbs/Index/store.js
  */
 import { observable } from 'mobx';
@@ -117,6 +117,27 @@ export default class Store extends common {
       one: ['top'],
       update: ['post']
     },
+    filter: {
+      top: {
+        threadId: 1,
+        title: 1
+      },
+      post: {
+        contentImg: 1,
+        createTime: 1,
+        faceImg: 1,
+        grade: 1,
+        isDigest: 1,
+        likeAdd: 1,
+        niname: 1,
+        replyNum: 1,
+        threadId: 1,
+        title: 1,
+        userId: 1,
+        vip: 1,
+        role: 1
+      }
+    },
 
     // 我的论坛点赞和收藏列表
     bbsLikeAndFavorList: async () => {
@@ -135,18 +156,27 @@ export default class Store extends common {
           search: {
             displayState: 3
           }
-        }
+        },
+        _filter: this.fetch.filter.top
       }),
 
     // 帖子列表
     post: refresh => {
       const { queryPost } = this.params;
+      const { page } = this.getState('_affixTabs');
+
+      // 推荐tab不是正常按时间排序，不要用截止时间戳
+      const createTimeKey = page !== 0 ? 'createTime' : undefined;
 
       return this.fetchListThenSetState(
         'get_bbs_list',
         'post',
-        queryPost,
-        refresh
+        {
+          ...queryPost,
+          _filter: this.fetch.filter.post
+        },
+        refresh,
+        createTimeKey
       );
     },
     updateOnePostList: postId =>

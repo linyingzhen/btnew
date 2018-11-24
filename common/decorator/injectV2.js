@@ -1,15 +1,17 @@
-/* eslint-disable react/sort-comp */
 /**
+ * SPA主要逻辑装饰器
  * const prefixCls = 'style-925556';
  * const images = '/static/images/common/decorator';
- * @Version #todo v3.1 180801 优化流程：static里面的方法也会每次执行，只不过不请求也返回带数据promise
+ * @Version [X] v3.1 180801 优化流程：static里面的方法也会每次执行，只不过不请求也返回带数据promise
  * @Version v3.2 181004 加入storeDidFetch
  * @Version v3.3 181010 加入storeDidInitFetch来细化钩子
  * @Version v3.4 181023 修复storeDidMount在Client端页面初始化时调用2次的问题
+ * @Version v3.5 181029 加入store本地化，运行时机在storeDidInitFetch
+ * @Version v3.6 181113 调整传入的第二个参数，可以传入login代表页面需要检查登录，非登录屏蔽请求
  * @Author: czy0729
  * @Date: 2018-07-15 16:34:04
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 00:02:29
+ * @Last Modified time: 2018-11-13 16:23:25
  * @Path m.benting.com.cn /common/decorator/inject@v2.js
  * ==========================================================================================
  * store生命周期 (尽量少用，使用前先思考逻辑是否正确)
@@ -25,119 +27,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { paramsKey, defaultKey } from '@stores/commonV2';
-import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
 import G from '@stores/g';
 import Ui from '@stores/ui';
+import {
+  hmtCount,
+  registerWx,
+  getFetchFns,
+  compareStatic,
+  doFetch,
+  setCache,
+  loginThenInitStore
+} from './utils';
 
-// 获得请求函数引用，返回数组
-const getFetchFns = (fetchConfig, modes) => {
-  const fns = [];
-
-  if (typeof fetchConfig !== 'object' || !Array.isArray(modes)) {
-    return fns;
-  }
-
-  modes.forEach(mode => {
-    if (fetchConfig[mode]) {
-      fetchConfig[mode].forEach((item, index) => {
-        const fn = fetchConfig[mode][index];
-
-        if (mode === 'static' && Array.isArray(fn)) {
-          fns.push(fn[0]);
-        } else {
-          fns.push(fn);
-        }
-      });
-    }
-  });
-
-  return fns;
-};
-
-// 从G继承数据
-const compareStatic = (fetchConfig, target) => {
-  const fns = [];
-
-  if (typeof fetchConfig !== 'object') {
-    return fns;
-  }
-
-  // config有static
-  if (fetchConfig.static) {
-    fetchConfig.static.forEach(item => {
-      let fn;
-      let key;
-      let gKey;
-      if (Array.isArray(item)) {
-        [fn, key, gKey] = item;
-      } else {
-        fn = item;
-        key = item;
-        gKey = item;
-      }
-
-      // 局部跟全局对比是否一致，不一致的话用全局替换
-      const gState = G.getState(gKey || key);
-
-      // 若是-1，getState结果为{}，需再次请求
-      if (!Object.keys(gState).filter(item => item.indexOf('_') !== 0).length) {
-        fns.push(fn);
-      } else {
-        const currentState = target.getState(key);
-
-        if (!Utils.isObjectValueEqual(gState, currentState)) {
-          target.setState(gState, key);
-        }
-      }
-    });
-  }
-
-  return fns;
-};
-
-// 发起请求
-const doFetch = (fns, target) => {
-  if (!fns.length) {
-    return null;
-  }
-
-  return Promise.all(
-    fns.map(item => {
-      const fn = target.fetch[Array.isArray(item) ? item[0] : item];
-      if (typeof fn !== 'function') {
-        console.error(
-          `(injectV2.js > doFetch) function ${
-            Array.isArray(item) ? item[0] : item
-          } is not defined.`
-        );
-        return null;
-      }
-
-      return target.fetch[Array.isArray(item) ? item[0] : item](true);
-    })
-  ).then(values => {
-    // [LifeCycle]
-    if (Const.__CLIENT__) {
-      if (!target.params.__clientFetch) {
-        if (typeof target.storeDidInitFetch === 'function') {
-          target.storeDidInitFetch(values);
-        } else if (typeof target.storeDidFetch === 'function') {
-          target.storeDidFetch(values);
-        }
-
-        target.setParams({
-          __clientFetch: true
-        });
-      } else if (typeof target.storeDidFetch === 'function') {
-        target.storeDidFetch(values);
-      }
-    }
-  });
-};
-
-const InjectDecorator = (Store, cache = true) => ComposedComponent =>
+const InjectDecorator = (
+  Store,
+  { login = false, cache = true } = {}
+) => ComposedComponent =>
   observer(
     class extends React.Component {
       static childContextTypes = {
@@ -274,8 +181,14 @@ const InjectDecorator = (Store, cache = true) => ComposedComponent =>
             });
 
             if (mustFetchFns.length) {
-              await doFetch(mustFetchFns, this.$);
+              // 服务器端没有token，login一定不请求
+              if (!login) {
+                await doFetch(mustFetchFns, this.$);
+              }
             }
+          } else if (login && !Utils.checkLogin()) {
+            // 客户端处理没登录
+            loginThenInitStore(asPath);
           } else {
             // 客户端不需要阻塞，不阻塞会显示loading动画，阻塞会导致不能马上切换页面
             doFetch(fns, this.$);
@@ -327,7 +240,21 @@ const InjectDecorator = (Store, cache = true) => ComposedComponent =>
 
             // 把打印在源代码的SERVER端的state复制到CLIENT端
             Object.keys($[defaultKey] || {}).forEach(item => {
-              this.$.setState($[defaultKey][item], item, false);
+              const localState = this.$[defaultKey][item];
+              const serverState = $[defaultKey][item];
+              let state = serverState;
+              let updateLoaded = false;
+
+              // 判断服务器渲染的数据_from === 'ls'，若未不覆盖本地缓存数据
+              // #todo 服务器有数据以服务器为主，其次以本地为主，最后以默认为主
+              if (typeof localState === 'object' && localState._from === 'ls') {
+                updateLoaded = serverState._loaded;
+                state = {
+                  _from: 'ls'
+                };
+              }
+
+              this.$.setState(state, item, updateLoaded);
             });
           }
         } else {
@@ -343,12 +270,14 @@ const InjectDecorator = (Store, cache = true) => ComposedComponent =>
               ui: Ui
             };
 
-            if (igoreFetch.length) {
+            if (login && !Utils.checkLogin()) {
+              loginThenInitStore(asPath);
+            } else if (igoreFetch && igoreFetch.length) {
               doFetch(igoreFetch, this.$);
             }
 
             if (Const.__WX__) {
-              this.registerWx();
+              registerWx();
             }
           }
 
@@ -363,7 +292,7 @@ const InjectDecorator = (Store, cache = true) => ComposedComponent =>
         }
 
         // map computed，computed都是根据另一些值来算一个值，不需要set
-        if (this.$.computed) {
+        if (this.$ && this.$.computed) {
           Object.keys(this.$.computed).forEach(item => {
             // 服务器端只有静态数据才能转成字符串，打印在源代码上，所以不能getter
             if (Const.__SERVER__) {
@@ -396,16 +325,20 @@ const InjectDecorator = (Store, cache = true) => ComposedComponent =>
 
         const { $ } = this.props;
 
+        if (!$) {
+          return;
+        }
+
         // 页面是PUSH进来的，要告诉store重置数据和重置scrollTop
         if (Utils.getPageTransition()) {
           if ($.setRefresh) {
             $.setRefresh();
           }
-          this.hmtCount();
+          hmtCount();
         }
 
         if (Const.__WX__) {
-          this.registerWx();
+          registerWx();
         }
 
         // [LifeCycle]storeDidMount
@@ -416,19 +349,23 @@ const InjectDecorator = (Store, cache = true) => ComposedComponent =>
 
       // 5
       componentDidMount() {
-        const { isServer } = this.props;
+        const { isServer, asPath } = this.props;
         const { fetch = {} } = this.$;
         const { config } = fetch;
         const { top, __refresh } = this.$.getParams();
 
         // 服务器端首次切换到客户端的时候，不应该请求
         if (!isServer) {
-          const fns = getFetchFns(
-            config,
-            __refresh ? ['every', 'update'] : ['every']
-          );
+          if (login && !Utils.checkLogin()) {
+            loginThenInitStore(asPath);
+          } else {
+            const fns = getFetchFns(
+              config,
+              __refresh ? ['every', 'update'] : ['every']
+            );
 
-          doFetch(fns, this.$);
+            doFetch(fns, this.$);
+          }
         }
 
         if (__refresh) {
@@ -438,6 +375,9 @@ const InjectDecorator = (Store, cache = true) => ComposedComponent =>
         // 当store有top值时，设置页面滚动位置
         document.documentElement.scrollTop = top;
         document.body.scrollTop = top;
+
+        // set cache
+        setCache(this.$);
       }
 
       // 2
@@ -449,16 +389,20 @@ const InjectDecorator = (Store, cache = true) => ComposedComponent =>
 
         const { $ } = nextProps;
 
+        if (!$) {
+          return;
+        }
+
         // 页面是PUSH进来的，要告诉store重置数据和重置scrollTop
         if (Utils.getPageTransition()) {
           if ($.setRefresh) {
             $.setRefresh();
           }
-          this.hmtCount();
+          hmtCount();
         }
 
         if (Const.__WX__) {
-          this.registerWx();
+          registerWx();
         }
 
         // [LifeCycle]storeDidMount
@@ -521,47 +465,8 @@ const InjectDecorator = (Store, cache = true) => ComposedComponent =>
         }
       }
 
-      // 百度统计，手动推送
-      hmtCount = () => {
-        try {
-          if ('_hmt' in window) {
-            window._hmt.push(['_trackPageview', window.location.pathname]);
-          }
-        } catch (ex) {
-          console.warn(ex);
-        }
-      };
-
-      // 微信注册页面
-      registerWx = async () => {
-        let config = G.wxConfig[window.location.href];
-
-        if (!config) {
-          const data = await Api.PP('get_wx_js-sign', {
-            url: window.location.href
-          });
-
-          if (data.code != 0) {
-            return;
-          }
-
-          config = data.data;
-          G.wxConfig[window.location.href] = config;
-        }
-
-        wx.config({
-          // debug: true,
-          appId: config.appId,
-          timestamp: config.timestamp,
-          nonceStr: config.nonceStr,
-          signature: config.signature,
-          jsApiList: Const.__JSAPI__
-        });
-
-        Utils.wxShareUpdate();
-      };
-
-      $; // 当前页面对应Store引用
+      // 当前页面对应Store引用
+      $;
 
       // 3
       render() {

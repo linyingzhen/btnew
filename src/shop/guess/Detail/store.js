@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-25 15:52:23
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-24 10:38:48
+ * @Last Modified time: 2018-11-15 11:39:39
  * @Path m.benting.com.cn /src/shop/guess/Detail/store.js
  */
 import { observable } from 'mobx';
@@ -13,6 +13,7 @@ import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
 import G from '@stores/g';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -62,7 +63,8 @@ export default class Store extends common {
         'get_new_guess-everday_detail',
         'detail',
         {
-          guessId: id
+          guessId: id,
+          _filter: filter.detail
         }
       );
 
@@ -89,11 +91,13 @@ export default class Store extends common {
             search: {
               userId
             }
-          }
+          },
+          _filter: filter.list
         };
       } else {
         query = {
-          guessId: id
+          guessId: id,
+          _filter: filter.list
         };
       }
 
@@ -122,7 +126,8 @@ export default class Store extends common {
             search: {
               state: 2
             }
-          }
+          },
+          _filter: filter.list
         },
         refresh
       );

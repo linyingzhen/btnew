@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-24 16:37:27
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-23 22:32:21
+ * @Last Modified time: 2018-11-08 12:00:58
  * @Path m.benting.com.cn /src/_/index.js
  */
 export { default as Address } from './Address';
@@ -19,6 +19,7 @@ export { default as FlowInput } from './FlowInput';
 export { default as HeadMenu } from './HeadMenu';
 export { default as Header } from './Header';
 export { default as Imgs } from './Imgs';
+export { default as ImgsThumb } from './ImgsThumb';
 export { default as Layout } from './Layout';
 export { default as Level } from './Level';
 export { default as ListRow } from './ListRow';

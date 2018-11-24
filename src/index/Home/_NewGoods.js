@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-21 15:26:28
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 00:02:28
+ * @Last Modified time: 2018-11-01 20:29:27
  * @Path m.benting.com.cn \src\index\Home\_NewGoods.js
  */
 import React from 'react';
@@ -31,14 +31,14 @@ const _NewGoods = (props, { $ }) => {
         </Link>
       </Flex>
       <div>
-        {list.map(item => (
+        {list.map(({ gid, title, imgs }) => (
           <Link
-            key={item.gid}
+            key={gid}
             className={`${prefixCls}__item`}
-            href={`/shop/goods?id=${item.gid}`}
-            as={`/shop/goods/${item.gid}`}
+            href={`/shop/goods?id=${gid}`}
+            as={`/shop/goods/${gid}`}
           >
-            <p className="t-28 l-40 t-c1">{item.title}</p>
+            <p className="t-28 l-40 t-c1">{title}</p>
             <Flex className="mt-12" justify="between" align="start">
               <Badge
                 text="上新"
@@ -51,7 +51,7 @@ const _NewGoods = (props, { $ }) => {
                   borderRadius: Styles.radius_xs
                 }}
               />
-              <Img src={Utils.getAppImgUrl(item.imgs, 'thumb')} size="1.2rem" />
+              <Img src={Utils.getAppImgUrl(imgs, 'thumb')} size="1.2rem" />
             </Flex>
           </Link>
         ))}

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-29 17:10:17
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 15:41:48
+ * @Last Modified time: 2018-11-19 09:36:47
  * @Path m.benting.com.cn /src/shop/_/Menu/index.js
  */
 import React from 'react';
@@ -18,8 +18,9 @@ import UI from '@stores/ui';
 
 const prefixCls = 'style-150092';
 
+export default
 @observer
-export default class Menu extends React.Component {
+class Menu extends React.Component {
   static contextTypes = {
     $: PropTypes.object
   };

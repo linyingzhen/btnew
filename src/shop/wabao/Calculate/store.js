@@ -4,11 +4,12 @@
  * @Author: czy0729
  * @Date: 2018-09-28 10:50:21
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-28 11:26:17
+ * @Last Modified time: 2018-11-15 16:06:45
  * @Path m.benting.com.cn /src/shop/wabao/Calculate/store.js
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -25,7 +26,8 @@ export default class Store extends common {
       const { id } = this.params.params;
 
       return this.fetchThenSetState('get_indiana_win_detail', 'detail', {
-        oncebuyId: id
+        oncebuyId: id,
+        _filter: filter.detail
       });
     }
   };

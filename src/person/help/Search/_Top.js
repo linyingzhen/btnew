@@ -4,7 +4,7 @@
  * @Author: Jun
  * @Date: 2018-07-27 17:35:23
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-08 15:14:16
+ * @Last Modified time: 2018-11-01 23:31:25
  * @Path m.benting.com.cn /src/person/help/Search/_Top.js
  */
 import React from 'react';
@@ -26,10 +26,20 @@ const _Top = (props, { $ }) => {
           name="keywords"
           placeholder="请输入您要咨询的问题"
           value={keywords}
+          style={{
+            width: '100%',
+            border: 'none'
+          }}
           onChange={$.page.keywordsChange}
         />
       </Flex.Item>
-      <Button type="primary" inline size="sm" onClick={$.fetch.search}>
+      <Button
+        className="ml-sm"
+        type="primary"
+        inline
+        size="sm"
+        onClick={$.fetch.search}
+      >
         搜索
       </Button>
 

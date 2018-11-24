@@ -3,8 +3,8 @@
  * const images = '/static/images';
  * @Author: lyz0720
  * @Date: 2018-10-31 13:50:01
- * @Last Modified by: lyz0720
- * @Last Modified time: 2018-10-31 14:50:27
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-02 10:01:58
  * @Path bt_mb_new \src\person\favorites\Index\store.js.git
  */
 import { observable } from 'mobx';
@@ -50,7 +50,7 @@ export default class Store extends common {
       }
     },
 
-    // 删除收藏帖子
+    // 取消收藏帖子
     deleteBBS: async postId => {
       await G.doFavor(postId);
       this.fetch.favorite(true);

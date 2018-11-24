@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-04 18:26:52
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-06 15:58:36
+ * @Last Modified time: 2018-11-13 17:06:23
  * @Path m.benting.com.cn /components/Video/index.js
  */
 import React from 'react';
@@ -162,6 +162,8 @@ export default class Video extends React.Component {
       );
     }
 
+    // const url = Utils.getImgUrl(src).replace('http://', 'https://');
+
     // 通过class去控制是否显示-webkit-media-controls
     return (
       <div
@@ -173,7 +175,7 @@ export default class Video extends React.Component {
           url={Utils.getImgUrl(src)}
           playing={playing}
           controls
-          // playsinline
+          playsinline
           width="100%"
           height={height}
           config={{
@@ -190,8 +192,7 @@ export default class Video extends React.Component {
           onPause={() => this.setState({ playing: false })}
           {...other}
         />
-        {_poster !== Const.__IMG_DEFAULT__ &&
-          !this.played && (
+        {_poster !== Const.__IMG_DEFAULT__ && !this.played && (
           <Img
             className={`${prefixCls}__poster`}
             src={_poster}

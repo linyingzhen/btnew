@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-20 18:10:53
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-29 00:10:12
+ * @Last Modified time: 2018-11-11 10:15:53
  * @Path m.benting.com.cn \src\index\Home\ds.js
  */
 import Utils from '@utils';
@@ -60,3 +60,31 @@ export const footerDS = [
     icon: 'gift'
   }
 ];
+export const filter = {
+  carousel: {
+    imgId: 1,
+    url: 1
+  },
+  newGoods: {
+    gid: 1,
+    imgs: 1,
+    title: 1
+  },
+  videos: {
+    createTime: 1,
+    fileinfo: {
+      surface: 1,
+      path: 1,
+      play_time: 1,
+      size: 1
+    },
+    tbId: 1,
+    tit: 1,
+    userName: 1
+  },
+  information: {
+    createTime: 1,
+    introCon: 1,
+    postId: 1
+  }
+};

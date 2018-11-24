@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-13 13:54:36
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 02:48:59
+ * @Last Modified time: 2018-11-02 11:56:41
  * @Path m.benting.com.cn /src/bbs/Article/_Score.js
  */
 import React from 'react';
@@ -77,15 +77,15 @@ const _Score = (props, { $ }) => {
           justify="center"
           wrap="wrap"
         >
-          {list.map(item => (
+          {list.map(({ userId, faceImg, point }) => (
             <Img
-              key={item.userId}
+              key={userId}
               className={`${prefixCls}__avatar`}
-              src={item.faceImg}
+              src={faceImg}
               size="0.64rem"
               circle
             >
-              <span className="point t-32 t-void t-c">{item.point}</span>
+              <span className="point t-32 t-void t-c">{point}</span>
             </Img>
           ))}
           <span className="t-30 l-64 t-sub ml-8 mt-4">

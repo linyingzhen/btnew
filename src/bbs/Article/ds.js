@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-11 17:27:40
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-16 17:18:45
+ * @Last Modified time: 2018-11-16 16:43:46
  * @Path m.benting.com.cn /src/bbs/Article/ds.js
  */
 import Utils from '@utils';
@@ -508,3 +508,52 @@ export const goodsDS = [
     ]
   }
 ];
+export const filter = {
+  detail: {
+    content: 1,
+    createTime: 1,
+    displayState: 1,
+    faceImg: 1,
+    fanAuth: 1,
+    forumId: 1,
+    grade: 1,
+    guessingData: 1,
+    json: 1,
+    likeAdd: 1,
+    niname: 1,
+    postId: 1,
+    registrationData: 1,
+    role: 1,
+    threadId: 1,
+    title: 1,
+    userId: 1,
+    vid: 1,
+    viewNum: 1,
+    vip: 1
+  },
+  comment: {
+    commentImg: 1,
+    content: 1,
+    createTime: 1,
+    faceImg: 1,
+    fanAuth: 1,
+    floor: 1,
+    grade: 1,
+    niname: 1,
+    parCreateTime: 1,
+    parMessage: 1,
+    parNiname: 1,
+    parUserId: 1,
+    postId: 1,
+    role: 1,
+    rtype: 1,
+    top: 1,
+    userId: 1,
+    vip: 1
+  },
+  score: {
+    userId: 1,
+    faceImg: 1,
+    point: 1
+  }
+};

@@ -4,14 +4,13 @@
  * @Author: czy0729
  * @Date: 2018-07-11 23:15:20
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-07-11 23:17:30
+ * @Last Modified time: 2018-11-05 17:43:19
  * @Path m.benting.com.cn /components/RichEditor/_BtnLinkImage.js
  */
 import React from 'react';
 import classNames from 'classnames';
 import { Modal } from 'antd-mobile';
 import BtnControl from './_BtnControl';
-import { images } from './ds';
 
 const prefixCls = 'style-161156';
 
@@ -56,7 +55,7 @@ export default class _BtnLinkImage extends React.Component {
     return (
       <div className={classNames(prefixCls, className)}>
         <BtnControl
-          label={<img src={`${images}/link_pic.png`} alt="" />}
+          label="pic-link"
           onClick={this.toggleModal}
         />
         <Modal

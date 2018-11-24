@@ -4,14 +4,15 @@
  * @Author: czy0729
  * @Date: 2018-07-11 18:19:10
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-08-30 11:13:03
+ * @Last Modified time: 2018-11-02 11:25:57
  * @Path m.benting.com.cn /src/bbs/Article/_Content.js
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { observer } from '@';
-import { DiscuzContent, RichEditor, Lazy } from '@components';
+import { DiscuzContent, Lazy } from '@components';
+import RichEditor from '@components/RichEditor';
 import Const from '@const';
 import Utils from '@utils';
 import Styles from '@styles';

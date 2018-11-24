@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-07 16:06:59
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-07 16:16:14
+ * @Last Modified time: 2018-11-12 14:10:57
  * @Path m.benting.com.cn /components/AffixTabs/default.js
  */
 import React from 'react';
@@ -14,6 +14,14 @@ import { Tabs } from 'antd-mobile';
 import Styles from '@styles';
 
 const prefixCls = 'c-affix-tabs';
+const marginLeftMap = {
+  0: '0',
+  1: '',
+  2: '22%',
+  3: '13.6%',
+  4: '',
+  5: '7.25%'
+};
 
 const AffixTabs = props => {
   const { tabs = [], page = 0, extra, className, children, ...other } = props;
@@ -36,14 +44,15 @@ const AffixTabs = props => {
                 {extra && <div className="extra">{extra}</div>}
                 <Tabs.DefaultTabBar
                   {...props}
-                  page={5}
+                  page={tabs.length}
                   tabBarActiveTextColor={Styles.color_main}
                   tabBarInactiveTextColor={Styles.color_sub}
                   tabBarUnderlineStyle={{
                     width: '6%',
-                    marginLeft: '7.25%',
+                    marginLeft: marginLeftMap[tabs.length],
                     marginBottom: '2%',
-                    border: `0.02rem solid ${Styles.color_main}`
+                    border: `0.02rem solid ${Styles.color_main}`,
+                    transition: 'left 0.3s cubic-bezier(0.86, 0, 0.07, 1)'
                   }}
                 />
               </div>

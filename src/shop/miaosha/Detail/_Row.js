@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-11 17:05:57
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-21 15:05:52
+ * @Last Modified time: 2018-11-14 18:16:58
  * @Path m.benting.com.cn /src/shop/auction/Detail/_Row.js
  */
 import React from 'react';
@@ -14,10 +14,10 @@ import { Avatar } from '@_';
 import Utils from '@utils';
 
 const _Row = props => {
-  const { userId, faceImg, niname, createTime } = props;
+  const { userId, faceImg, niname, vip, createTime } = props;
 
   return (
-    <List.Item thumb={<Avatar userId={userId} img={faceImg} />}>
+    <List.Item thumb={<Avatar userId={userId} img={faceImg} vip={vip} />}>
       <Flex>
         <Flex.Item>
           <p className="t-30 l-44">{niname}</p>

@@ -7,7 +7,7 @@
  * @Author: czy0729
  * @Date: 2018-06-21 21:37:53
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 11:25:49
+ * @Last Modified time: 2018-11-15 11:45:00
  * @Path m.benting.com.cn /components/ListView/index.js
  */
 import React from 'react';
@@ -232,33 +232,17 @@ class _ListView extends React.Component {
     );
   }
 
-  render() {
+  renderListView() {
     const {
       hideFooter,
       data,
       section,
       refresh,
-      renderEmpty,
       renderBodyComponent,
       renderRow,
-      renderSectionHeader,
-      className
+      renderSectionHeader
     } = this.props;
     const { dataSource } = this.state;
-
-    // 没有数据显示Empty
-    if (data.list.length === 0) {
-      if (data._loaded) {
-        return (
-          <div className={classNames(prefixCls, className)}>{renderEmpty}</div>
-        );
-      }
-      return (
-        <div className={classNames(prefixCls, className)}>
-          <Empty>数据加载中...</Empty>
-        </div>
-      );
-    }
 
     // 170527 对ListView首次渲染表现进行优化
     // 假如初始数据少于8条，initialListSize和pageSize都为8
@@ -277,7 +261,7 @@ class _ListView extends React.Component {
       <React.Fragment>
         <ListView
           ref={ref => (this.ref = ref)}
-          className={classNames(prefixCls, className, {
+          className={classNames({
             [`${prefixCls}_refresh`]: refresh,
             [`${prefixCls}_hide-footer`]: hideFooter,
             [`${prefixCls}_section`]: !!section.length
@@ -331,7 +315,10 @@ class _ListView extends React.Component {
           .${prefixCls}_section .list-view-section-body:not(:last-child) {
             margin-bottom: ${Styles.distance};
           }
-          .${prefixCls}_section .list-view-section-body .am-list-item:last-child .am-list-line:after {
+          .${prefixCls}_section
+            .list-view-section-body
+            .am-list-item:last-child
+            .am-list-line:after {
             display: none;
           }
 
@@ -345,6 +332,27 @@ class _ListView extends React.Component {
         `}</style>
       </React.Fragment>
     );
+  }
+
+  render() {
+    const { data, renderEmpty, className } = this.props;
+
+    let el;
+    if (data.list.length === 0) {
+      if (Const.__CLIENT__) {
+        if (data._loaded) {
+          el = renderEmpty;
+        } else {
+          el = <Empty>数据加载中...</Empty>;
+        }
+      } else {
+        el = null;
+      }
+    } else {
+      el = this.renderListView();
+    }
+
+    return <div className={classNames(prefixCls, className)}>{el}</div>;
   }
 }
 

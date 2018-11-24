@@ -112,7 +112,7 @@ const Form = props => {
           padding-bottom: 0.16rem !important;
         }
         .${prefixCls} textarea {
-          font-size: 0.3rem !important;
+          font-size: ${Styles.font_form} !important;
           color: ${Styles.color_desc} !important;
         }
         .${prefixCls} textarea::-webkit-input-placeholder {

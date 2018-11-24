@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-11 17:05:57
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-29 14:21:10
+ * @Last Modified time: 2018-11-15 10:24:12
  * @Path m.benting.com.cn /src/shop/auction/Detail/_Row.js
  */
 import React from 'react';

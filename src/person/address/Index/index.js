@@ -4,7 +4,7 @@
  * @Author: cwz0525
  * @Date: 2018-08-29 10:44:15
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-19 14:36:31
+ * @Last Modified time: 2018-11-13 18:08:44
  * @Path m.benting.com.cn /src/person/address/Index/store.js
  */
 import React from 'react';
@@ -97,4 +97,4 @@ Address.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(observer(Address));
+export default injectV2(store, { login: true })(observer(Address));

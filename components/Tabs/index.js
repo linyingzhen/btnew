@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-09 16:58:20
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-05 16:47:00
+ * @Last Modified time: 2018-11-16 16:46:03
  * @Path m.benting.com.cn /components/Tabs/index.js
  */
 import React from 'react';
@@ -54,7 +54,6 @@ const _Tabs = props => {
         /* reset */
         .${prefixCls} .am-tabs-default-bar-content {
           padding: 0 ${Styles.wind};
-          border-bottom: ${Styles.border};
         }
         .${prefixCls} .am-tabs-default-bar-tab {
           width: 1.2rem !important;
@@ -67,13 +66,13 @@ const _Tabs = props => {
           content: initial !important;
         }
         .${prefixCls} .am-tabs-default-bar-tab-active {
-          color: ${Styles.color_main};
+          color: ${Styles.color_title};
         }
         .${prefixCls} .am-tabs-default-bar-underline {
           width: 0.4rem !important;
           height: 0.04rem;
           margin-bottom: 0.16rem;
-          background-color: ${Styles.color_main};
+          background-color: ${Styles.color_title};
           border: 0;
           border-radius: 0.04rem;
           transition: margin 0.3s cubic-bezier(0.86, 0, 0.07, 1);
@@ -191,7 +190,9 @@ const _Tabs = props => {
           display: inline-block;
           width: auto;
         }
-        .${prefixCls}_center .am-tabs-default-bar-top .am-tabs-default-bar-content {
+        .${prefixCls}_center
+          .am-tabs-default-bar-top
+          .am-tabs-default-bar-content {
           width: auto;
         }
       `}</style>

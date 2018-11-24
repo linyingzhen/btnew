@@ -1,11 +1,11 @@
 /**
- * const prefixCls = 'style-211857';
- * const images = '/static/images';
+ * const prefixCls = 'style-148301';
+ * const images = '/static/images/src/person/btlevel/Index';
  * @Author: lyz0720
  * @Date: 2018-10-26 09:59:45
- * @Last Modified by: lyz0720
- * @Last Modified time: 2018-10-26 10:09:50
- * @Path bt_mb_new \src\person\level\Index\index.js.git
+ * @Last Modified by:   czy0729
+ * @Last Modified time: 2018-11-13 17:23:44
+ * @Path bt_mb_new /src/person/btlevel/Index/index.js.git
  */
 import React from 'react';
 import { injectV2 } from '@';
@@ -22,4 +22,4 @@ const BtLevel = () => (
   </Layout>
 );
 
-export default injectV2(store)(BtLevel);
+export default injectV2(store, { login: true })(BtLevel);

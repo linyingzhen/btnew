@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-24 18:13:05
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-08-21 12:31:50
+ * @Last Modified time: 2018-11-10 17:18:02
  * @Path m.benting.com.cn /components/Animate/index.js
  */
 import React from 'react';
@@ -43,6 +43,7 @@ const _Animate = props => {
           transform: translate3d(0, -100%, 0);
         }
         .${prefixCls} .top-leave {
+          animation-duration: 0;
           transform: translate3d(0, 0, 0);
         }
         .${prefixCls} .top-enter.top-enter-active,
@@ -85,6 +86,7 @@ const _Animate = props => {
           transform: translate3d(0, 100%, 0);
         }
         .${prefixCls} .bottom-leave {
+          animation-duration: 0;
           transform: translate3d(0, 0, 0);
         }
         .${prefixCls} .bottom-enter.bottom-enter-active,
@@ -127,6 +129,7 @@ const _Animate = props => {
           transform: translate3d(100%, 0, 0);
         }
         .${prefixCls} .left-leave {
+          animation-duration: 0;
           transform: translate3d(0, 0, 0);
         }
         .${prefixCls} .left-enter.left-enter-active,
@@ -159,13 +162,13 @@ const _Animate = props => {
         .${prefixCls} .fade-enter,
         .${prefixCls} .fade-appear,
         .${prefixCls} .fade-leave {
-          animation-duration: 0.24s;
+          animation-duration: 0.16s;
           animation-fill-mode: both;
           animation-play-state: paused;
           animation-timing-function: ease-in;
         }
         .${prefixCls} .fade-leave {
-          animation-duration: 0.16s;
+          animation-duration: 0;
         }
         .${prefixCls} .fade-enter,
         .${prefixCls} .fade-appear {
@@ -206,7 +209,7 @@ const _Animate = props => {
           animation-play-state: paused;
         }
         .${prefixCls} .fade-float-leave {
-          animation-duration: 0.16s;
+          animation-duration: 0;
         }
         .${prefixCls} .fade-float-enter,
         .${prefixCls} .fade-float-appear {

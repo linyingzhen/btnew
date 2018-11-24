@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-26 10:12:35
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-07-26 17:39:57
+ * @Last Modified time: 2018-11-05 11:57:31
  * @Path m.benting.com.cn /src/video/Post/store.js
  */
 import { observable } from 'mobx';
@@ -69,8 +69,6 @@ export default class Store extends common {
   };
 
   do = {
-    _submit: (form, onSubmit) => onSubmit(form, this.do.submit),
-
     // 发布
     submit: async values => {
       const { files } = this.getState('_upload');
@@ -88,13 +86,9 @@ export default class Store extends common {
         ...values
       });
 
-      if (window.Stores['/video']) {
-        window.Stores['/video'].setRefresh();
-      }
-
-      Utils.light('发布成功');
       this.page.reset();
-      Utils.router.back();
+      Utils.light('发布成功');
+      Utils.router.push('/video');
     }
   };
 
@@ -116,6 +110,20 @@ export default class Store extends common {
           tags: []
         },
         '_tags'
+      );
+      this.setState('', 'qiniuFileKey');
+    },
+
+    // 删除视频
+    delete: () => {
+      this.setState(
+        {
+          files: [],
+          uploading: false,
+          percent: 0,
+          size: 0
+        },
+        '_upload'
       );
       this.setState('', 'qiniuFileKey');
     },
@@ -173,7 +181,7 @@ export default class Store extends common {
           size: 0,
           uploading: false
         },
-        '_media'
+        '_upload'
       );
     },
 

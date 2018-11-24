@@ -4,7 +4,7 @@
  * @Author: lyz0720
  * @Date: 2018-09-28 12:22:37
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 13:34:30
+ * @Last Modified time: 2018-11-13 17:19:24
  * @Path bt_mb_new /src/person/setup/Infor/index.js
  */
 import React from 'react';
@@ -25,8 +25,8 @@ const Infor = (props, { $ }) => {
   const { form, onSubmit } = props;
   const {
     birDay,
-    changeName, // 这是代表还剩次数
-    changeBir, // 这是代表还剩次数
+    changeName, // 这代表已修改次数
+    changeBir, // 这代表已修改次数
     faceImg,
     niname,
     sex,
@@ -58,15 +58,15 @@ const Infor = (props, { $ }) => {
           name="niname"
           initialValue={niname}
           option={Const.rules.required}
-          disabled={nameDisabled}
+          disabled={!nameDisabled}
           extra={
-            nameDisabled && (
+            !nameDisabled && (
               <Icon
                 className="t-44 t-icon"
                 type="information-circle"
                 style={{ marginRight: '-0.04rem' }}
                 onClick={() => {
-                  if (!nameDisabled) {
+                  if (nameDisabled) {
                     return;
                   }
 
@@ -93,14 +93,14 @@ const Infor = (props, { $ }) => {
               ? ''
               : birDay
           }
-          disabled={birDisabled}
+          disabled={!birDisabled}
           extra={
-            birDisabled && (
+            !birDisabled && (
               <Icon
                 className="t-44 t-icon"
                 type="information-circle"
                 onClick={() => {
-                  if (!nameDisabled) {
+                  if (birDisabled) {
                     return;
                   }
 
@@ -134,19 +134,16 @@ const Infor = (props, { $ }) => {
           disabled
         />
       </Form>
-      <Form.Button
-        type="primary"
-        onClick={() => onSubmit(form, $.do.update)}
-      >
-        保存修改
+      <Form.Button type="primary" onClick={() => onSubmit(form, $.do.update)}>
+        保存
       </Form.Button>
 
       <style jsx global>{`
         .style-176625 {
         }
         .${prefixCls} .c-form-upload__upload {
-          width: 1rem !important;
-          height: 1rem !important;
+          width: 0.8rem !important;
+          height: 0.8rem !important;
           border-radius: 50%;
         }
         .${prefixCls} .c-form__label {
@@ -170,4 +167,4 @@ Infor.contextTypes = {
   $: PropTypes.object
 };
 
-export default injectV2(store)(form(observer(Infor)));
+export default injectV2(store, { login: true })(form(observer(Infor)));

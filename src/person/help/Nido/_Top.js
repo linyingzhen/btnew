@@ -3,8 +3,8 @@
  * const images = '/static/images';
  * @Author: lyz0720
  * @Date: 2018-11-01 18:06:03
- * @Last Modified by:   lyz0720
- * @Last Modified time: 2018-11-01 18:06:03
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-01 23:18:40
  * @Path bt_mb_new \src\person\help\Nido\_Top.js.git
  */
 import React from 'react';
@@ -33,7 +33,9 @@ const _Top = () => (
       .wrap-qr {
         margin-top: -1rem;
         padding: 1.64rem 0 0.64rem;
-        background: ${Styles.color_main} url(${images}/top.png);
+        background-color: #f4cc4a;
+        background-image: url(${images}/top.png);
+        background-size: cover;
       }
       .img-qr {
         width: 4rem;

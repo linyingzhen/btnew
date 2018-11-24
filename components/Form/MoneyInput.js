@@ -4,12 +4,14 @@
  * @Author: czy0729
  * @Date: 2018-08-11 16:36:35
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-17 15:19:00
+ * @Last Modified time: 2018-11-08 15:42:52
  * @Path m.benting.com.cn /components/Form/MoneyInput.js
  */
 import React from 'react';
 import classNames from 'classnames';
 import { InputItem, Modal } from 'antd-mobile';
+import Const from '@const';
+import Styles from '@styles';
 import utils from './utils';
 
 const prefixCls = 'c-form-money-input';
@@ -94,6 +96,34 @@ class Input extends React.Component {
         {...other}
       >
         {label && utils.getLabelDecorator(option)(label)}
+
+        <style jsx global>{`
+          .c-form-input {
+          }
+          .${prefixCls} input {
+            font-size: ${Styles.font_form} !important;
+            color: ${Styles.color_desc} !important;
+          }
+          .${prefixCls} input::-webkit-input-placeholder {
+            color: ${Styles.color_sub} !important;
+          }
+          .${prefixCls} .am-input-clear {
+            background-color: transparent !important;
+            background-position: center;
+            background-image: url(${Const.__IMG__}/icon/clear${Const.__IMG_DPR__}.png);
+          }
+          .${prefixCls} .am-input-error-extra {
+            background-image: url(${Const.__IMG__}/icon/information${Const.__IMG_DPR__}.png) !important;
+          }
+          /* disabled > label */
+          .${prefixCls}.am-input-disabled .am-input-label {
+            color: ${Styles.color_disabled};
+          }
+          /* disabled > label */
+          .${prefixCls} input:disabled {
+            color: ${Styles.color_sub} !important;
+          }
+        `}</style>
       </InputItem>
     );
   }

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-16 10:30:43
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-16 10:31:04
+ * @Last Modified time: 2018-11-21 13:49:07
  * @Path m.benting.com.cn /src/event/cashback/Submit/ds.js
  */
 export const shopDS = [
@@ -13,12 +13,16 @@ export const shopDS = [
     value: '本汀旗舰店（天猫）'
   },
   {
-    label: '本汀渔具旗舰店（京东）',
-    value: '本汀渔具旗舰店（京东）'
+    label: '本汀大门旗舰店（天猫）',
+    value: '本汀大门旗舰店（天猫）'
   },
   {
     label: '本汀麦酥专卖店（天猫）',
     value: '本汀麦酥专卖店（天猫）'
+  },
+  {
+    label: '本汀渔具旗舰店（京东）',
+    value: '本汀渔具旗舰店（京东）'
   },
   {
     label: '本汀旗舰店（苏宁）',

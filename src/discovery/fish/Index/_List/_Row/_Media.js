@@ -4,29 +4,22 @@
  * @Author: czy0729
  * @Date: 2018-08-08 16:24:51
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 18:32:29
+ * @Last Modified time: 2018-11-22 17:20:54
  * @Path m.benting.com.cn /src/discovery/fish/Index/_List/_Row/_Media.js
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { observer } from '@';
-import {
-  Video,
-  Carousel,
-  Content,
-  ImgView,
-  Flex,
-  Icon,
-  Link
-} from '@components';
+import { Video, Content, ImgView, Flex, Icon, Link } from '@components';
 import Utils from '@utils';
 import Imgs from './_Imgs';
 
 const prefixCls = 'style-111886';
 
+export default
 @observer
-export default class Media extends React.Component {
+class Media extends React.Component {
   static contextTypes = {
     $: PropTypes.object
   };
@@ -44,7 +37,7 @@ export default class Media extends React.Component {
     return (
       <Video
         className={classNames({
-          'mt-18': !!content
+          'mt-16': !!content
         })}
         src={files.length && files[0].filePath}
         poster={files.length ? files[0].sfPath : undefined}
@@ -57,43 +50,25 @@ export default class Media extends React.Component {
   }
 
   renderImgs() {
-    const { content, files = [], infoId, params = {} } = this.props;
+    const { content, files = [], params = {} } = this.props;
 
-    // 列表项
-    if (infoId) {
-      return (
-        <Imgs
-          className={classNames({
-            'mt-18': !!content
-          })}
-          data={files.map(item => ({
-            src: item.fileId || item.filePath
-          }))}
-          onImgClick={current =>
-            this.setState({
-              renderImgView: true,
-              dataImgView: files,
-              show: true,
-              current
-            })
-          }
-          {...params.image}
-        />
-      );
+    let data;
+    if (files.length === 1) {
+      data = files.map(({ fileId, filePath }) => ({
+        src: `${Utils.getAppImgUrl(fileId || filePath, 'scale')}/1`
+      }));
+    } else {
+      data = files.map(({ fileId, filePath }) => ({
+        src: fileId || filePath
+      }));
     }
 
-    // 详情
     return (
-      <Carousel
+      <Imgs
         className={classNames({
-          'mt-18': !!content
+          'mt-16': !!content
         })}
-        data={files.map(item => ({
-          src: item.fileId || item.filePath
-        }))}
-        height="100vw"
-        autoplay={false}
-        style={{ backgroundSize: 'contain' }}
+        data={data}
         onImgClick={current =>
           this.setState({
             renderImgView: true,
@@ -102,6 +77,7 @@ export default class Media extends React.Component {
             current
           })
         }
+        {...params.image}
       />
     );
   }
@@ -122,8 +98,7 @@ export default class Media extends React.Component {
             </span>
             <span className="t-primary">{goodsName}</span>
             <span>帅爆分享！</span>
-            {maxWeight &&
-              !totalWeight && (
+            {maxWeight && !totalWeight && (
               <span>
                 喜获
                 {fishKind}
@@ -131,8 +106,7 @@ export default class Media extends React.Component {
                 斤巨物！
               </span>
             )}
-            {!maxWeight &&
-              totalWeight && (
+            {!maxWeight && totalWeight && (
               <span>
                 喜获
                 {fishKind}
@@ -141,8 +115,7 @@ export default class Media extends React.Component {
                 斤！
               </span>
             )}
-            {maxWeight &&
-              totalWeight && (
+            {maxWeight && totalWeight && (
               <span>
                 喜获
                 {fishKind}
@@ -160,8 +133,7 @@ export default class Media extends React.Component {
               汀友使用
             </span>
             <span className="t-primary">{goodsName}</span>
-            {maxWeight &&
-              !totalWeight && (
+            {maxWeight && !totalWeight && (
               <span>
                 喜获
                 {fishKind}
@@ -169,8 +141,7 @@ export default class Media extends React.Component {
                 斤巨物！
               </span>
             )}
-            {!maxWeight &&
-              totalWeight && (
+            {!maxWeight && totalWeight && (
               <span>
                 喜获
                 {fishKind}
@@ -179,8 +150,7 @@ export default class Media extends React.Component {
                 斤！
               </span>
             )}
-            {maxWeight &&
-              totalWeight && (
+            {maxWeight && totalWeight && (
               <span>
                 喜获
                 {fishKind}
@@ -203,7 +173,7 @@ export default class Media extends React.Component {
     return (
       content && (
         <Content
-          className="t-34 l-48 ls-o1 mt-18 user-select"
+          className="t-34 l-48 ls-o1 mt-16 user-select"
           atList={atList}
           {...params.article}
         >
@@ -225,7 +195,7 @@ export default class Media extends React.Component {
     }
 
     return (
-      <Flex className="mt-18" align="start">
+      <Flex className="mt-16" align="start">
         <Icon
           className={classNames('t-28 mt-4', {
             't-success': isSuccess,
@@ -282,13 +252,11 @@ export default class Media extends React.Component {
           <ImgView
             show={show}
             current={current}
-            data={dataImgView.map(item => {
-              if (item.filePath.indexOf('.gif') !== -1) {
-                return Utils.getImgUrl(item.filePath);
-              }
-
-              return Utils.getAppImgUrl(item.fileId || item.filePath, 'scale');
-            })}
+            data={dataImgView.map(
+              item =>
+                `${Utils.getAppImgUrl(item.fileId || item.filePath, 'scale')}/1`
+            )}
+            hideOrigin
             onClose={() =>
               this.setState({
                 renderImgView: false,

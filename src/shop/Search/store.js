@@ -3,8 +3,8 @@
  * const images = '/static/images';
  * @Author: lyz0720
  * @Date: 2018-11-01 11:22:44
- * @Last Modified by: lyz0720
- * @Last Modified time: 2018-11-01 14:15:23
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-01 23:25:36
  * @Path bt_mb_new \src\shop\Search\store.js.git
  */
 import React from 'react';
@@ -24,7 +24,10 @@ export default class Store extends common {
       title: ''
     },
     shopCategory: G.getState('shopCategory'),
-    goods: { ...Const.__EMPTY__, _loaded: true }
+    goods: {
+      ...Const.__EMPTY__,
+      _loaded: true
+    }
   });
 
   computed = {
@@ -54,7 +57,6 @@ export default class Store extends common {
     // 搜索
     goods: refresh => {
       const { keywords } = this.getState('state');
-      window.console.log(keywords);
 
       this.fetchListThenSetState(
         'get_goods-list',
@@ -71,13 +73,15 @@ export default class Store extends common {
         refresh
       );
     },
+
     search: () => {
-      const { keywords } = this.getState('state');
+      const { keywords } = this.getState();
 
       if (!keywords) {
-        Utils.light('请输入要搜索的商品');
+        Utils.light('请输入要搜索的商品名');
         return false;
       }
+
       this.fetch.goods(true);
       return true;
     }
@@ -115,6 +119,7 @@ export default class Store extends common {
         )
       });
     },
+
     // 输入关键字
     keywordsChange: e => {
       const { value } = e.target;

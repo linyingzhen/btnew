@@ -4,7 +4,7 @@
  * @Author: lyz0720
  * @Date: 2018-09-21 11:20:17
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-25 14:22:28
+ * @Last Modified time: 2018-11-07 11:23:15
  * @Path bt_mb_new /src/person/prize/Detail/_Pack.js
  */
 import React from 'react';
@@ -22,8 +22,8 @@ const _Coupon = (props, { $ }) => {
   const { prizeName, prizeVal, expdatebegin, expdateend, imgId } = $.getState(
     'detail'
   );
-  const begin = Utils.date('y.m.d H:i', expdatebegin);
-  const end = Utils.date('y.m.d H:i', expdateend);
+  const begin = Utils.date('y.m.d H:i:s', expdatebegin);
+  const end = Utils.date('y.m.d H:i:s', expdateend);
 
   return (
     <div className={classNames(prefixCls, className)}>

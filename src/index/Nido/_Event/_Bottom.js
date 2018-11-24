@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-08-02 14:48:13
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 19:53:40
+ * @Last Modified time: 2018-11-15 11:47:34
  * @Path m.benting.com.cn /src/index/Nido/_Event/_Bottom.js
  */
 import React from 'react';
@@ -34,17 +34,17 @@ const _Bottom = (props, { $ }) => {
             <div className="ml-16">
               <p className="t-30 l-42 t-title">金币捡漏</p>
               {panicGold.state === 1 && (
-                <Flex className="mt-6">
+                <Flex className="mt-8">
                   <CountDown
-                    className="t-24 l-34 t-danger"
+                    className="t-20 l-34 t-danger"
                     beginTime={panicGold.beginTime}
                     theme={false}
                   />
-                  <span className="t-24 l-34 t-sub">后开始</span>
+                  <span className="t-20 l-34 t-sub ml-xs">后开始</span>
                 </Flex>
               )}
               {panicGold.state === 2 && (
-                <Badge className="mt-6" text="进行中" style={Styles._badge} />
+                <Badge className="mt-8" text="进行中" style={Styles._badge} />
               )}
               {panicGold.state === undefined && (
                 <p className="t-22 l-48 t-sub">暂无活动</p>
@@ -63,7 +63,7 @@ const _Bottom = (props, { $ }) => {
             <div className="ml-16">
               <p className="t-30 l-42 t-title">积分挖宝</p>
               {pointOncebuy.state === 2 ? (
-                <Badge className="mt-6" text="进行中" style={Styles._badge} />
+                <Badge className="mt-8" text="进行中" style={Styles._badge} />
               ) : (
                 <p className="t-22 l-48 t-sub">暂无活动</p>
               )}
@@ -83,7 +83,7 @@ const _Bottom = (props, { $ }) => {
             <div className="ml-16">
               <p className="t-30 l-42 t-title">欢乐猜鱼</p>
               {guess.state === 2 ? (
-                <Badge className="mt-6" text="进行中" style={Styles._badge} />
+                <Badge className="mt-8" text="进行中" style={Styles._badge} />
               ) : (
                 <p className="t-22 l-48 t-sub">暂无活动</p>
               )}
@@ -105,7 +105,7 @@ const _Bottom = (props, { $ }) => {
             <div className="ml-16">
               <p className="t-30 l-42 t-title">积分竞拍</p>
               {pointAuction.state === 2 ? (
-                <Badge className="mt-6" text="进行中" style={Styles._badge} />
+                <Badge className="mt-8" text="进行中" style={Styles._badge} />
               ) : (
                 <p className="t-22 l-48 t-sub">暂无活动</p>
               )}

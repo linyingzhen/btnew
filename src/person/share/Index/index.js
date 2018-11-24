@@ -3,8 +3,8 @@
  * const images = '/static/images';
  * @Author: cwz0525
  * @Date: 2018-08-27 11:00:44
- * @Last Modified by: cwz0525
- * @Last Modified time: 2018-08-28 15:08:29
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-13 18:09:34
  * @Path newProject \src\person\share\Index\ds.js
  */
 import React from 'react';
@@ -19,7 +19,7 @@ import store from './store';
 import Styles from '@styles';
 import UI, { images } from './ds';
 
-@injectV2(store)
+@injectV2(store, { login: true })
 @observer
 export default class Share extends React.Component {
   static contextTypes = {

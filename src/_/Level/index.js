@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-05 14:02:35
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-08-21 14:21:00
+ * @Last Modified time: 2018-11-16 16:25:06
  * @Path m.benting.com.cn /src/_/Level/index.js
  */
 import React from 'react';
@@ -32,7 +32,7 @@ const Level = props => {
       <style jsx>{`
         .style-999440 {
           width: 0.42rem;
-          height: 0.39rem;
+          height: 0.38rem;
           vertical-align: middle;
         }
       `}</style>

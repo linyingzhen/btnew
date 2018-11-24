@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-12 09:49:41
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-22 17:32:45
+ * @Last Modified time: 2018-11-05 17:14:37
  * @Path m.benting.com.cn /components/RichEditor/_ControlButtom.js
  */
 import React from 'react';
@@ -17,7 +17,6 @@ import Styles from '@styles';
 import Button from '../Button';
 import BtnControl from './_BtnControl';
 import BtnView from './_BtnView';
-import { images } from './ds';
 
 const prefixCls = 'style-302886';
 
@@ -37,7 +36,7 @@ export default class _ControlButtom extends React.Component {
     const backupDS = Utils.lsGet(localStorageKey, []);
 
     if (backupDS.length === 0) {
-      Utils.light('没有任何自动保存的数据');
+      Utils.light('没有任何自动保存数据');
     } else {
       const DS = backupDS.map(item => ({
         icon: Utils.date('H:i', item.date / 1000),
@@ -66,7 +65,9 @@ export default class _ControlButtom extends React.Component {
 
     const newEditorState = EditorState.undo(editorState);
 
-    if (newEditorState) onChange(newEditorState);
+    if (newEditorState) {
+      onChange(newEditorState);
+    }
   };
 
   redo = () => {
@@ -74,7 +75,9 @@ export default class _ControlButtom extends React.Component {
 
     const newEditorState = EditorState.redo(editorState);
 
-    if (newEditorState) onChange(newEditorState);
+    if (newEditorState) {
+      onChange(newEditorState);
+    }
   };
 
   render() {
@@ -86,20 +89,20 @@ export default class _ControlButtom extends React.Component {
           <Flex>
             {advance && (
               <BtnControl
-                label={<img src={`${images}/undo.png`} alt="" />}
+                label="back-fill"
                 onClick={this.undo}
               />
             )}
             {advance && (
               <BtnControl
                 className="ml-sm"
-                label={<img src={`${images}/redo.png`} alt="" />}
+                label="forward-fill"
                 onClick={this.redo}
               />
             )}
             <BtnControl
               className={advance ? 'ml-sm' : undefined}
-              label={<img src={`${images}/document.png`} alt="" />}
+              label="history"
               onClick={this.getBackup}
             />
           </Flex>
@@ -117,15 +120,12 @@ export default class _ControlButtom extends React.Component {
         <style jsx global>{`
           .style-302886 {
             position: fixed;
-            // z-index: ${Styles.z_rich_editor_control};
             z-index: 1;
             bottom: 0;
             left: 0;
             right: 0;
             padding: ${Styles.sm} ${Styles.wind};
-            background-color: ${Styles.color_bg};
-            // border-top: ${Styles.border};
-            // border-bottom: ${Styles.border};
+            background-color: #e9e9e9;
           }
         `}</style>
       </Flex>

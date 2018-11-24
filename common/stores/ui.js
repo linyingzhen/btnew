@@ -4,12 +4,12 @@
  * @Author: czy0729
  * @Date: 2018-06-20 11:15:54
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-06-20 16:54:41
+ * @Last Modified time: 2018-10-30 12:55:24
  * @Path m.benting.com.cn \common\stores\ui.js
  */
 import { observable } from 'mobx';
 import Const from '@const';
-import common from './common';
+import common from './commonV2';
 
 const namespace = `${Const.__LS_PREFIX__}UI`;
 const defaultFixedTextarea = {
@@ -65,7 +65,8 @@ class Store extends common {
    * @version 171206 1.0
    */
   showMask = props => this.setState({ show: true, ...props }, 'mask');
-  hideMask = () => this.setState({ show: false }, 'mask');
+  hideMask = () =>
+    this.setState({ show: false, style: {}, onClick: null }, 'mask');
 
   /**
    * Fixed

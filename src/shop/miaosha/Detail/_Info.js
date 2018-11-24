@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-21 14:21:14
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-21 15:28:17
+ * @Last Modified time: 2018-11-14 18:18:58
  * @Path m.benting.com.cn /src/shop/miaosha/Detail/_Info.js
  */
 import React from 'react';
@@ -71,7 +71,7 @@ const _Info = (props, { $ }) => {
       {_loaded && (
         <>
           <p className="t-34 l-48">{title}</p>
-          {property && <p className="t-24 l-32 t-sub mt-4">{property}</p>}
+          {property && <p className="t-26 t-sub mt-8">{property}</p>}
           <CountDown
             className="mt-24"
             tag={tag}
@@ -97,7 +97,7 @@ const _Info = (props, { $ }) => {
 
       <style jsx>{`
         .style-414741 {
-          min-height: 2.58rem;
+          min-height: 2.23rem;
           padding: 0.32rem ${Styles.wind};
           background: ${Styles.color_theme};
         }

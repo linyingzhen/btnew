@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-20 16:29:01
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-24 14:42:41
+ * @Last Modified time: 2018-11-14 11:11:51
  * @Path m.benting.com.cn /src/shop/miaosha/Index/_Row.js
  */
 import React from 'react';
@@ -97,6 +97,7 @@ const _Row = props => {
   return (
     <Row
       thumb={imgs}
+      thumbType="thumb"
       title={title}
       extra={extra}
       tag={tag}

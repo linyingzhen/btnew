@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-11 23:09:02
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-07-11 23:10:44
+ * @Last Modified time: 2018-11-10 17:29:31
  * @Path m.benting.com.cn /components/RichEditor/_BtnEmoji.js
  */
 import React from 'react';
@@ -12,7 +12,6 @@ import classNames from 'classnames';
 import Styles from '@styles';
 import EmojiPicker from '../EmojiPicker';
 import BtnControl from './_BtnControl';
-import { images } from './ds';
 
 const prefixCls = 'style-318071';
 
@@ -50,7 +49,8 @@ export default class _BtnEmoji extends React.Component {
     return (
       <div className={classNames(prefixCls, className)}>
         <BtnControl
-          label={<img src={`${images}/emoji.png`} alt="" />}
+          label="emoji"
+          iconActive={showEmojiPicker}
           onClick={this.toggleEmojiPicker}
         />
         <EmojiPicker
@@ -77,11 +77,11 @@ export default class _BtnEmoji extends React.Component {
             width: 100%;
             background-color: #fff;
             border-top: ${Styles.border};
+            box-shadow: 0 -0.08rem 0.08rem -0.08rem rgba(0, 0, 0, 0.16) !important;
             transform: translate3d(0, 100%, 0);
-            transition: all 0.3s;
           }
           .${prefixCls}__emoji-picker_open {
-            transform: translate3d(0, 0, 0);
+            transform: translate3d(0, -0.92rem, 0);
           }
         `}</style>
       </div>

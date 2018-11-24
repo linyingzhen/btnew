@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-24 18:01:08
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 13:44:19
+ * @Last Modified time: 2018-11-16 16:55:11
  * @Path m.benting.com.cn /src/index/Nido/ds.js
  */
 import Utils from '@utils';
@@ -158,4 +158,51 @@ export const mockTopic = {
       topicTotal: 227
     }
   ]
+};
+export const filter = {
+  carousel: {
+    imgId: 1,
+    url: 1
+  },
+  fish: {
+    faceImg: 1,
+    fileList: {
+      fileId: 1
+    },
+    infoId: 1,
+    niname: 1,
+    rate: 1,
+    tbId: 1,
+    tit: 1
+  },
+  discovery: {
+    commentCount: 1,
+    con: 1,
+    faceImg: 1,
+    fileList: {
+      fileId: 1
+    },
+    grade: 1,
+    infoId: 1,
+    likeCount: 1,
+    niname: 1,
+    publishTime: 1,
+    role: 1,
+    userId: 1,
+    vip: 1
+  },
+  bbs: {
+    contentImg: 1,
+    createTime: 1,
+    faceImg: 1,
+    grade: 1,
+    likeAdd: 1,
+    niname: 1,
+    replyNum: 1,
+    role: 1,
+    threadId: 1,
+    title: 1,
+    userId: 1,
+    vip: 1
+  }
 };

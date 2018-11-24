@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-23 00:22:04
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 18:31:02
+ * @Last Modified time: 2018-11-12 14:08:28
  * @Path bt_mb_new /src/discovery/redpacket/Cash/_Form.js
  */
 import React from 'react';
@@ -79,9 +79,9 @@ const _Form = (props, { $ }) => {
           option={Const.rules.required}
         />
         <Form.Textarea
+          label="祝福语"
           name="title"
           initialValue="大鲫大鲤，渔获多多"
-          placeholder="请输入祝福语"
           count={80}
           option={Const.rules.required}
         />

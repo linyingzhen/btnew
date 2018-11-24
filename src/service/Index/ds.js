@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-03 14:49:08
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-07 15:48:02
+ * @Last Modified time: 2018-11-21 13:50:05
  * @Path m.benting.com.cn /src/service/Index/ds.js
  */
 export const tabsDS = [{ title: '线上' }, { title: '实体店' }];
@@ -12,6 +12,10 @@ export const shopDS = [
   {
     label: '天猫：本汀旗舰店',
     value: '天猫：本汀旗舰店'
+  },
+  {
+    label: '天猫：本汀大门旗舰店',
+    value: '天猫：本汀大门旗舰店'
   },
   {
     label: '天猫：本汀麦酥专卖店',

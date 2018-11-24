@@ -5,7 +5,7 @@
  * @Author: czy0729
  * @Date: 2018-06-20 11:13:28
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-26 15:14:13
+ * @Last Modified time: 2018-11-14 11:21:17
  * @Path m.benting.com.cn \common\api\index.js
  */
 import fetch from 'isomorphic-unfetch';
@@ -14,14 +14,13 @@ import Const from '@const';
 import Utils from '@utils';
 import G from '@stores/g';
 
-let apis;
-
 /**
  * Api.P约定
  * Api.PP不作处理
  * 地址前面为!  代表需要登录才发请求
  * 地址前面为!! 代表需要登录才发请求，并且结果失败时，不作提示
  */
+let apis;
 function initApis() {
   apis = {
     /* ==================== 0 其他或未分类 ==================== */
@@ -488,6 +487,12 @@ function initApis() {
      * @version 170525 1.0
      */
     get_user_fans: '!/users/concern/myfanlist',
+
+    /**
+     * 16.4 搜索好友（+好友）
+     * @version 170826 1.0
+     */
+    get_user_list: '/user/searchfriend',
 
     /* ==================== 17 消息 ==================== */
     /**
@@ -2103,7 +2108,82 @@ function initApis() {
      * @version 181009 1.0
      * @param {Int} *tid 帖子ID
      */
-    get_vote_detail: `${Const.__NEW_API__}/votefloor/detail`
+    get_vote_detail: `${Const.__NEW_API__}/votefloor/detail`,
+
+    /* ==================== 送车活动 ==================== */
+    /**
+     * 参与人数统计
+     * @version 181109 1.0
+     * @param {Int} *tid 帖子ID
+     */
+    'get_event-car_statistics': `${Const.__NEW_API__}/car/statistics`,
+
+    /**
+     * 报名
+     * @version 181108 1.0
+     * @param {Int}    *tid      帖子ID
+     * @param {String} *order_no 订单号
+     */
+    'do_event-car_sign-up': `${Const.__NEW_API__}/car/sign_up`,
+
+    /**
+     * 重新报名
+     * @version 181108 1.0
+     * @param {Int}    *sid      报名记录ID
+     * @param {String} *order_no 订单号
+     */
+    'do_event-car_re-sign-up': `${Const.__NEW_API__}/car/re_sign_up`,
+
+    /**
+     * 获取用户报名状态
+     * @version 181106 1.0
+     * @param {Int} tid *帖子ID
+     */
+    'get_event-car_user-status': `!${Const.__NEW_API__}/car/status`,
+
+    /**
+     * 报名用户列表
+     * @version 181106 1.0
+     * @param {Int} tid   帖子ID
+     * @param {Int} audit 审核状态：0审核中 1审核通过 2审核未通过
+     */
+    'get_event-car_sign-up-list': `${Const.__NEW_API__}/car/sign_up_list`,
+
+    /**
+     * 用户报名详情
+     * @version 181108 1.0
+     * @param {Int}    tid     帖子ID
+     * @param {String} uid     用户ID
+     * @param {Int}    show_no 是否完整显示订单号(1=>显示, 不传则不显示)
+     */
+    'get_event-car_sign-up-detail': `${Const.__NEW_API__}/car/sign_up_records`,
+
+    /**
+     * 发布渔获
+     * @version 181108 1.0
+     * @param {String} *rodName          鱼竿名称
+     * @param {Int}    weight            渔获重量（单位 斤）
+     * @param {Int}    *dtsourceType     类型 20商品 100送车活动
+     * @param {Int}    *dtsourceCategory 商品分类id
+     * @param {String} *dtsourceId       昵称
+     * @param {String} *con              内容
+     * @param {Int}    *infoType         文件类型 1视频 2图片
+     * @param {String} *fileIds          文件id，多个用逗号分隔（1,2）
+     * @param {Int}    *tid              贴子id
+     * @param {Int}    *len              渔获长度（单位 cm）
+     * @param {String} *fishDate         钓鱼日期
+     * @param {String} *location         钓场地点
+     */
+    'do_event-car_publish': `${Const.__NEW_API__}/rewardcar/publishfishgain`,
+
+    /**
+     * 渔获列表
+     * @version 181107 1.0
+     * @param {Int} viewType  查看方式 0全部 1当前用户
+     * @param {Int} sendcarId 活动贴id
+     * @param {Int} audit     审核状态：0审核中 1审核通过 2审核未通过
+     */
+    'get_event-car_fish-list': `${Const.__NEW_API__}/rewardcar/sendcarfishlist`
   };
 }
 
@@ -2123,12 +2203,17 @@ const _fetch = async (api, query, isSubmitApi = false) => {
   // 为了后端正确判断，把空的order和search过滤掉
   const _query = Utils.deepCopy(query);
   if (_query._) {
-    if (_query._.order && Object.keys(_query._.order).length === 0) {
+    if (_query._.order && !Object.keys(_query._.order).length) {
       delete _query._.order;
     }
-    if (_query._.search && Object.keys(_query._.search).length === 0) {
+
+    if (_query._.search && !Object.keys(_query._.search).length) {
       delete _query._.search;
     }
+  }
+
+  if (_query._filter) {
+    delete _query._filter;
   }
 
   if (isSubmitApi) {
@@ -2162,6 +2247,7 @@ const _fetch = async (api, query, isSubmitApi = false) => {
  * @version 170717 1.4 配合app端，tk覆盖本地tk
  * @version 170721 1.5 加入plantform；未登录和登录过期引入回调机制
  * @version 171204 2.0 @next
+ * @version 181031 2.1 支持在返回数据前过滤字段
  * @param {String}   *api        api映射key值
  * @param {Object}   query       请求参数
  * @param {Object}   config      配置参数
@@ -2198,7 +2284,7 @@ const P = async (api, query = {}, config = {}) => {
               _loaded: false,
               _code: -1
             });
-            Utils.log('Api', api, -1);
+            Utils.log('Api', api, '-1');
           } else {
             resolve({
               ...defaultValue,
@@ -2226,13 +2312,118 @@ const P = async (api, query = {}, config = {}) => {
       }
 
       if (Const.__DEV__) {
-        Utils.log('Api', api, parseInt(res.code));
+        Utils.log('Api', api, String(res.code));
       }
 
-      switch (parseInt(res.code)) {
+      const { _filter } = query;
+      const { code, data } = res;
+
+      switch (parseInt(code)) {
         // [0] 请求成功
         case 0:
-          resolve(res.data);
+          // _filter 过滤字段
+          if (typeof _filter === 'object') {
+            let _data;
+
+            if (Array.isArray(data)) {
+              // [Array]
+              // #todo
+              _data = data;
+            } else if (typeof data === 'object') {
+              // [Object]
+              _data = {};
+
+              if (Array.isArray(data.list)) {
+                _data = {
+                  ...data
+                };
+
+                const filterKeys = Object.keys(_filter);
+                _data.list = data.list.map(item => {
+                  const temp = {};
+
+                  filterKeys.forEach(key => {
+                    // 最多支持两层
+                    if (
+                      typeof _filter[key] === 'object' &&
+                      typeof item[key] === 'object'
+                    ) {
+                      const filterSubKeys = Object.keys(_filter[key]);
+
+                      if (Array.isArray(item[key])) {
+                        temp[key] = item[key].map(subItem => {
+                          const tempSub = {};
+
+                          filterSubKeys.forEach(subKey => {
+                            if (subKey in subItem) {
+                              tempSub[subKey] = subItem[subKey];
+                            }
+                          });
+
+                          return tempSub;
+                        });
+                      } else {
+                        temp[key] = {};
+
+                        filterSubKeys.forEach(subKey => {
+                          if (subKey in item[key]) {
+                            temp[key][subKey] = item[key][subKey];
+                          }
+                        });
+                      }
+                    } else if (key in item) {
+                      temp[key] = item[key];
+                    }
+                  });
+
+                  return temp;
+                });
+              } else {
+                const filterKeys = Object.keys(_filter);
+
+                filterKeys.forEach(key => {
+                  if (key in data) {
+                    _data[key] = data[key];
+                  }
+                });
+              }
+            } else {
+              // [Other]
+              _data = data;
+            }
+
+            if (Const.__DEV__) {
+              const len = JSON.stringify(data).length;
+              const _len = JSON.stringify(_data).length;
+
+              let keys = [];
+              let _keys = [];
+
+              if (typeof data === 'object') {
+                if (Array.isArray(data.list) && data.list.length) {
+                  keys = Object.keys(data.list[0]);
+                  _keys = Object.keys(_data.list[0]);
+                } else {
+                  keys = Object.keys(data);
+                  _keys = Object.keys(_data);
+                }
+              }
+
+              Utils.log(
+                'Filter',
+                api,
+                `${len} -> ${_len} (-${((1 - _len / len) * 100).toFixed(2)}%)`,
+                keys.filter(item => _keys.indexOf(item) === -1).sort(),
+                data,
+                _data
+              );
+            }
+
+            resolve(_data);
+          } else {
+            resolve(data);
+          }
+
           break;
 
         // [1] 未登录(单例confirm)
@@ -2314,7 +2505,6 @@ const P = async (api, query = {}, config = {}) => {
               Utils.onConfirm(
                 '该版块帖子需要您登录并通过粉丝认证，前往认证?',
                 () => {
-                  // window.location = 'https://www.nidosport.com/person/fans_prove';
                   Utils.router.replace('/account/fans');
                   _confirming = false;
                 },
@@ -2388,8 +2578,7 @@ const P = async (api, query = {}, config = {}) => {
         Utils.light('网络请求出错，请刷新');
       }
 
-      /* eslint-disable-next-line */
-      console.log(ex);
+      console.warn(ex);
 
       // reject(new Error(`[${api}] 严重错误`));
       if (Const.__CLIENT__) {

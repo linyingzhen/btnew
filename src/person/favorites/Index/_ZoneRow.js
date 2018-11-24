@@ -3,9 +3,9 @@
  * const images = '/static/images';
  * @Author: lyz0720
  * @Date: 2018-10-31 11:38:52
- * @Last Modified by: lyz0720
- * @Last Modified time: 2018-10-31 13:41:37
- * @Path bt_mb_new \src\person\favorites\Index\_ZoneRow.js.git
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-02 09:51:28
+ * @Path bt_mb_new \src\person\favorites\Index\__ZoneRow.js.git
  */
 import React from 'react';
 import classNames from 'classnames';
@@ -17,7 +17,7 @@ import Imgs from '@_/Imgs';
 
 const prefixCls = 'style-289373';
 
-const ZoneRow = props => {
+const _ZoneRow = props => {
   const {
     id,
     imgs,
@@ -87,4 +87,4 @@ const ZoneRow = props => {
   );
 };
 
-export default observer(ZoneRow);
+export default observer(_ZoneRow);

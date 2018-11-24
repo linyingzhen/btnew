@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-31 18:29:58
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-23 14:45:00
+ * @Last Modified time: 2018-11-13 17:52:20
  * @Path m.benting.com.cn /src/person/publish/Index/index.js
  */
 import React from 'react';
@@ -19,4 +19,4 @@ const Publish = () => (
   </Layout>
 );
 
-export default injectV2(store)(Publish);
+export default injectV2(store, { login: true })(Publish);

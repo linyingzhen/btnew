@@ -1,11 +1,11 @@
 /**
- * const prefixCls = 'style-196208';
- * const images = '/static/images';
+ * const prefixCls = 'style-193965';
+ * const images = '/static/images/src/person/btlevel/Index';
  * @Author: lyz0720
  * @Date: 2018-10-26 13:47:33
- * @Last Modified by:   lyz0720
- * @Last Modified time: 2018-10-26 13:47:33
- * @Path bt_mb_new \src\person\btlevel\Index\store.js.git
+ * @Last Modified by:   czy0729
+ * @Last Modified time: 2018-11-13 17:27:31
+ * @Path bt_mb_new /src/person/btlevel/Index/store.js.git
  */
 import { observable } from 'mobx';
 import common from '@stores/commonV2';

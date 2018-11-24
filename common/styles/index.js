@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-06-20 11:16:01
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 20:10:32
+ * @Last Modified time: 2018-11-16 15:49:51
  * @Path m.benting.com.cn \common\styles\index.js
  */
 import Const from '@const';
@@ -16,12 +16,12 @@ const colorBorder = '#e9e9e9';
 const Styles = {
   /* ==================== color ==================== */
   color_theme: '#fff', // 白 (可能用于优化夜间主题)
-  color_main: '#404040', // 主题色 #404040
-  color_bg: '#f9fbfc', // 背景色
-  color_inner: '#f7f7f7', // 里面背景色
+  color_main: '#404040', // 主题色
+  color_bg: 'rgba(243, 246, 248, 1)', // 背景色 #f3f6f8
+  color_inner: 'rgba(238, 240, 244, 1)', // 内背景色 #eef0e4
   color_title: '#121212', // 字体标题色
   color_desc: '#121212', // 字体默认色 #404040
-  color_sub: '#9b9b9b', // 字体浅色
+  color_sub: '#888', // '#9b9b9b', // 字体浅色
   color_wait: '#7289a5', // 字体等待色
   color_icon: '#ccc', // 图标颜色
   color_disabled: '#ccc', // 字体表单禁止色

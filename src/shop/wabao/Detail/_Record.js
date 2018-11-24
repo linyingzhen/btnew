@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-27 18:55:05
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-24 11:21:40
+ * @Last Modified time: 2018-11-19 10:14:45
  * @Path m.benting.com.cn /src/shop/wabao/Detail/_Record.js
  */
 import React from 'react';
@@ -19,6 +19,7 @@ const prefixCls = 'style-416865';
 
 const _Record = (props, { $ }) => {
   const { className } = props;
+  const { perTotal = '-' } = $.getState('detail');
   const record = $.getState('record');
 
   return (
@@ -29,9 +30,7 @@ const _Record = (props, { $ }) => {
         desc={
           <>
             <span>已有</span>
-            <span className="t-danger ml-xs mr-xs">
-              {record._loaded ? record.pageinfo.recordtotal : '-'}
-            </span>
+            <span className="t-danger ml-xs mr-xs">{perTotal}</span>
             <span>人次参与</span>
           </>
         }

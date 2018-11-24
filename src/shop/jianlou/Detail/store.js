@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-23 22:05:50
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-25 09:54:59
+ * @Last Modified time: 2018-11-15 11:22:00
  * @Path m.benting.com.cn /src/shop/jianlou/Detail/store.js
  */
 import { observable } from 'mobx';
@@ -12,6 +12,7 @@ import common from '@stores/commonV2';
 import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -41,7 +42,8 @@ export default class Store extends common {
       const { id } = this.params.params;
 
       return this.fetchThenSetState('get_shop_miaosha-detail', 'detail', {
-        panicId: id
+        panicId: id,
+        _filter: filter.detail
       });
     },
 
@@ -57,7 +59,8 @@ export default class Store extends common {
             search: {
               panicId: id
             }
-          }
+          },
+          _filter: filter.record
         },
         refresh
       );
@@ -74,10 +77,7 @@ export default class Store extends common {
       this.fetch.detail();
       this.fetch.record(true);
 
-      Utils.router.push(
-        `/pay/result?id=${orderNo}`,
-        `/pay/result/${orderNo}`
-      );
+      Utils.router.push(`/pay/result?id=${orderNo}`, `/pay/result/${orderNo}`);
     }
   };
 

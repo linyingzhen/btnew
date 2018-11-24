@@ -3,8 +3,8 @@
  * const images = '/static/images';
  * @Author: lyz0720
  * @Date: 2018-10-31 14:44:49
- * @Last Modified by:   lyz0720
- * @Last Modified time: 2018-10-31 14:44:49
+ * @Last Modified by: czy0729
+ * @Last Modified time: 2018-11-02 09:55:12
  * @Path bt_mb_new \src\person\favorites\Index\_Row.js.git
  */
 import React from 'react';
@@ -29,7 +29,7 @@ const _Row = (props, { $ }) => {
         createTime: props.createTime,
         likeCount: props.likeAdd,
         commentCount: props.replyNum,
-        imgs: props.contentImg,
+        imgs: Utils.getRealDraftEntityMap(JSON.parse(props.json)),
         href: `/bbs/article?id=${props.threadId}`,
         as: `/bbs/article/${props.threadId}`,
         onDelete: $.do.delete

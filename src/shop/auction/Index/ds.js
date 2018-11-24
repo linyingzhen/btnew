@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-10 18:34:46
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-09-20 17:12:29
+ * @Last Modified time: 2018-11-14 18:41:55
  * @Path m.benting.com.cn /src/shop/auction/Index/ds.js
  */
 import Utils from '@utils';
@@ -45,3 +45,18 @@ export const appTypeDS = [
     value: '2'
   }
 ];
+export const filter = {
+  list: {
+    appType: 1,
+    auctionId: 1,
+    auctionType: 1,
+    beginTime: 1,
+    currentNum: 1,
+    currentPrice: 1,
+    endTime: 1,
+    goodsImg: 1,
+    nowTime: 1,
+    showState: 1,
+    title: 1
+  }
+};

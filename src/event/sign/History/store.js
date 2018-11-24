@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-17 23:59:55
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-20 15:22:10
+ * @Last Modified time: 2018-11-14 09:25:34
  * @Path m.benting.com.cn /src/event/sign/History/store.js
  */
 import { observable } from 'mobx';
@@ -13,6 +13,7 @@ import Api from '@api';
 import Const from '@const';
 import Utils from '@utils';
 import G from '@stores/g';
+import { filter } from './ds';
 
 export default class Store extends common {
   @observable
@@ -39,7 +40,10 @@ export default class Store extends common {
 
     // 我的签到记录
     signRecord: query =>
-      this.fetchThenSetState('get_sign_list', 'signRecord', query)
+      this.fetchThenSetState('get_sign_list', 'signRecord', {
+        ...query,
+        _filter: filter.signRecord
+      })
   };
 
   do = {

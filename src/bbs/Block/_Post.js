@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-10-21 22:23:54
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-21 22:24:31
+ * @Last Modified time: 2018-11-12 16:04:25
  * @Path bt_mb_new /src/bbs/Block/_Post.js
  */
 import React from 'react';
@@ -26,6 +26,7 @@ const _Post = (props, { $ }) => {
       data={post}
       renderRow={item => (
         <ListRow
+          contentImg={item.contentImg}
           userId={item.userId}
           img={item.faceImg}
           vip={item.vip}

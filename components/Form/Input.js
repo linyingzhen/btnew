@@ -78,7 +78,7 @@ class Input extends React.Component {
           .c-form-input {
           }
           .${prefixCls} input {
-            font-size: 0.3rem !important;
+            font-size: ${Styles.font_form} !important;
             color: ${Styles.color_desc} !important;
           }
           .${prefixCls} input::-webkit-input-placeholder {

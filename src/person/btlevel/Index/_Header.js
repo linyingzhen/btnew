@@ -1,11 +1,11 @@
 /**
- * const prefixCls = 'style-206072';
- * const images = '/static/images';
+ * const prefixCls = 'style-197891';
+ * const images = '/static/images/src/person/btlevel/Index';
  * @Author: lyz0720
  * @Date: 2018-10-26 09:55:54
- * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 02:34:53
- * @Path bt_mb_new \src\person\btlevel\Index\_Header.js.git
+ * @Last Modified by:   czy0729
+ * @Last Modified time: 2018-11-13 17:24:23
+ * @Path bt_mb_new /src/person/btlevel/Index/_Header.js.git
  */
 import React from 'react';
 import { observer } from '@';

@@ -4,7 +4,7 @@
  * @Author: cwz0525
  * @Date: 2018-07-09 14:31:20
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-29 15:41:16
+ * @Last Modified time: 2018-11-02 10:24:59
  * @Path m.benting.com.cn /src/person/Index/ds.js
  */
 import Utils from '@utils';
@@ -142,14 +142,14 @@ export const listDS = [
   ],
   [
     {
+      label: '帮助中心',
+      href: '/person/help',
+      type: 'question-square-fill'
+    },
+    {
       label: '关于我们',
       href: '/person/about',
       type: 'information-circle-fill'
-    },
-    {
-      label: '帮助反馈中心',
-      href: '/person/help',
-      type: 'question-square-fill'
     }
   ]
 ];

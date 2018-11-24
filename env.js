@@ -5,30 +5,30 @@
  * @Author: czy0729
  * @Date: 2018-08-05 19:41:45
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 19:45:36
+ * @Last Modified time: 2018-11-23 17:51:37
  * @Path m.benting.com.cn /env.js
  */
-const RELEASE_ENV  = 'development';
-// const RELEASE_ENV = 'production';
+// const RELEASE_ENV  = 'development';
+const RELEASE_ENV  = 'production';
 
 const RELEASE      = RELEASE_ENV === 'production';
 const PROJECT      = 'BENTING';
 
-const WEB          = 'http://benting.tw-bt.com';
+const WEB          = 'https://www.benting.com.cn';
 const WEB_BT       = 'https://www.tw-bt.com';
 const WEB_NIDO     = 'https://www.nidosport.com';
 const API          = 'https://api.nidosport.com';
 const NEW_API      = 'https://service.nidosport.com';
+const IMG_API      = 'https://oss.benting.com.cn';
 const WSS          = 'wss://api.nidosport.com/wss';
-const IMG_API      = 'http://nidoimg.tw-bt.com';
 
-const DEV_WEB      = 'https://newbttest.benting.com.cn';
+const DEV_WEB      = 'https://btnewtest.benting.com.cn';
 const DEV_WEB_BT   = 'https://bttest.benting.com.cn';
 const DEV_WEB_NIDO = 'https://ldtest.benting.com.cn';
 const DEV_API      = 'https://ci-api.benting.com.cn';
 const DEV_NEW_API  = 'https://lm-api.benting.com.cn';
-const DEV_WSS      = 'wss://ci-api.benting.com.cn/wss';
 const DEV_IMG_API  = 'http://osstest.benting.com.cn';
+const DEV_WSS      = 'wss://ci-api.benting.com.cn/wss';
 
 const appEnv = {
   __PORT__         : 8104,

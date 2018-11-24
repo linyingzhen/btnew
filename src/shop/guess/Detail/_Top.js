@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-09-25 16:07:16
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 20:17:03
+ * @Last Modified time: 2018-11-15 11:43:07
  * @Path m.benting.com.cn /src/shop/guess/Detail/_Top.js
  */
 import React from 'react';
@@ -79,7 +79,8 @@ const _Top = (props, { $ }) => {
         }
         .${prefixCls}__count-down .item {
           display: inline-block;
-          width: 0.94rem !important;
+          width: auto !important;
+          min-width: 0.94rem;
           height: auto !important;
           padding: 0.24rem 0.18rem !important;
           line-height: 0.66rem !important;

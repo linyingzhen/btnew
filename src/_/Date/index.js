@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-27 13:49:22
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 02:48:14
+ * @Last Modified time: 2018-11-01 20:53:16
  * @Path m.benting.com.cn /src/_/Date/index.js
  */
 import React from 'react';
@@ -25,7 +25,7 @@ const Date = props => {
       direction="column"
       justify="center"
     >
-      <p className="t-34 l-28 t-void t-c">{Utils.date('d', time)}</p>
+      <p className="t-34 l-28 t-void t-c">{parseInt(Utils.date('d', time))}</p>
       <p className="t-24 l-28 t-void t-c mt-4">
         {numberMap[parseInt(Utils.date('m', time))]}月
       </p>

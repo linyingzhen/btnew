@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-05 17:05:08
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-22 17:32:04
+ * @Last Modified time: 2018-11-10 17:31:23
  * @Path m.benting.com.cn /components/EmojiPicker/index.js
  */
 import React from 'react';
@@ -230,8 +230,8 @@ export default class EmojiPicker extends React.Component {
           .c-emoji-picker {
           }
           img {
-            width: 0.48rem;
-            height: 0.48rem;
+            width: 0.44rem;
+            height: 0.44rem;
           }
         `}</style>
         <style jsx global>{`
@@ -277,7 +277,7 @@ export default class EmojiPicker extends React.Component {
             box-shadow: 0 0 0.08rem rgba(0, 0, 0, 0.16);
           }
           .wrap {
-            height: 3.28rem !important;
+            height: 3.6rem !important;
             overflow-y: scroll;
           }
         `}</style>

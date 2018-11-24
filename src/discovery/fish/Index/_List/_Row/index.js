@@ -97,14 +97,14 @@ const _Row = (props, { $ }) => {
         />
         {infoAddress && (
           <Address
-            className="t-24 l-34 t-primary mt-18"
+            className="t-24 l-34 t-primary mt-16"
             address={infoAddress}
             long={userLong}
             lat={userLat}
           />
         )}
         <Bar
-          className="mt-18"
+          className="mt-16"
           infoId={infoId}
           liked={liked}
           likeCount={likeCount}

@@ -4,7 +4,7 @@
  * @Author: czy0729
  * @Date: 2018-07-11 23:39:30
  * @Last Modified by: czy0729
- * @Last Modified time: 2018-10-28 20:14:10
+ * @Last Modified time: 2018-11-10 17:11:14
  * @Path m.benting.com.cn /components/RichEditor/_Title.js
  */
 import React from 'react';
@@ -18,10 +18,9 @@ const _Title = props => {
   const { value, onChange, className } = props;
 
   return (
-    <div>
+    <div className={classNames(prefixCls, className)}>
       <TextareaItem
-        className={classNames(prefixCls, className)}
-        placeholder="请您输入贴子标题"
+        placeholder="请输入标题"
         autoHeight
         clear
         value={value}
@@ -30,8 +29,11 @@ const _Title = props => {
 
       <style jsx global>{`
         .style-135473 {
-          padding: 0 ${Styles.wind} !important;
-          border-bottom: ${Styles.border}
+          margin: 0 ${Styles.wind} !important;
+          border-bottom: 0.02rem solid ${Styles.color_border};
+        }
+        .${prefixCls} .am-textarea-item {
+          padding-left: 0 !important;
         }
         .${prefixCls} .am-textarea-clear {
           margin-top: 0;
